@@ -326,7 +326,7 @@ span.tags
  * Menu Responsive
  */
 pre {
-    tab-size: 8;
+    tab-size: 7;
 }
 
 @media screen and (max-width: 765px) {
