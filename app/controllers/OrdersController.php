@@ -81,8 +81,32 @@ class OrdersController extends \BaseController {
 	{
 		//
 	}
+	public function agreeBasket()
+	{
+		$order = new Order();
+		$order->user_id = Input::get('user_id');
+		$order->product_id = Input::get('product_id');
+		if($order->save())
+		{
+		    $orderId = Order::orderBy('id','DESC')->first();
+		    //var_dump($orderId);
+    		$toOrder = new ProdToOrder();
+		    $toOrder->product_id = Input::get('product_id');
+		    $toOrder->quantities = Input::get('quantities');
+		    $toOrder->order_id = $orderId->id;
+		    $toOrder->save();
+		    $product = Product::find(Input::get('product_id'));
+		    $qtyUpdate = $product->amounts - Input::get('quantities');
+		    $product->amounts = $qtyUpdate;
+		    $product->save();
+		}
+		
+		return Redirect::back()->with('notice', 'Producto agregado a la Cesta');
+	}
+	public function showBasket($id)
+	{
+		$orders = Order::where('user_id','=',$id)->get();
 
-
-
-
+		return View::make('home.orders')->with('orders',$orders);
+	}
 }

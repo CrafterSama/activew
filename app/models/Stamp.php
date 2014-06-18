@@ -25,15 +25,18 @@ class Stamp extends Eloquent {
 	}
 	public static function getId($name)
 	{
-		$stamp = Stamp::find($name)->where();
-		$stampId = $stamp->id();
-		return $stampId;
+		$stamp = Stamp::find($name);
+		return $stamp->id;
 	}
 	public static function getName($id)
 	{
 		$stamp = Stamp::find($id);
-		$stampName = $stamp->stamp;
-		return $stampName;
+		return $stamp->stamp;
+	}
+	public static function getStampName($id)
+	{
+		$stamp = Stamp::find($id);
+		return $stamp->stampname;
 	}
 
 }

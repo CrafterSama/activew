@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'databaser',
-			'username'  => 'root',
-			'password'  => '',
+			'database'  => 'activewear',
+			'username'  => 'active',
+			'password'  => 'v1d454Lud4bl3',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

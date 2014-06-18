@@ -13,7 +13,7 @@ class Product extends Eloquent {
 
 	protected $table = 'products';
 
-	public function ProdToStamp()
+	public function stamps()
 	{
  		return $this->hasMany('Stamp');
 	}
@@ -26,6 +26,7 @@ class Product extends Eloquent {
    	);*/
 
    	public static $messages = array(
+
 		'amounts.required' => 'Rellenar la Cantidad es obligatorio',
 		'amounts.numeric' => 'Cantidad solo acepta Datos Numericos',
    	);
@@ -35,5 +36,22 @@ class Product extends Eloquent {
 		$messages = self::$messages;
 		return Validator::make($data, $reglas);
    	}
+   	public static function getAmounts($id)
+   	{
+   		$amounts = DB::table('products')
+                    ->where('model_id','=', $id)
+                    ->pluck(DB::raw('sum(amounts)'));
 
+        return $amounts;
+   	}
+   	public static function getModelByStampId($id)
+   	{
+   		return DB::table('products')
+   				->where('stamp_id','=',$id)
+   				->pluck('model_id');
+   	}
+   	public function getName($id)
+   	{
+
+   	}
 }

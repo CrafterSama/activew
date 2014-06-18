@@ -12,78 +12,68 @@
 */
 
 /** Home Links **/
+Route::pattern('id', '[0-9]+');
+
 Route::get('/', 'HomeController@index');
+
 Route::get('productos', 'HomeController@showProducts');
+
+Route::get('productos/ver/{id}/{title?}', 'HomeController@showProductProfile');
+
 Route::get('acerca-de', 'HomeController@showAbout');
+
 Route::get('contacto', 'HomeController@showContact');
 
-
-/** Admin Links **/
-
-
-
-Route::group(array('before'=>'admin'), function()
-{
-
-
-});
-
-// Nos mostrará el formulario de login.
 Route::get('login', 'AuthController@showLogin');
 
-// Validamos los datos de inicio de sesión.
 Route::post('login', 'AuthController@postLogin');
 
 Route::get('registrarse', 'UsersController@showRegister');
 
 Route::post('registrarse', 'UsersController@postRegister');
 
-// Nos indica que las rutas que están dentro de él sólo serán mostradas si antes el usuario se ha autenticado.
 Route::group(array('before' => 'auth'), function()
 {
-	// Esta será nuestra ruta de bienvenida.
+
+	Route::post('cesta/agregar', 'OrdersController@agreeBasket');
+	Route::post('cesta/actualizar/{id}', 'OrdersController@updateBasket');
+	Route::get('cesta/usuarios/{id}/ver', 'OrdersController@showBasket');
+
+    Route::get('logout', 'AuthController@logOut');
+
 	Route::get('admin', 'AdminController@showPanel');
-   
     Route::group(['prefix' => 'admin'], function() {
 		
-		
-		#Route::get('productos', 'ProductsController@index');
+		/** Admin Links **/
+		Route::get('productos', 'ProductsController@index');
 		Route::get('productos/agregar', 'ProductsController@create');
 		Route::post('productos/agregar', 'ProductsController@store');
 		Route::get('productos/{id}/editar', 'ProductsController@edit');
 		Route::post('productos/{id}/editar', 'ProductsController@update');
-		Route::delete('productos/{id}/borrar', 'ProductsController@destroy');
+		Route::get('productos/borrar/{id}', 'ProductsController@destroy');
 
-
-		#Route::get('modelos', 'ModelosController@index');
+		Route::get('modelos', 'ModelosController@index');
 		Route::get('modelos/agregar', 'ModelosController@create');
 		Route::post('modelos/agregar', 'ModelosController@store');
 		Route::get('modelos/{id}/editar', 'ModelosController@edit');
 		Route::post('modelos/{id}/editar', 'ModelosController@update');
-		Route::delete('modelos/{id}/borrar', 'ModelosController@destroy');
+		Route::get('modelos/borrar/{id}', 'ModelosController@destroy');
 		
-
-
-		#Route::get('usuarios', 'UsersController@index');
+		Route::get('usuarios', 'UsersController@index');
 		Route::get('usuarios/baneados', 'UsersController@bannedUsers');
 		Route::get('usuarios/{id}/restaurar', 'UsersController@restoreUser');
 		Route::get('usuarios/agregar', 'UsersController@create');
 		Route::post('usuarios/agregar', 'UsersController@store');
 		Route::get('usuarios/{id}/editar', 'UsersController@edit');
 		Route::post('usuarios/{id}/editar', 'UsersController@update');
-		Route::delete('usuarios/{id}/borrar', 'UsersController@destroy');
+		Route::get('usuarios/borrar/{id}', 'UsersController@destroy');
 		Route::get('usuarios/{id}/perfil', 'UsersController@showProfile');
 		
 		Route::get('pedidos', 'OrdersController@index');
 
-		Route::resource('usuarios', 'UsersController');
-		Route::resource('productos', 'ProductsController');
-		Route::resource('modelos', 'ModelosController');
+		Route::controller('users', 'UsersController');
+		Route::controller('products', 'ProductsController');
+		Route::controller('modelos', 'ModelosController');
 	});
 
-	Route::get('pedidos', 'HomeController@showOrders');
-	Route::get('usuarios/{id}/pedidos', 'OrdersController@showByUser');
-
-    // Esta ruta nos servirá para cerrar sesión.
-    Route::get('logout', 'AuthController@logOut');
 });

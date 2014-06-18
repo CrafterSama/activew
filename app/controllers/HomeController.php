@@ -110,25 +110,22 @@ class HomeController extends BaseController {
 
 	public function showProducts()
 	{
-		/*$products = Products::all();
-
-		if(is_null($products))
-		{*/
-			return View::make('home.products');
-		/*}
-		else
-		{
-			return View::make('home.products')->with(array('products',$products));
-		}*/
-
+		$products = Product::where('amounts','!=','0')
+		  ->orderBy('id','desc')
+					->paginate(5);
+		return View::make('home.products')->with('products',$products);
 	}
-	public function showOrders()
+	
+	public function showProductProfile($id,$title=null)
 	{
-		/*$orders = Orders::all();
-
-		if(is_null($orders))
+		$product = Product::find($id);
+		return View::make('home.prodprofile')->with('product',$product);
+	}
+	public function showOrders($id)
+	{
+		/*if(is_null($orders))
 		{*/
-			return View::make('home.orders');
+			return View::make('home.orders')->with('orders',$orders);
 		/*}
 		else
 		{

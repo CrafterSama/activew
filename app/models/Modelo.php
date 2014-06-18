@@ -13,6 +13,10 @@ class Modelo extends Eloquent {
 
 	protected $table = 'modelos';
 
+	public function products()	{
+		return $this->hasMany('Product');
+	}
+
 	public static $rules = array(
 		'model_name' 	=> 'required|unique:modelos,model_name,id',
 		'price_out_tax_float' 	=> 'required',
@@ -33,14 +37,19 @@ class Modelo extends Eloquent {
 		return Validator::make($data, $reglas);
    	}
 
-	/*public function user()
-	{
- 		return $this->hasMany('User');
-	}*/
 	public static function getName($id)
 	{
 		$modelo = Modelo::find($id);
 		return $modelo->model_name;
+	}
+	public static function getNameByStamp($id)
+	{
+		return DB::table('modelos')
+				->join('products','products.model_id','=','modelos.id')
+				->join('stamps','products.stamp_id','=','stamps.id')
+				->where('stamps.id','=',$id)
+				->pluck('modelos.model_name');
+
 	}
 	public static function getPrice($id)
 	{

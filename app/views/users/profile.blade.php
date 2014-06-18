@@ -3,7 +3,7 @@
 @section('content')
 	<h2>Perfil del Usuario {{ $user->full_name }}</h2>
 	<div class="alert alert-info">
-		A continuación encontrara una Pequeña ficha con los Datos del Usuario del Cual esta Consultando el Perfil. 
+		A continuación encontrara una pequeña ficha con los datos del usuario del Cual esta consultando el perfil. 
 	</div>
 	<br>
 	@if(Session::has('notice'))
@@ -24,7 +24,9 @@
 				</button>
 				<ul class="dropdown-menu">
                     <li><a href="/admin/usuarios/{{ $user->id }}/editar"><i class="fa fa-pencil"></i> Editar</a></li>
-                    <li><a href="/admin/usuarios/{{ $user->id }}/borrar"><i class="fa fa-trash-o"></i> Borrar</a></li>
+                    @if ($user->id != Auth::user()->id)
+	                    <li><a href="/admin/usuarios/borrar/{{ $user->id }}"><i class="fa fa-trash-o"></i> Borrar</a></li>
+                    @endif
 				</ul>
 			</span>
 	        <span class="tools pull-right">

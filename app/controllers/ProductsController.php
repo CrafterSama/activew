@@ -19,10 +19,10 @@ class ProductsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$products = Product::paginate(10);
-		$modelos = Modelo::all();
+		$products = Product::orderBy('id','desc')->paginate(10);
 		$stamps = Stamp::all();
-		return View::make('admin.products')->with('products',$products)->with('modelos',$modelos)->with('stamps',$stamps);
+		$modelos = Modelo::all();
+		return View::make('admin.products')->with(['products'=>$products,'stamps'=>$stamps,'modelos'=>$modelos]);
 	}
 
 
@@ -37,7 +37,7 @@ class ProductsController extends \BaseController {
 		$modelos = Modelo::all();
 		$product = new Product();
 		$stamp = new Stamp();
-		return View::make('products.form')->with('product', $product)->with('modelos',$modelos)->with('stamp',$stamp);
+		return View::make('products.form')->with(['product' => $product,'modelos' => $modelos,'stamp' => $stamp]);
 	}
 
 
@@ -49,52 +49,54 @@ class ProductsController extends \BaseController {
 	public function store()
 	{
 		if(!$this->autorizado) return Redirect::to('/login');
-		$stamp = new Stamp();
-		$file = Input::file('stamp');
-		/*var_dump($file);*/
-		$filename = str_random(16).'_'.date('d_m_Y_H_i_s').'_'.$file->getClientOriginalName();
-		$stamp->stamp = $filename;
-		$rules = array(
-			'stamp' => 'image|max:1024'
-		);
-		$inputs = array(
-			'stamp' => Input::file('stamp')
-		);
-		$validation = Validator::make($inputs, $rules);
+		$stamp 			= new Stamp();
+		$stampname 		= Input::get('stampname');
+		$file 			= Input::file('stamp');
+		$filename 		= str_random(16).'_'.date('d_m_Y_H_i_s').'_'.$file->getClientOriginalName();
+		$stamp->stampname 	= $stampname;
+		$stamp->stamp 	= $filename;
+		$rules 			= array(
+			'stampname'	=>'required',
+			'stamp' 	=> 'image|max:1024'
+			);
+		$inputs 		= array(
+			'stampname'	=> Input::get('stampname'),
+			'stamp' 	=> Input::file('stamp')
+			);
+		$validation 	= Validator::make($inputs, $rules);
 		if( $validation->passes() )
 		{
 			//Upload the file
 			$uploadPath = 'assets/images/stamps';
-			$upload = $file->move($uploadPath,$filename);
+			$upload 	= $file->move($uploadPath,$filename);
 			if ($upload) {
 				$stamp->save();
 			}
 		}//if it validate
 
-		$stampId 	= 	Stamp::orderBy('created_at','DESC')->first();
+		$stampId 		= 	Stamp::orderBy('created_at','DESC')->first();
 		foreach (Input::get('model_id') as $modelId) {
-			$product 			= 	new Product();
-			$product->model_id 	= 	$modelId;
-			$amounts = Input::get('amounts_'.$modelId.'');
-			$product->amounts 	= 	$amounts;
-			$product->stamp_id 	= 	$stampId->id;
-			var_dump($product);
-			$amount = 'amounts_'.$modelId;
-			$rules = array(
-				$amount => 'required|numeric'
+			$product 			= new Product();
+			$product->model_id 	= $modelId;
+			$amounts 			= Input::get('amounts_'.$modelId.'');
+			$product->amounts 	= $amounts;
+			$product->stamp_id 	= $stampId->id;
+			$amount 			= 'amounts_'.$modelId;
+			$rules 				= array(
+				$amount 		=> 'required|numeric'
 			);
-			$inputs = array(
-				$amount => $amounts
+			$inputs 			= array(
+				$amount 		=> $amounts
 			);
-			$messages = array(
-				'required' => 'Dede llenar el campo Cantidades',
-				'numeric' => 'Las cantidades solo pueden ser numeros'
+			$messages 			= array(
+				'required' 		=> 'Dede llenar el campo Cantidades',
+				'numeric' 		=> 'Las cantidades solo pueden ser numeros'
 			);
 			
 			$validator 			= 	Validator::make($inputs,$rules);
 			if($validator->fails())
 			{
-				$errors = $messages;
+				$errors 		= $messages;
 				return Redirect::back()->withErrors($validator)->withInput();
 			}
 			else
@@ -127,7 +129,13 @@ class ProductsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		if(!$this->autorizado) return Redirect::to('/login');
+		$product = Product::find($id);
+		if (is_null ($product))
+		{
+			App::abort(404);
+		}
+		return View::make('products.form')->with('product', $product);
 	}
 
 
@@ -151,7 +159,26 @@ class ProductsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if(!$this->autorizado) return Redirect::to('/login');
+		$product = Product::find($id);
+		if (is_null($product))
+		{
+			App::abort(404);
+		}
+		
+		$product->forceDelete();
+		
+		if (Request::ajax())
+		{
+			return Response::json(array(
+				'success' => true,
+				'msg'	 => 'Usuario '.$user->full_name.' eliminado',
+				'id'	 => $user->id
+			));
+		}else
+		{
+			return Redirect::back()->with('notice', 'El producto ha sido eliminado correctamente.');	
+		}
 	}
 
 

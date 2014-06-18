@@ -1,6 +1,6 @@
 <?php
 
-class UsersController extends \BaseController {
+class UsersController extends BaseController {
 
 	private $autorizado;
 	public function __construct() {
@@ -15,7 +15,7 @@ class UsersController extends \BaseController {
 	public function index()
 	{
 		if(!$this->autorizado) return Redirect::to('/login');
-		$users  = 	User::paginate(10);
+		$users  = 	User::where('id','!=',Auth::user()->id)->paginate(10);
 		$roles 	= 	Role::all();
 		foreach ($users as $user) {
 			$rol 	= 	Role::find($user->role_id);	# code...
@@ -163,23 +163,31 @@ class UsersController extends \BaseController {
 	{
 		if(!$this->autorizado) return Redirect::to('/login');
 		$user = User::find($id);
-		if (is_null($user))
+		if ($user->id == Auth::user()->id) 
 		{
-			App::abort(404);
-		}
+			return Redirect::to('admin/usuarios')->with('notice', 'No puedes borrar tu propio usuario.');
+		} 
+		else 
+		{
+			if (is_null($user))
+			{
+				App::abort(404);
+			}
 		
-		$user->forceDelete();
-		
-		if (Request::ajax())
-		{
-			return Response::json(array(
-				'success' => true,
-				'msg'	 => 'Usuario '.$user->full_name.' eliminado',
-				'id'	 => $user->id
-			));
-		}else
-		{
-			return Redirect::route('admin.usuarios');	
+			$user->forceDelete();
+			
+			if (Request::ajax())
+			{
+				return Response::json(array(
+					'success' => true,
+					'msg'	 => 'Usuario '.$user->full_name.' eliminado',
+					'id'	 => $user->id
+				));
+			} 
+			else 
+			{
+				return Redirect::back()->with('notice', 'El usuario ha sido eliminado correctamente.');	
+			}
 		}
 	}
 	public function showProfile($id)
