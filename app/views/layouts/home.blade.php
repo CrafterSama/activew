@@ -61,7 +61,7 @@
 										@if (Auth::user()->role_id == 1)
 										<li><a href="/admin"><i class="fa fa-dashboard"></i>  Panel de Administracion</a>
 											@endif
-											<li><a href="/cesta/usuarios/{{ Auth::user()->id }}/ver"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a>
+											<li><a href="/cesta"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a>
 												<li><a href="/logout"><i class="fa fa-sign-out"></i>  Salir</a>
 												</ul>
 											</span></li>
@@ -72,7 +72,7 @@
 
 
 										</div>
-										
+
 									</nav>
 								</div>
 							</div>
@@ -95,5 +95,7 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		{{ HTML::script('assets/js/bootstrap.min.js') }}
 		{{ HTML::script('assets/js/common.js') }}
+
+		@yield('javascript')
 	</body>
 	</html>

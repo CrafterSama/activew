@@ -103,8 +103,9 @@ class OrdersController extends \BaseController {
 		
 		return Redirect::back()->with('notice', 'Producto agregado a la Cesta');
 	}
-	public function showBasket($id)
+	public function showBasket()
 	{
+		$id = Auth::user()->id;
 		$orders = Order::where('user_id','=',$id)->get();
 
 		return View::make('home.orders')->with('orders',$orders);

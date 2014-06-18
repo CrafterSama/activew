@@ -37,7 +37,7 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::post('cesta/agregar', 'OrdersController@agreeBasket');
 	Route::post('cesta/actualizar/{id}', 'OrdersController@updateBasket');
-	Route::get('cesta/usuarios/{id}/ver', 'OrdersController@showBasket');
+	Route::get('cesta', 'OrdersController@showBasket');
 
     Route::get('logout', 'AuthController@logOut');
 
@@ -77,3 +77,33 @@ Route::group(array('before' => 'auth'), function()
 	});
 
 });
+
+
+
+/* CART */
+Route::get('/cart', ['uses' => 'CartController@get_cart'] );
+Route::get('/cart/remove/{rowid}', ['uses' => 'CartController@get_removeitem'] );
+Route::post('/cart/{id}/add/{qty}', ['uses' => 'CartController@post_add'] );
+Route::get('/cart/minus/{rowid}', ['uses' => 'CartController@post_minus'] );
+Route::get('/cart/plus/{rowid}', ['uses' => 'CartController@post_plus'] );
+
+Route::post('/procesar', ['uses' => 'CartController@post_procesar'] );
+
+Route::get('/factura', function()
+{
+    return View::make('emails.factura'); 
+});
+
+Route::get('/procesado', function()
+{
+    $categorias = DB::table('categorias')->get();
+    return View::make('index', array('categorias' => $categorias, 'msg' => "Orden procesada, revise su email para completar el proceso."));
+});
+
+Route::get('/datos-enviados', function()
+{
+    $categorias = DB::table('categorias')->get();
+    return View::make('index', array('categorias' => $categorias, 'msg' => "Datos de pago enviados, te responderemos a la brevedad posible."));
+});
+
+Route::get('/factura/{slug}', ['uses' => 'CartController@get_factura'] );
