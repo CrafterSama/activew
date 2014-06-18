@@ -32,7 +32,7 @@
                         <p><strong>en Stock: </strong> {{ $product->amounts }} </p>
                         <br />
                         {{ Form::model($product, array('url' => '/cesta/agregar','role'=>'form','class'=>'col-md-3')) }}
-                            <input type="number" name="quantities"  min="1" max="{{ $product->amounts }}" class="form-control col-xs-3" required="required" />
+                            <input type="number" name="quantities" value="1" min="1" max="{{ $product->amounts }}" class="form-control col-xs-3" required="required" />
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <input type="hidden" name="user_id" value="@if(Auth::check()){{ Auth::user()->id }}@endif">
                             <br />
