@@ -10,13 +10,13 @@
 
     <!-- Bootstrap core CSS -->
     {{ HTML::style('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', array('media'=>'screen')) }}
-
+    <!-- Font Awesome -->
+    {{ HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array('media'=>'screen')) }}
     <!-- Custom styles for this template -->
     {{ HTML::style('assets/css/adminpanel.css', array('media'=>'screen')) }}
     {{ HTML::style('assets/css/adminpanel-responsive.css', array('media'=>'screen')) }}
-    {{ HTML::style('assets/css/table-responsive.css', array('media'=>'screen')) }}
-    {{ HTML::style('//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array('media'=>'screen')) }}
     {{ HTML::style('assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
+    {{ HTML::style('assets/css/table-responsive.css', array('media'=>'screen')) }}
     <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
     {{ HTML::style('assets/css/jquery-img-upload/jquery.fileupload.css', array('media'=>'screen')) }}
         
@@ -59,6 +59,7 @@
                     </ul>
                 </li>
                 <!-- user login dropdown end -->
+                <a href="/" class="btn btn-success">Volver a la Web</a>
             </ul>
             <!--search & user info end-->
         </div>
