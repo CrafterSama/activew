@@ -57,41 +57,16 @@
 										</a>
 										<ul class="dropdown-menu extended logout">
 										@if (Auth::user()->role_id == 1)
-<<<<<<< HEAD
 											<li><a href="/admin"><i class="fa fa-dashboard"></i>  Panel de Administracion</a></li>
 										@endif
-											<li><a href="/cesta/usuarios/{{ Auth::user()->id }}/ver"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a></li>
+											<li><a href="/cesta"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a></li>
 											<li><a href="/logout"><i class="fa fa-sign-out"></i>  Salir</a></li>
 										</ul>
 									</span>
 								@else
-								<a class="blog-nav-item lavel lavel-success" href="registrarse">Registrarte</a>
-								<a class="blog-nav-item" href="/login">Identificarse  <i class="fa fa-sign-in"></i></a>
+									<a class="blog-nav-item lavel lavel-success" href="registrarse">Registrarte</a>
+									<a class="blog-nav-item" href="/login">Identificarse  <i class="fa fa-sign-in"></i></a>
 								@endif
-=======
-										<li><a href="/admin"><i class="fa fa-dashboard"></i>  Panel de Administracion</a>
-											@endif
-											<li><a href="/cesta"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a>
-												<li><a href="/logout"><i class="fa fa-sign-out"></i>  Salir</a>
-												</ul>
-											</span></li>
-											@else
-											<a class="blog-nav-item lavel lavel-success" href="registrarse">Registrarte</a>
-											<a class="blog-nav-item" href="/login">Identificarse  <i class="fa fa-sign-in"></i></a>
-											@endif
-
-
-										</div>
-
-									</nav>
-								</div>
-							</div>
-						</header>
-						<div class="blog-header">
-							<div class="container">
-								<h1 class="blog-title">ActiveWear Venezuela</h1>
-								<p class="lead blog-description">Catalogo de ropa para la actividad deportiva, ventas y mas...</p>
->>>>>>> origin/master
 							</div>
 						</nav>
 					</div>
