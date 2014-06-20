@@ -36,11 +36,11 @@ class CartController extends BaseController {
     {
         if($cart = Cart::get($rowid)){
             $qty = $cart->qty-1;
-                if($qty==0){
-                    Cart::remove($rowid);
-                } else{
-                    Cart::update($rowid, array("qty" => $qty));
-                }
+            if($qty==0){
+                Cart::remove($rowid);
+            } else{
+                Cart::update($rowid, array("qty" => $qty));
+            }
         }            
 
         return Redirect::to('/carrito');
@@ -61,43 +61,42 @@ class CartController extends BaseController {
     } 
 
 
-    public function post_procesar()
+    public function get_procesar()
     {
-        $inputs = Input::all();
-        $inputs['slug'] =  str_random(32);
+        if (Auth::guest()){
+            Session::put('mensaje_error', 'Inicie sesión para realizar la compra.');
+            Session::put('next_url', 'procesar');
+            return View::make('login');
+        }else{
 
-        $factura = new Factura();
-        $factura->nombre = $inputs['nombre'];
-        $factura->telefono = $inputs['telefono'];
-        $factura->correo = $inputs['correo'];
-        $factura->direccion = $inputs['direccion'];
-        $factura->slug = $inputs['slug'];
-        $factura->save();
+            /* crear factura */
+            $factura = new Factura();
+            $factura->user_id = Auth::user()->id;
+            $factura->slug = Uuid::generate();
+            $factura->save();
 
-        $inputs['id'] = $factura->id;
+            foreach ($carts = Cart::content() as $key => $cart) {
+                $product = Product::find($cart->id);                 
 
-        foreach ($carts = Cart::content() as $key => $cart) {
-            $item = new Item();
-            $item->producto_id = $cart->id;
-            $item->cantidad = $cart->qty;
-            $item->precio = $cart->price;
-            $item->factura_id = $factura->id;
+                if(( $product->amounts - $cart->qty ) >= 0 ){
+                    /* actualiza existencia */
+                    $product->amounts = $product->amounts - $cart->qty;
+                    $product->save();
+                     /* crea item del pedido */
+                    $item = new Item();
+                    $item->producto_id = $cart->id;
+                    $item->cantidad = $cart->qty;
+                    $item->precio = $cart->price;
+                    $item->factura_id = $factura->id;
 
-            $item->keep = $cart->name ." | ". $cart->qty ." | ". $cart->price ." | ". $cart->options['image'];  
-            $item->save();
-        }  
-        Cart::destroy();     
+                    $item->keep = $cart->name ." | ". $cart->qty ." | ". $cart->price ." | ". $cart->options['image'];  
+                    $item->save();
+                }
+            }  
+            Cart::destroy();     
 
-        $data = [];
-        $data['datos'] = $inputs;
-        $data['cart'] = $carts;
-
-        Mail::send('emails.factura', $data , function($m) use ($inputs)
-        {
-            $m->from('ventas@joelblackberryzone.com.ve', 'JoelBlackBerryZone.com.ve');
-            $m->to($inputs['correo'])->cc('ventas@joelblackberryzone.com.ve')->subject('Orden de compra.');
-        });
-        return Redirect::to('/procesado');
+            return Redirect::to('/procesado');
+        }
     } 
 
     public function get_factura($slug){

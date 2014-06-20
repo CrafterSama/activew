@@ -87,7 +87,7 @@ Route::post('/cart/{id}/add/{qty}', ['uses' => 'CartController@post_add'] );
 Route::get('/cart/minus/{rowid}', ['uses' => 'CartController@post_minus'] );
 Route::get('/cart/plus/{rowid}', ['uses' => 'CartController@post_plus'] );
 
-Route::post('/procesar', ['uses' => 'CartController@post_procesar'] );
+Route::get('/procesar', ['uses' => 'CartController@get_procesar'] );
 
 Route::get('/factura', function()
 {

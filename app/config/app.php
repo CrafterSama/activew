@@ -187,8 +187,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Cart'            => 'Gloudemans\Shoppingcart\Facades\Cart'
-
+		'Cart'            => 'Gloudemans\Shoppingcart\Facades\Cart',
+		'Uuid' => 'Webpatser\Uuid\Uuid',
 	),
 
 );
