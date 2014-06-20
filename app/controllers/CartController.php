@@ -14,11 +14,9 @@ class CartController extends BaseController {
         $rid = Cart::search(array('id' => $id));
         if(isset($rid[0])){
             $cart = Cart::get($rid[0]);
-        }
-        
+        }        
 
-        if(!isset($cart) || (($cart->qty + $qty) <= $product->amounts)){
-            
+        if(!isset($cart) || (($cart->qty + $qty) <= $product->amounts)){            
             $precio = Modelo::getPrice($product->model_id);
             $name = Stamp::getStampName($product->stamp_id) . "(". Modelo::getName($product->model_id) .")";
 
@@ -50,10 +48,14 @@ class CartController extends BaseController {
 
     public function post_plus($rowid)
     {
+
         if($cart = Cart::get($rowid)){
-            $qty = $cart->qty+1;
-            Cart::update($rowid, array("qty" => $qty));                
-        }            
+            $product = Product::find($cart->id);                 
+
+            if(($qty = $cart->qty+1) <= $product->amounts){            
+                Cart::update($rowid, array("qty" => $qty));
+            }             
+        }
 
         return Redirect::to('/carrito');
     } 
@@ -137,9 +139,3 @@ class CartController extends BaseController {
     }
 
 }
-
-/*
-
-@if(Auth::check()){{ Auth::user()->id }}@endif
-
-*/

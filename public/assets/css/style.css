@@ -362,3 +362,44 @@ pre {
 .blog-title{
   margin-top: 10px;
 }
+
+.remove{
+  background-color: #e74c3c !important; 
+  cursor: pointer !important;
+}
+
+.cart-change{
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.cart-change.minus{
+  color: red;
+}
+.cart-change.plus{
+  color: green;
+}
+
+.cart-change:hover{
+  color:#fff;
+}
+
+.hide{
+  display: none !important;
+}
+
+.success-lf{
+  float: right;
+  text-align: right;
+  font-size: 20px;
+}
+
+.success-lf label{
+  text-decoration: underline;
+}
+
+.cart-qty{
+  font-size: 20px !important;
+  margin: 5px;
+}

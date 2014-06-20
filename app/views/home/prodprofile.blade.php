@@ -58,12 +58,9 @@
                 var id = $(this).data('id');
                 var qty = $("#qty").val() || 1;
                 $.post('/cart/' + id + '/add/' + qty, function(data, textStatus, xhr) {
-                    console.log(data);
-                    /*$.post('/total', function(data, textStatus, xhr) {
-                        console.log(data);
-                        $(".cart").html("Tu compra es de: <span> " + data + " Bs.</span>");
-                        $(".hide").removeClass('hide');
-                    });*/
+                    $.post('/total', function(data, textStatus, xhr) {
+                        $(".cart-text").html(data);
+                    });
                 });
             })
         });

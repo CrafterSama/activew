@@ -107,3 +107,14 @@ Route::get('/datos-enviados', function()
 });
 
 Route::get('/factura/{slug}', ['uses' => 'CartController@get_factura'] );
+
+Route::get('/carrito', function()
+{
+    $cart = Cart::content();
+    return View::make('home.carrito', array('cart' => $cart )); 
+});
+
+Route::post('/total', function()
+{
+    echo '(' . Cart::count() .') Carrito <span class="fa fa-shopping-cart fa-lg white"></span>';
+});
