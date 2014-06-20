@@ -376,13 +376,15 @@ pre {
 
 .cart-change.minus{
   color: red;
+  opacity: 0.5;
 }
 .cart-change.plus{
   color: green;
+  opacity: 0.5;
 }
 
 .cart-change:hover{
-  color:#fff;
+  opacity: 1;
 }
 
 .hide{
