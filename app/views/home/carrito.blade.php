@@ -28,12 +28,12 @@
 								@foreach($cart as $item)
 								<?php $no++; ?>
 								<tr>
-									<td>{{ $no; }}. </td>
-									<td>
+									<td data-title="No.">{{ $no; }}. </td>
+									<td data-title="Producto">
 										<a href="#"><img src="/assets/images/stamps/{{ $item->options->image }}" class="cart-img" alt="" width="80"></a>
 										<a href="#" class="item-name">{{ $item->name }}</a>
 									</td>
-									<td> 
+									<td data-title="Cantidad"> 
 										<a href="/cart/minus/{{ $item->rowid }}" class="cart-change minus"> 
 											<i class="fa fa-minus fa-lg"></i> 
 										</a> 
@@ -43,8 +43,8 @@
 											<i class="fa fa-plus fa-lg"></i> 
 										</a> 
 									</td>
-									<td>{{ $item->price }} Bs </td>
-									<td>
+									<td data-title="Precio">Bs. {{ $item->price }}</td>
+									<td data-title="Eliminar">
 										<a href="/cart/remove/{{ $item->rowid }}" class="cart-remove">
 											<i class="fa fa-trash-o fa-lg"></i> 
 										</a>
@@ -53,8 +53,8 @@
 								@endforeach
 
 								<tr>
-									<td colspan="4" class="cart-bottom" style="text-align:right"><strong>Subtotal :</strong></td>
-									<td> {{ Cart::total(); }} Bs.</td>													
+									<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Sub-Total :</strong></td>
+									<td data-title="Sub-Total :">Bs. {{ Cart::total(); }}</td>													
 								</tr>
 
 								<tr>

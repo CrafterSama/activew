@@ -49,7 +49,7 @@
 								<a class="blog-nav-item" href="http://www.instagram.com/pioggiadimare"><span class="fa fa-instagram fa-lg white"></span></a>
 								<a class="blog-nav-item" href="http://www.facebook.com/pioggiamare"><span class="fa fa-facebook fa-lg white"></span></a>
 								<a class="blog-nav-item" href="http://www.pinterest.com/pioggiadimare"><span class="fa fa-pinterest fa-lg white"></span></a>
-								<a class="blog-nav-item lavel lavel-success cart-text" href="/carrito"> ({{ Cart::count(); }}) Carrito <span class="fa fa-shopping-cart fa-lg white"></span></a>
+								<a class="blog-nav-item lavel lavel-success cart-text" href="/carrito"> <span class="badged">{{ Cart::count(); }}</span> Carrito <span class="fa fa-shopping-cart fa-lg white"></span></a>
 								@if (Auth::check())
 									<span class="dropdown blog-nav-item">
 										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
