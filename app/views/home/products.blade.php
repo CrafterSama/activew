@@ -22,6 +22,7 @@
 							@if (empty($products))
 								<h4>Aun no hay Datos</h4>
 							@else
+
 								@foreach ($products as $product)
 								{{-- var_dump($product->model_id) --}}
 									<tr>
@@ -36,7 +37,7 @@
 											</span>
 										</td>
 										<td class="col-md-2 text-center" data-title="en Stock">
-											{{ $product->amounts }}
+											<span class="label label-primary pro-count">{{ $product->amounts }}</span>
 										</td>
 									</tr>
 								@endforeach

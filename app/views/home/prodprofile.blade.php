@@ -62,6 +62,10 @@
                         $(".cart-text").html(data);
                     });
                 });
+
+                $(this).removeClass('btn-success');
+                $(this).addClass('btn-info');
+                $(this).html('<i class="fa fa-check fa-lg"></i> Agregado');
             })
         });
     </script>
