@@ -58,8 +58,8 @@
                         <li><a href="/logout"><i class="fa fa-key"></i>Cerrar Sesion</a></li>
                     </ul>
                 </li>
-                <!-- user login dropdown end -->
-                <a href="/" class="btn btn-success">Volver a la Web</a>
+
+                <span><a href="/" class="btn btn-success">Volver a la Web</a></span>
             </ul>
             <!--search & user info end-->
         </div>
