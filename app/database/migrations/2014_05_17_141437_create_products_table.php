@@ -16,8 +16,10 @@ class CreateProductsTable extends Migration {
         {
             $table->increments('id');
             $table->integer('print_id');
+            //$table->foreign('print_id')->references('id')->on('prints');
 			$table->integer('amounts');
             $table->integer('model_id');
+            //$table->foreign('model_id')->references('id')->on('models');
             $table->float('model_price');
             $table->timestamps();
             $table->softDeletes();
