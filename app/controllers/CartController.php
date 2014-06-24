@@ -95,7 +95,7 @@ class CartController extends BaseController {
             }  
             Cart::destroy();     
 
-            return Redirect::to('/procesado');
+            return Redirect::to('/orders');
         }
     } 
 
@@ -135,6 +135,15 @@ class CartController extends BaseController {
         });
 
         return Redirect::back();
+    }
+
+    public function get_orders(){
+        return View::make('home.orders', array('orders' => Auth::user()->facturas));
+    }
+
+    public function get_order($id){
+        $order = Factura::find($id);
+        return View::make('home.order', array('order' => $order));
     }
 
 }

@@ -60,7 +60,7 @@
 										@if (Auth::user()->role_id == 1)
 											<li><a href="/admin"><i class="fa fa-dashboard"></i>  Panel de Administracion</a></li>
 										@endif
-											<li><a href="/pedidos"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a></li>
+											<li><a href="/orders"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a></li>
 											<li><a href="/logout"><i class="fa fa-sign-out"></i>  Salir</a></li>
 										</ul>
 									</span>

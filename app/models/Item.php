@@ -5,9 +5,9 @@ class Item extends Eloquent {
 	protected $table = 'items';
 	public $timestamp = true;
 
-	public function producto()
+	public function product()
     {
-        return $this->hasOne('Producto', 'id');
+        return $this->hasOne('Product', 'id', 'producto_id');
     }
 
 }

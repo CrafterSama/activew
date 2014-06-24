@@ -76,6 +76,9 @@ Route::group(array('before' => 'auth'), function()
 		Route::controller('modelos', 'ModelosController');
 	});
 
+	Route::get('/orders', ['uses' => 'CartController@get_orders'] );
+	Route::get('/order/{id}', ['uses' => 'CartController@get_order'] );
+
 });
 
 
@@ -89,22 +92,7 @@ Route::get('/cart/plus/{rowid}', ['uses' => 'CartController@post_plus'] );
 
 Route::get('/procesar', ['uses' => 'CartController@get_procesar'] );
 
-Route::get('/factura', function()
-{
-    return View::make('emails.factura'); 
-});
 
-Route::get('/procesado', function()
-{
-    $categorias = DB::table('categorias')->get();
-    return View::make('index', array('categorias' => $categorias, 'msg' => "Orden procesada, revise su email para completar el proceso."));
-});
-
-Route::get('/datos-enviados', function()
-{
-    $categorias = DB::table('categorias')->get();
-    return View::make('index', array('categorias' => $categorias, 'msg' => "Datos de pago enviados, te responderemos a la brevedad posible."));
-});
 
 Route::get('/factura/{slug}', ['uses' => 'CartController@get_factura'] );
 

@@ -13,24 +13,26 @@
 		            	<table class="table table-rounded table-striped table-condensed cf">
 		            		<thead class="cf">
 								<tr>
-									<th class="col-md-6">No de Orden</th>
-									<th class="col-md-2 text-center">Producto</th>
-									<th class="col-md-2 text-center">Cantidades</th>
+									<th class="col-md-3">ID</th>
+									<th class="col-md-3 text-center">Productos</th>
+									<th class="col-md-3 text-center">Fecha</th>
+									<th class="col-md-3 text-center">Ver</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach ($orders as $order)
 								<tr>
-									<td>
+									<td class="col-md-3">
 										{{ $order->id }}
 									</td>
-									<td>
-										{{ $order->id }}
+									<td class="col-md-3 text-center">
+										{{ $order->countItems() }}
 									</td>
-									<td>
-										{{ Form::model($order, array('url' => '/cesta/agregar','role'=>'form')) }}
-				                            <input type="number" name="quantities" value="{{ ProdToOrder::getQty($order->id) }}" min="1" max="" class="form-control" />
-                        				{{ Form::close() }}
+									<td class="col-md-3 text-center">
+										{{ $order->created_at }}
+									</td>
+									<td class="col-md-3 text-center">
+										<a href="/order/{{ $order->id }}" class="btn btn-primary">Ver</a>
                         			</td>
 								</tr>
 								@endforeach
