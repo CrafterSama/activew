@@ -22,17 +22,17 @@
 							<tbody>
 								@foreach ($orders as $order)
 								<tr>
-									<td class="col-md-3">
+									<td data-title="ID" class="col-md-3">
 										{{ $order->id }}
 									</td>
-									<td class="col-md-3 text-center">
+									<td data-title="Productos" class="col-md-3 text-center">
 										{{ $order->countItems() }}
 									</td>
-									<td class="col-md-3 text-center">
+									<td data-title="Fecha" class="col-md-3 text-center">
 										{{ $order->created_at }}
 									</td>
-									<td class="col-md-3 text-center">
-										<a href="/order/{{ $order->id }}" class="btn btn-primary">Ver</a>
+									<td data-title="Ver" class="col-md-3 text-center">
+										<a href="/order/{{ $order->id }}" class="btn btn-primary"><i class="fa fa-eye"></i>&nbsp;&nbsp;Ver</a>
                         			</td>
 								</tr>
 								@endforeach
