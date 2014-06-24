@@ -59,7 +59,27 @@
 						<div class="row">
 							<div class="col-lg-12 bg2">
 								<form action="/pagar">
-									<input type="text">
+									{{-- <input type="text"> --}}
+									<div class="col-lg-6">
+										<div class="form-group">
+											{{ Form::label('recibo','No. de transferencia o deposito') }}
+											{{ Form::text('recibo', null, array('class'=>'form-control', 'placeholder'=>'123456789',)) }}
+										</div>
+										<div class="form-group">
+											{{ Form::label('monto','Monto de la transferencia o deposito') }}
+											{{ Form::text('monto', null, array('class'=>'form-control', 'placeholder'=>'Monto en Bs.',)) }}
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											{{ Form::label('fecha','Seleccione la Fecha de la transaccion') }}
+											{{ Form::text('fecha', null, array('class'=>'form-control', 'placeholder'=>'dd/mm/aaaa',)) }}
+										</div>
+										<div class="form-group">
+											{{ Form::label('adjunto','Seleccione el Adjunto') }}
+											{{ Form::file('adjunto', null, array('class'=>'form-control', 'placeholder'=>'imagen.jpg',)) }}
+										</div>
+									</div>
 								</form>
 								<a href="/procesar" class="btn btn-lg btn-primary pull-right"> <i class="fa fa-check"></i> Procesar compra</a>
 							</div>		
