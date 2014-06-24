@@ -1,4 +1,7 @@
 /bootstrap
+/bootstrap/autoload.php
+/bootstrap/paths.php
+/bootstrap/start.php
 /vendor
 composer.phar
 composer.lock
