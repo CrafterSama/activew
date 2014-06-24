@@ -78,6 +78,7 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::get('/orders', ['uses' => 'CartController@get_orders'] );
 	Route::get('/order/{id}', ['uses' => 'CartController@get_order'] );
+	Route::post('/pay', ['uses' => 'CartController@post_pay'] );
 
 });
 

@@ -82,7 +82,7 @@ class CartController extends BaseController {
                     /* actualiza existencia */
                     $product->amounts = $product->amounts - $cart->qty;
                     $product->save();
-                     /* crea item del pedido */
+                    /* crea item del pedido */
                     $item = new Item();
                     $item->producto_id = $cart->id;
                     $item->cantidad = $cart->qty;
@@ -104,35 +104,40 @@ class CartController extends BaseController {
         return View::make('factura', array('factura' => $factura));
     }
 
-    public function post_pagar(){
+    public function post_pay(){
         $inputs = Input::all();
+
+        $rules = array(
+            'recibo' => 'required',
+            'monto'    => 'required',
+            'fecha' => 'required',
+            );
+
+        $validation = Validator::make($inputs, $rules);
+
+        if ($validation->fails())
+        {
+            return Redirect::to('/order/' . Input::get('id'))->withInput(Input::except('adjunto'))->withErrors($validation);
+        }
 
         $pago = new Pago();
         $pago->recibo = $inputs['recibo'];
         $pago->monto = $inputs['monto'];
         $pago->fecha = $inputs['fecha'];
 
-        $adj = Input::file('adjunto');
-        $destinationPath = 'uploads/pagos/';
-        $filename = str_random(16)."_".$adj->getClientOriginalName();
-        $adjunto = Input::file('adjunto')->move($destinationPath, $filename);
+        if (Input::file('adjunto')){
+            $adj = Input::file('adjunto');
+
+            $destinationPath = public_path() . '/assets/images/pays/';
+            $filename = str_random(16)."_".$adj->getClientOriginalName();
+            $adjunto = Input::file('adjunto')->move($destinationPath, $filename);
+            $pago->adjunto = $adjunto;
+        }
 
         $pago->factura_id = $inputs['id'];
-        $pago->adjunto = $adjunto;
+        
 
         $pago->save();
-
-        $factura = Factura::find($inputs['id']);
-
-        $data['factura'] = $factura->toArray();
-        $data['items'] = $factura->items->toArray();
-        $data['pago'] = $factura->pago->toArray();
-
-        Mail::send('emails.pago', $data , function($m) use ($factura)
-        {
-            $m->from('ventas@joelblackberryzone.com.ve', 'JoelBlackBerryZone.com.ve');
-            $m->to($factura['correo'])->cc('ventas@joelblackberryzone.com.ve')->subject('Confirmación de Pago.');
-        });
 
         return Redirect::back();
     }

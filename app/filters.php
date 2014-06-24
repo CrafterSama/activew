@@ -44,6 +44,11 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('csrf', function()
+{
+    if (Request::forged()) return Response::error('500');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
