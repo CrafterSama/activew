@@ -49,11 +49,21 @@
 							{{ Form::label('full_name', 'Nombre completo') }}
 							{{ Form::text('full_name', null, array('placeholder' => 'Nombre y Apellido', 'class' => 'form-control')) }}        
 						</div>
+						<div class="form-group col-md-4">
+							{{ Form::label('user_address', 'Direccion') }}
+							<div class="alert alert-info">Debe guardar aqui la direccion a la cual recibe los pedidos, coloque al final la Ciudad y el Estado</div>
+							{{ Form::text('user_address', null, array('placeholder' => 'Direccion', 'class' => 'form-control')) }}        
+						</div>
+						<div class="form-group col-md-4">
+							{{ Form::label('user_mobile', 'Numero Telefonico o Movil') }}
+							<div class="alert alert-info">Ingrese su Numero de telefono o movil para efectos de comunicación</div>
+							{{ Form::text('user_mobile', null, array('placeholder' => 'Telefono', 'class' => 'form-control')) }}        
+						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-md-4">
 							{{ Form::label('role_id', 'Tipo de Usuario') }}
-							<select name="role_id" id="role_id" class="form-control"><option value="1">Administrador</option><option value="2">Usuario</option></select>       
+							{{ Form::select('role_id', $options, $user->role_id, array('class'=>'form-control')) }}      
 						</div>
 						<div class="form-group col-md-4">
 							{{ Form::label('password', 'Contraseña') }}

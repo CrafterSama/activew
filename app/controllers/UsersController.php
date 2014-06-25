@@ -40,7 +40,12 @@ class UsersController extends BaseController {
 	{
 		if(!$this->autorizado) return Redirect::to('/login');
 		$user = new User();
-		return View::make('users.form')->with('user', $user);
+		$roles = Role::all();
+		$options = array();
+		foreach ($roles as $role) {
+			$options[$role->id] = $role->role_name;
+		}
+		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options]);
 	}
 
 
@@ -57,13 +62,17 @@ class UsersController extends BaseController {
 		$user->username = Input::get('username');
 		$user->email = Input::get('email');
 		$user->password = Hash::make(Input::get('password'));
+		$user->user_address = Input::get('user_address');
+		$user->user_mobile = Input::get('user_mobile');
 		$user->role_id = Input::get('role_id');
-		/*$user->active = true;*/
+
 		$validator = User::validate(array(
 			'full_name' => Input::get('full_name'),
 			'username' => Input::get('username'),
 			'email' => Input::get('email'),
 			'password' => Input::get('password'),
+			'user_address' => Input::get('user_address'),
+			'user_mobile' => Input::get('user_mobile'),
 			'role_id' => Input::get('role_id'),
 		));
 		if($validator->fails()){
@@ -107,7 +116,12 @@ class UsersController extends BaseController {
 		{
 			App::abort(404);
 		}
-		return View::make('users.form')->with('user', $user);
+		$roles = Role::all();
+		$options = array();
+		foreach ($roles as $role) {
+			$options[$role->id] = $role->role_name;
+		}
+		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options]);
 	}
 
 
@@ -135,13 +149,19 @@ class UsersController extends BaseController {
 			$password = Hash::make(Input::get('password'));
 		}
 		$user->password = $password;
+		$user->user_address = Input::get('user_address');
+		$user->user_mobile = Input::get('user_mobile');
+		
 		$validator = User::validate(array(
 			'full_name' => Input::get('full_name'),
 			'username' => Input::get('username'),
 			'email' => Input::get('email'),
-			'password' => $password,				
+			'password' => $password,
+			'user_address' => Input::get('user_address'),
+			'user_mobile' => Input::get('user_mobile'),				
 			'role_id' => Input::get('role_id'), 
 		), $user->id);
+		
 		if($validator->fails()){
 			$errors = $validator->messages()->all();
 			$user->password = null;

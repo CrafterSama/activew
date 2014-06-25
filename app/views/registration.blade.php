@@ -41,10 +41,18 @@
                 <br>
             @endif
             <p>Ingresa tus Datos a Continuación</p>
-            {{ Form::text('full_name', Input::old('full_name'), array('class' => 'form-control','placeholder' => 'Nombre Completo')); }}
-            {{ Form::email('email', Input::old('email'), array('class' => 'form-control','placeholder' => 'Correo Electronico')); }}
+            {{ Form::text('full_name', null, array('class' => 'form-control','placeholder' => 'Nombre Completo')); }}
+            {{ Form::email('email', null, array('class' => 'form-control','placeholder' => 'Correo Electronico')); }}
+            <div class="form-group">
+                <div class="alert alert-info">Debe guardar aqui la direccion a la cual recibe los pedidos, coloque al final la Ciudad y el Estado</div>
+                {{ Form::text('user_address', null, array('placeholder' => 'Direccion', 'class' => 'form-control')) }}        
+            </div>
+            <div class="form-group">
+            <div class="alert alert-info">Ingrese su Numero de telefono o movil para efectos de comunicación</div>
+            {{ Form::text('user_mobile', null, array('placeholder' => 'Telefono', 'class' => 'form-control')) }}        
+            </div>
             <p> Ingresa los detalles para tu Cuenta</p>
-            {{ Form::text('username', Input::old('username'), array('class' => 'form-control','placeholder' => 'Usuario')); }}
+            {{ Form::text('username', null, array('class' => 'form-control','placeholder' => 'Usuario')); }}
             {{ Form::password('password', array('class' => 'form-control','placeholder' => 'Contraseña')); }}
             {{ Form::password('password_confirm', array('class' => 'form-control','placeholder' => 'Re-ingresa Contraseña')); }}
             <button class="btn btn-lg btn-login btn-block" type="submit">Registrarse</button>
