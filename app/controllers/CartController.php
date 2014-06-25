@@ -95,7 +95,7 @@ class CartController extends BaseController {
             }  
             Cart::destroy();     
 
-            return Redirect::to('/orders');
+            return Redirect::to('/order/' . $factura->id);
         }
     } 
 
@@ -128,7 +128,7 @@ class CartController extends BaseController {
         if (Input::file('adjunto')){
             $adj = Input::file('adjunto');
 
-            $destinationPath = public_path() . '/assets/images/pays/';
+             $destinationPath = 'assets/images/pays/';
             $filename = str_random(16)."_".$adj->getClientOriginalName();
             $adjunto = Input::file('adjunto')->move($destinationPath, $filename);
             $pago->adjunto = $adjunto;

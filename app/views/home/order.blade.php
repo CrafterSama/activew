@@ -58,7 +58,8 @@
 							<!-- Start cart action -->
 							<div class="row">
 								<div class="col-lg-12 bg2">
-									@if(!$order->pago())
+
+									@if(!$order->pago)
 									<h3>Confirmar pago:</h3>
 									<form action="/pay" method="post" enctype="multipart/form-data">
 										<div class="col-lg-6">
@@ -107,7 +108,7 @@
 											</div>
 											<div class="form-group">
 												{{ Form::label('adjunto','Adjunto') }}
-												<a href="{{ $order->pago->adjunto }}" target="_blank">Ver</a>
+												<a href="/{{ $order->pago->adjunto }}" target="_popup">ADJUNTO</a>
 											</div>
 										</div>
 

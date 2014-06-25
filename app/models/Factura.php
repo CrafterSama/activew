@@ -24,7 +24,7 @@ class Factura extends Eloquent {
     {
         $total = 0;
         foreach ($this->items as $key => $item) {
-            $total+=$item->precio;
+            $total+= ($item->precio * $item->cantidad );
         }
         return $total;
     }

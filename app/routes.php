@@ -39,10 +39,10 @@ Route::group(array('before' => 'auth'), function()
 	Route::post('cesta/actualizar/{id}', 'OrdersController@updateBasket');
 	Route::get('cesta', 'OrdersController@showBasket');
 
-    Route::get('logout', 'AuthController@logOut');
+	Route::get('logout', 'AuthController@logOut');
 
 	Route::get('admin', 'AdminController@showPanel');
-    Route::group(['prefix' => 'admin'], function() {
+	Route::group(['prefix' => 'admin'], function() {
 		
 		/** Admin Links **/
 		Route::get('productos', 'ProductsController@index');
@@ -76,9 +76,11 @@ Route::group(array('before' => 'auth'), function()
 		Route::controller('modelos', 'ModelosController');
 	});
 
-	Route::get('/orders', ['uses' => 'CartController@get_orders'] );
-	Route::get('/order/{id}', ['uses' => 'CartController@get_order'] );
-	Route::post('/pay', ['uses' => 'CartController@post_pay'] );
+Route::get('/orders', ['uses' => 'CartController@get_orders'] );
+Route::get('/order/{id}', ['uses' => 'CartController@get_order'] );
+Route::post('/pay', ['uses' => 'CartController@post_pay'] );
+
+
 
 });
 
@@ -99,11 +101,16 @@ Route::get('/factura/{slug}', ['uses' => 'CartController@get_factura'] );
 
 Route::get('/carrito', function()
 {
-    $cart = Cart::content();
-    return View::make('home.carrito', array('cart' => $cart )); 
+	$cart = Cart::content();
+	return View::make('home.carrito', array('cart' => $cart )); 
 });
 
 Route::post('/total', function()
 {
-    echo '(' . Cart::count() .') Carrito <span class="fa fa-shopping-cart fa-lg white"></span>';
+	echo '(' . Cart::count() .') Carrito <span class="fa fa-shopping-cart fa-lg white"></span>';
+});
+
+
+Route::get('/assets/images/pays/{slug}', function($slug){
+	return Response::download('assets/images/pays/'.$slug);
 });
