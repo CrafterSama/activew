@@ -356,6 +356,12 @@ pre {
       background: #C74751;
     }
 }
+@media screen and (width: 768px) {
+  body {
+    padding-top: 52px;
+  } 
+
+}
 
 /* @ielijose */
 

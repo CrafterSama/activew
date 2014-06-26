@@ -29,7 +29,7 @@
 			<header role="banner" class="navbar navbar-fixed-top navbar-inverse">
 				<div class="container">
 					<div class="navbar-header text-left">
-						<img src="/../assets/images/logo.png" alt="" class="img-thumbnail">
+						<img src="/../assets/images/logo.png" alt="" height="50px" style="margin:0.2em;" />
 						<button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -39,7 +39,6 @@
 					</div>
 					<div class="navbar-inverse side-collapse in">
 						<nav role="navigation" class="navbar-collapse ">
-							<img src="/../assets/images/logo.png" alt="" class="img-thumbnail">
 							<ul class="nav navbar-nav">
 								<li><a class="blog-nav-item" href="/">Inicio</a></li>
 								<li><a class="blog-nav-item" href="/productos">Productos</a></li>
