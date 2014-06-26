@@ -769,7 +769,7 @@ body, td { font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; 
             <span class="hide"><p id="permission-reminder" align="left" class="footer-content-left"></p></span>
 
 
-            <p align="center" class="footer-content-left"> Desarrollado por: <a href="http://puertolab.com">puertoLab</a></p>
+            <p align="center" class="footer-content-left"> Desarrollado por: <a href="http://craftersama.me">CrafterSama Studio</a></p>
 
 
             </td>
