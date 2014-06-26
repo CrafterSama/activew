@@ -83,10 +83,10 @@
 
 			@yield('content')
 
-			<div class="blog-footer">
-				<p>Creado por <a href="http://twitter.com/csstudioWDC">CrafterSama Studio</a></p>
+			<footer class="blog-footer">
+				<p>Creado por <a href="http://craftersama.me">CrafterSama Studio</a></p>
 				<p><a href="#">Back to top</a></p>
-			</div>
+			</footer>
 		<!-- Bootstrap core JavaScript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->

@@ -52,16 +52,6 @@ h6, .h6 {
 
 
 /*
- * Override Bootstrap's default container.
- */
-
-@media (min-width: 1200px) {
-  .container {
-    width: 1020px;
-  }
-}
-
-/*
  * Masthead for nav
  */
 
@@ -323,6 +313,26 @@ span.tags
 pre {
     tab-size: 7;
 }
+/*
+ * Override Bootstrap's default container.
+ */
+@media screen and (min-width: 768px) and (max-width: 990px) {
+  body 
+  {
+    padding-top: 52px;
+  }
+
+}
+@media screen and (min-width: 100px) and (max-width: 769px) {
+  .blog-header .container {
+    text-align: center;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1020px;
+  }
+}
 
 @media screen and (max-width: 765px) {
     .side-collapse-container{
@@ -356,12 +366,7 @@ pre {
       background: #C74751;
     }
 }
-@media screen and (width: 768px) {
-  body {
-    padding-top: 52px;
-  } 
 
-}
 
 /* @ielijose */
 
