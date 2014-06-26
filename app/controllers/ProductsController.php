@@ -147,7 +147,13 @@ class ProductsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$product = Product::find($id);
+		$product->amounts = Input::get('amounts');
+		
+		if ($product->save())
+		{
+			return Redirect::to('admin/productos')->with('notice', 'El producto se edito correctamente.');
+		}
 	}
 
 

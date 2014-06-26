@@ -4,7 +4,7 @@ class CartController extends BaseController {
 
     public function get_cart()
     {
-        echo Cart::content();        
+        return Cart::content();        
     }  
 
     public function post_add($id, $qty = 1)
@@ -36,7 +36,7 @@ class CartController extends BaseController {
     {
         if($cart = Cart::get($rowid)){
             $qty = $cart->qty-1;
-            if($qty==0){
+            if($qty == 0){
                 Cart::remove($rowid);
             } else{
                 Cart::update($rowid, array("qty" => $qty));
@@ -66,7 +66,7 @@ class CartController extends BaseController {
         if (Auth::guest()){
             Session::put('mensaje_error', 'Inicie sesión para realizar la compra.');
             Session::put('next_url', 'procesar');
-            return View::make('login');
+            return View::make('/login');
         }else{
 
             /* crear factura */

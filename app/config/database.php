@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'activewear',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'coanime03',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

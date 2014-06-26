@@ -50,8 +50,7 @@
 								<hr />
 								@foreach ($modelos as $modelo)
 									{{ Form::label($modelo->model_name, strtoupper($modelo->model_name)) }}
-									{{ Form::checkbox('model_id['.$modelo->id.']',$modelo->id) }}
-									<input type="number" min="1" name="amounts_{{ $modelo->id }}" placeholder="Cantidades" class="form-control" />
+									<input type="number" min="1" name="amounts" placeholder="Cantidades" class="form-control" />
 									<br />
 								@endforeach
 							</div>

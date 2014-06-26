@@ -53,8 +53,6 @@
 									</tr>							  
 								</tbody>
 							</table>
-
-
 							<!-- Start cart action -->
 							<div class="row">
 								<div class="col-lg-12 bg2">

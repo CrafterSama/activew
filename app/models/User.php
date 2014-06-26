@@ -114,6 +114,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	public static function getName($id)
+	{
+		$name = User::find($id);
+		return $name->full_name;
+	}
+
 	public function facturas()
     {
         return $this->hasMany('Factura');

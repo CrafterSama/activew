@@ -23,23 +23,27 @@
 						<tr>
 							<th class="col-xs-1 text-center">Nº de Orden</th>
 							<th class="text-center">Usuario</th>
-							<th class="text-center">Productos</th>
+							<th class="text-center">Producto</th>
+							<th class="text-center">Cantidad</th>
 							<th class="col-xs-2 text-center">Fecha de la Orden</th>
 							<th class="col-xs-3 text-center">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td data-title="Nº de Orden"></td>
-							<td data-title="Usuario"></td>
-							<td data-title="Productos"></td>
-							<td data-title="Fecha de la Orden"></td>
-							<td data-title="Acciones" class="text-center">
-								<a href="" class="btn btn-success btn-xs white"  data-toggle="tooltip" data-placement="top" title="Aprovar Pedido"><i class="fa fa-check fa-lg"></i></a>
-								<a href="" class="btn btn-warning btn-xs white"  data-toggle="tooltip" data-placement="top" title="Editar Registro"><i class="fa fa-pencil fa-lg"></i></a>
-								<a href="" class="btn btn-danger btn-xs white"  data-toggle="tooltip" data-placement="top" title="Borrar Registro"><i class="fa fa-trash-o fa-lg"></i></a>
-							</td>
-						</tr>
+						@foreach ($items as $item)
+							<tr class="text-center">
+								<td data-title="Nº de Recibo">{{ $item->id }}</td>
+								<td data-title="Usuario">{{ User::getName($item->factura->user_id) }}</td>
+								<td data-title="Producto"><img class="img-thumbnail" src="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}" class="cart-img" alt="" width="80"></a> {{ Stamp::getStampName($item->product->stamp_id) }}</td>
+								<td data-title="Cantidad">{{ $item->cantidad }}</td>
+								<td data-title="Fecha de la Orden">{{ Helper::getDate(strtotime($item->created_at,0)) }}</td>
+								<td data-title="Acciones" class="text-center">
+									<a href="" class="btn btn-success btn-xs white"  data-toggle="tooltip" data-placement="top" title="Aprovar Pedido"><i class="fa fa-check fa-lg"></i></a>
+									<a href="" class="btn btn-warning btn-xs white"  data-toggle="tooltip" data-placement="top" title="Editar Registro"><i class="fa fa-pencil fa-lg"></i></a>
+									<a href="" class="btn btn-danger btn-xs white"  data-toggle="tooltip" data-placement="top" title="Borrar Registro"><i class="fa fa-trash-o fa-lg"></i></a>
+								</td>
+							</tr>
+						@endforeach
 					</tbody>
 	            </table>
 	        </section>

@@ -9,7 +9,8 @@ class OrdersController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('admin.orders');
+		$items = Item::all();
+		return View::make('admin.orders')->with('items', $items);
 	}
 
 

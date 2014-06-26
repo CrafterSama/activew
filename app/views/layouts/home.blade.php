@@ -83,7 +83,7 @@
 			@yield('content')
 
 			<div class="blog-footer">
-				<p>Creado por <a href="http://twitter.com/csamastudio">CrafterSama Studio</a></p>
+				<p>Creado por <a href="http://twitter.com/csstudioWDC">CrafterSama Studio</a></p>
 				<p><a href="#">Back to top</a></p>
 			</div>
 		<!-- Bootstrap core JavaScript

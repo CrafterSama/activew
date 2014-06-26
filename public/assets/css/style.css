@@ -95,6 +95,16 @@ h6, .h6 {
   border: none;
 }
 
+ul.dropdown-menu
+{
+  background: #C74751;
+}
+.dropdown-menu > li > a
+{
+  color: #ffffff;
+  background: #C74751;
+}
+
 /* Nav links */
 .blog-nav-item {
   position: relative;
@@ -189,21 +199,6 @@ h6, .h6 {
 .sidebar-module-inset ol:last-child {
   margin-bottom: 0;
 }
-
-
-
-/* Pagination
-.pager {
-  margin-bottom: 60px;
-  text-align: left;
-}
-.pager > li > a {
-  width: 140px;
-  padding: 10px 20px;
-  text-align: center;
-  border-radius: 30px;
-}*/
-
 
 /*
  * Blog posts
@@ -351,9 +346,14 @@ pre {
     .side-collapse.in {
         width:0;
     }
+    ul.dropdown-menu
+    {
+      background: #C74751;
+    }
     .dropdown-menu > li > a
     {
       color: #ffffff;
+      background: #C74751;
     }
 }
 
