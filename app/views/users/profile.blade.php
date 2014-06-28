@@ -15,7 +15,7 @@
 	@endif
 	<section class="panel">
 	    <header class="panel-heading">
-			<a href="/admin/usuarios" class="btn btn-info"><i class="fa fa-angle-double-left"></i>  Volver</a>
+			<a href="{{ URL::previous() }}" class="btn btn-info"><i class="fa fa-angle-double-left"></i>  Volver</a>
 			&nbsp;
 			&nbsp;
 			<span class="dropdown">

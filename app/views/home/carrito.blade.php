@@ -75,7 +75,12 @@
 						<!-- End cart action -->
 						@else
 						<br/>
-						<h2 align="center">No hay productos en tu carrito de compras :(</h2>
+						<h2 class="text-center">No hay productos en tu carrito de compras</h2>
+						<br />
+						<div class="text-center">
+							<button class="btn btn-success btn-lg" onclick="location.href='productos'">Visita Nuestros Productos</button>
+						</div>
+
 						@endif
 					</section>
 				</div>

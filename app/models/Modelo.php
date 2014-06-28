@@ -14,7 +14,7 @@ class Modelo extends Eloquent {
 	protected $table = 'modelos';
 
 	public function products()	{
-		return $this->hasMany('Product');
+		return $this->hasMany('Product', 'model_id', 'id');
 	}
 
 	public static $rules = array(
@@ -40,7 +40,14 @@ class Modelo extends Eloquent {
 	public static function getName($id)
 	{
 		$modelo = Modelo::find($id);
-		return $modelo->model_name;
+		if($modelo)
+		{
+			return $modelo->model_name;
+		}
+		else
+		{
+			return '&nbsp;&nbsp;"No hay Modelo Asociado(Borre el Producto)" ';
+		}
 	}
 	public static function getNameByStamp($id)
 	{
@@ -54,7 +61,15 @@ class Modelo extends Eloquent {
 	public static function getPrice($id)
 	{
 		$modelo = Modelo::find($id);
-		return $modelo->price_out_tax_float;
+		if($modelo)
+		{
+			//return $modelo->model_name;
+			return $modelo->price_out_tax_float;
+		}
+		else
+		{
+			return '&nbsp;&nbsp;"No hay Precio Asociado(Borre el Producto)" ';
+		}
 	}
 
 }

@@ -19,9 +19,9 @@ class Stamp extends Eloquent {
 	 * @return mixed
 	 */
 
-	public function stampToProduct()
+	public function products()
 	{
-		return $this->belongTo('Product');
+		return $this->hasMany('Product','stamp_id','id');
 	}
 	public static function getId($name)
 	{

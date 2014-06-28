@@ -23,7 +23,7 @@
 	<br>
 	<section class="panel">
 		<header class="panel-heading">
-			<a href="/admin/productos" class="btn btn-info"><i class="fa fa-angle-double-left"></i> Volver</a>	
+			<a href="{{ URL::previous() }}" class="btn btn-info"><i class="fa fa-angle-double-left"></i> Volver</a>	
 			<span class="pull-right">
 				{{ $action }} Productos 
 			</span>
@@ -50,7 +50,8 @@
 								<hr />
 								@foreach ($modelos as $modelo)
 									{{ Form::label($modelo->model_name, strtoupper($modelo->model_name)) }}
-									<input type="number" min="1" name="amounts" placeholder="Cantidades" class="form-control" />
+									{{ Form::checkbox('model_id['.$modelo->id.']',$modelo->id) }}
+									<input type="number" min="1" name="amounts_{{ $modelo->id }}" placeholder="Cantidades" class="form-control" />
 									<br />
 								@endforeach
 							</div>

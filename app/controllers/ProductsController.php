@@ -89,8 +89,9 @@ class ProductsController extends \BaseController {
 				$amount 		=> $amounts
 			);
 			$messages 			= array(
-				'required' 		=> 'Dede llenar el campo Cantidades',
-				'numeric' 		=> 'Las cantidades solo pueden ser numeros'
+				'stampname.required' => 'Debe llenar el Campo Nombre del Stampado',
+				'amounts_'.$modelId.'.required' => 'Dede llenar el campo Cantidades',
+				'amounts_'.$modelId.'.numeric' => 'Las cantidades solo pueden ser numeros',
 			);
 			
 			$validator 			= 	Validator::make($inputs,$rules);

@@ -140,8 +140,19 @@ class ModelosController extends \BaseController {
 		{
 			App::abort(404);
 		}
-		
+		$products = DB::table('products')
+						->where('model_id','=',$id)
+						->get();
+		if($products)
+		{
+			foreach ($products as $product) {
+				$p = Product::find($product->id);
+				$p->forceDelete();
+			}
+		}
 		$modelo->forceDelete();
+
+
 		
 		if (Request::ajax())
 		{
@@ -150,7 +161,8 @@ class ModelosController extends \BaseController {
 				'msg'	 => 'Usuario '.$user->full_name.' eliminado',
 				'id'	 => $user->id
 			));
-		}else
+		}
+		else
 		{
 			return Redirect::back()->with('notice', 'El producto ha sido eliminado correctamente.');	
 		}

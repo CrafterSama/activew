@@ -46,7 +46,9 @@
             <!--search & user info start-->
             <ul class="nav pull-right top-menu">
                 <!-- user login dropdown start-->
+                <li><a href="/" class="btn btn-warning bt-lg"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Volver a la Web</a></li>
                 <li class="dropdown">
+                    
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <img alt="" src="/assets/images/avatar1_small.jpg">
                         <span class="username">{{ Auth::user()->full_name; }}</span>
@@ -58,8 +60,6 @@
                         <li><a href="/logout"><i class="fa fa-key"></i>Cerrar Sesion</a></li>
                     </ul>
                 </li>
-
-                <span><a href="/" class="btn btn-success">Volver a la Web</a></span>
             </ul>
             <!--search & user info end-->
         </div>
