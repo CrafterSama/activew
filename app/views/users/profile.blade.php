@@ -47,6 +47,12 @@
 					<td class="visible-lg"><strong>Email</strong></td><td data-title="Correo Electronico"> {{ $user->email }} </td>
 				</tr>
 				<tr>
+					<td class="visible-lg"><strong> Direción</strong></td><td data-title="Rol de Usuario"> {{ $user->user_address }} </td>
+				</tr>
+				<tr>
+					<td class="visible-lg"><strong> Teléfono</strong></td><td data-title="Rol de Usuario"> {{ $user->user_mobile }} </td>
+				</tr>
+				<tr>
 					<td class="visible-lg"><strong> Nivel</strong></td><td data-title="Rol de Usuario"> {{ $rol->role_name }} </td>
 				</tr>
 		    </table>

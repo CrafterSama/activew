@@ -33,7 +33,7 @@
 						@foreach ($items as $item)
 							<tr class="text-center">
 								<td data-title="Nº de Recibo">{{ $item->id }}</td>
-								<td data-title="Usuario">{{ User::getName($item->factura->user_id) }}</td>
+								<td data-title="Usuario"><a href="/admin/usuarios/{{ $item->factura->user_id }}/perfil" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Datos del Usuario">{{ User::getName($item->factura->user_id) }}</a></td>
 								<td data-title="Producto"><img class="img-thumbnail" src="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}" class="cart-img" alt="" width="80"></a> {{ Stamp::getStampName($item->product->stamp_id) }}</td>
 								<td data-title="Cantidad">{{ $item->cantidad }}</td>
 								<td data-title="Fecha de la Orden">{{ Helper::getDate(strtotime($item->created_at,0)) }}</td>
