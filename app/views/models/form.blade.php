@@ -35,13 +35,16 @@
 					@include ('common/errors', array('errors' => $errors))
 
 					<div class="row">
-						<div class="form-group col-md-4">
-							{{ Form::label('model_name', 'Nombre del Modelo') }}
+						<div class="form-group col-md-8">
+							{{ Form::label('model_name', 'Nombre del Modelo',array('class'=>'control-label')) }}
 							{{ Form::text('model_name', null, array('placeholder' => 'Introduce el Nombre del Modelo', 'class' => 'form-control')) }}
 						</div>
-						<div class="form-group col-md-4">
-							{{ Form::label('price_out_tax_float', 'Precio Normal') }}
-							{{ Form::text('price_out_tax_float', null, array('placeholder' => '0000.00', 'class' => 'form-control')) }}
+						<div class="form-group col-md-8">
+							{{ Form::label('price_out_tax_float', 'Precio Normal',array('class'=>'control-label')) }}
+							<div class="input-group">
+								<span class="input-group-addon">Bs.</span>
+								{{ Form::text('price_out_tax_float', null, array('placeholder' => '0000.00', 'class' => 'form-control')) }}
+							</div>
 						</div>
 					</div>
 					{{ Form::button($action . ' modelo', array('type' => 'submit', 'class' => 'btn btn-primary pull-right')) }}    

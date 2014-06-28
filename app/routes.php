@@ -70,10 +70,14 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('usuarios/{id}/perfil', 'UsersController@showProfile');
 		
 		Route::get('pedidos', 'OrdersController@index');
+		
+		Route::get('configuracion', 'ConfigurationsController@getConfig');
+		Route::post('configuracion', 'ConfigurationsController@updateConfig');
 
 		Route::controller('users', 'UsersController');
 		Route::controller('products', 'ProductsController');
 		Route::controller('modelos', 'ModelosController');
+
 	});
 
 Route::get('/orders', ['uses' => 'CartController@get_orders'] );
