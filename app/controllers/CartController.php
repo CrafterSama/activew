@@ -147,7 +147,7 @@ class CartController extends BaseController {
 
         $pago->save();
 
-        /*$factura = Factura::find($inputs['id']);
+        $factura = Factura::find($inputs['id']);
 
         $data['user'] = Auth::user();
 
@@ -159,7 +159,7 @@ class CartController extends BaseController {
         {
             $m->from('ventas@activewear.com.ve', 'ActiveWear.com.ve');
             $m->to($data['user']['email'])->cc('ventas@activewear.com.ve')->subject('Confirmación de Pago.');
-        });*/
+        });
 
         return Redirect::back();
     }

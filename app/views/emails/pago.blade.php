@@ -34,11 +34,6 @@
 
 		<p><strong>Fecha:</strong> {{ $pago['fecha'] }}</p>
 
-		<p><strong>Adjunto:</strong> <a href="http://pioggia.craftersama.me/{{ $pago['adjunto'] }}" style="font-size: 18px; background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px">Ver Adjunto</a> </p>
-
-
-
-
 
 		<h1>Recibo No. {{ $factura['id'] }} </h1>
 
@@ -50,14 +45,9 @@
 
 
 
-		<p style="text-decoration:none;"><strong>Nombre:</strong> {{ $factura['nombre'] }} </p>
+		<p><strong>Nombre:</strong> {{ $user['full_name'] }} </p>
 
-		<p style="text-decoration:none;"><strong>Teléfono:</strong> {{ $factura['telefono'] }} </p>
-
-		<p style="text-decoration:none;"><strong>Correo:</strong> {{ $factura['correo'] }}</p>
-
-		<p style="text-decoration:none;"><strong>Dirección:</strong> {{ $factura['direccion'] }} </p>
-
+		<p><strong>Correo:</strong> {{ $user['email'] }} </p>
 	
 
 		<hr/>
@@ -110,7 +100,7 @@
 
 		<div align="center">
 
-			<a href="http://pioggia.craftersama.me/factura/{{ $factura['slug'] }}" style="font-size: 28px;  background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px;"> Ver en linea </a>
+			<a href="http://pioggia.craftersama.me/order/{{ $factura['id'] }}" style="font-size: 28px;  background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px;"> Ver en linea </a>
 
 		</div>
 
