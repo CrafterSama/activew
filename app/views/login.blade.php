@@ -44,6 +44,11 @@
 
                 </span>
             </label>
+
+            @if(isset($_GET['redirect']))
+              {{ Form::hidden('redirect', $_GET['redirect'] ); }}
+            @endif
+
             {{ Form::submit('Entrar',array('class'=>'btn btn-lg btn-login btn-block')) }}
 
             <div class="registration">

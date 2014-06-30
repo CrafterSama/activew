@@ -63,40 +63,48 @@ class CartController extends BaseController {
 
     public function get_procesar()
     {
-        if (Auth::guest()){
-            Session::put('mensaje_error', 'Inicie sesión para realizar la compra.');
-            Session::put('next_url', 'procesar');
-            return View::make('/login');
-        }else{
+         /* crear factura */
+        $factura = new Factura();
+        $factura->user_id = Auth::user()->id;
+        $factura->slug = Uuid::generate();
+        $factura->save();
 
-            /* crear factura */
-            $factura = new Factura();
-            $factura->user_id = Auth::user()->id;
-            $factura->slug = Uuid::generate();
-            $factura->save();
+        foreach ($carts = Cart::content() as $key => $cart) {
+            $product = Product::find($cart->id);                 
 
-            foreach ($carts = Cart::content() as $key => $cart) {
-                $product = Product::find($cart->id);                 
+            if(( $product->amounts - $cart->qty ) >= 0 ){
+                /* actualiza existencia */
+                $product->amounts = $product->amounts - $cart->qty;
+                $product->save();
+                /* crea item del pedido */
+                $item = new Item();
+                $item->producto_id = $cart->id;
+                $item->cantidad = $cart->qty;
+                $item->precio = $cart->price;
+                $item->factura_id = $factura->id;
 
-                if(( $product->amounts - $cart->qty ) >= 0 ){
-                    /* actualiza existencia */
-                    $product->amounts = $product->amounts - $cart->qty;
-                    $product->save();
-                    /* crea item del pedido */
-                    $item = new Item();
-                    $item->producto_id = $cart->id;
-                    $item->cantidad = $cart->qty;
-                    $item->precio = $cart->price;
-                    $item->factura_id = $factura->id;
+                $item->keep = $cart->name ." | ". $cart->qty ." | ". $cart->price ." | ". $cart->options['image'];  
+                $item->save();
+            }
+        }  
+        Cart::destroy();  
 
-                    $item->keep = $cart->name ." | ". $cart->qty ." | ". $cart->price ." | ". $cart->options['image'];  
-                    $item->save();
-                }
-            }  
-            Cart::destroy();     
+        $user = Auth::user();
 
-            return Redirect::to('/order/' . $factura->id);
-        }
+        $datos = [];
+        $datos['user'] = $user;
+        $datos['factura'] = $factura;
+        $datos['cart'] = $carts;
+
+        //return View::make('emails.factura', array('datos' => $data));
+
+        Mail::send('emails.factura', $datos , function($m) use ($user)
+        {
+            $m->from('ventas@activewear.com.ve', 'ActiveWear.com.ve');
+            $m->to($user['email'])->cc('ventas@activewear.com.ve')->subject('Orden de compra.');
+        }); 
+
+        return Redirect::to('/order/' . $factura->id);
     } 
 
     public function get_factura($slug){
@@ -128,16 +136,30 @@ class CartController extends BaseController {
         if (Input::file('adjunto')){
             $adj = Input::file('adjunto');
 
-             $destinationPath = 'assets/images/pays/';
+            $destinationPath = 'assets/images/pays/';
             $filename = str_random(16)."_".$adj->getClientOriginalName();
             $adjunto = Input::file('adjunto')->move($destinationPath, $filename);
             $pago->adjunto = $adjunto;
         }
 
         $pago->factura_id = $inputs['id'];
-        
+
 
         $pago->save();
+
+        /*$factura = Factura::find($inputs['id']);
+
+        $data['user'] = Auth::user();
+
+        $data['factura'] = $factura->toArray();
+        $data['items'] = $factura->items->toArray();
+        $data['pago'] = $factura->pago->toArray();
+
+        Mail::send('emails.pago', $data , function($m) use ($data)
+        {
+            $m->from('ventas@activewear.com.ve', 'ActiveWear.com.ve');
+            $m->to($data['user']['email'])->cc('ventas@activewear.com.ve')->subject('Confirmación de Pago.');
+        });*/
 
         return Redirect::back();
     }

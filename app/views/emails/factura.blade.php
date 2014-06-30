@@ -22,7 +22,7 @@
 
 	<div style="padding: 0 1em;"> 
 
-		<h1>Recibo No. {{ $datos['id'] }} </h1>
+		<h1>Recibo No. {{ $factura['id'] }} </h1>
 
 		<hr>
 
@@ -31,15 +31,9 @@
 		<h4>Datos de facturación: </h4>
 
 
+		<p><strong>Nombre:</strong> {{ $user['full_name'] }} </p>
 
-		<p><strong>Nombre:</strong> {{ $datos['nombre'] }} </p>
-
-		<p><strong>Teléfono:</strong> {{ $datos['telefono'] }} </p>
-
-		<p><strong>Correo:</strong> {{ $datos['correo'] }}</p>
-
-		<p><strong>Dirección:</strong> {{ $datos['direccion'] }} </p>
-
+		<p><strong>Correo:</strong> {{ $user['email'] }} </p>
 	
 
 		<hr/>
@@ -105,13 +99,11 @@
         LUEGO REPORTA TU PAGO HACIENDO CLICK EL EL SIGUIENTE LINK "COMPLETAR PAGO", LLENA EL FORMILARIO Y LISTO.
         </div>
 
-			<a href="http://pioggia.craftersama.me/factura/{{ $datos['slug'] }}" style="font-size: 28px; background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px"> Completar Pago </a>
+			<a href="http://pioggia.craftersama.me/order/{{ $factura['id'] }}" style="font-size: 28px; background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px"> Completar Pago </a>
 
 		</div>
 
-	</div>
-
-	
+	</div>	
 
 </body>
 

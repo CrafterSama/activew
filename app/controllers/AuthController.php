@@ -33,11 +33,8 @@ class AuthController extends BaseController {
         if(Auth::attempt($userdata, Input::get('remember-me', 0)))
         {
             // De ser datos válidos nos mandara a la bienvenida
-            if(Session::has('next_url')){
-                $url = Session::get('next_url');
-                Session::forget('mensaje_error');
-                Session::forget('next_url');
-                return Redirect::to($url);
+            if(Input::has('redirect')){
+                return Redirect::to(Input::get('redirect'));
             }else{
                return Redirect::to('/'); 
             }

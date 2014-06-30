@@ -84,6 +84,7 @@ Route::get('/orders', ['uses' => 'CartController@get_orders'] );
 Route::get('/order/{id}', ['uses' => 'CartController@get_order'] );
 Route::post('/pay', ['uses' => 'CartController@post_pay'] );
 
+Route::get('/procesar', ['uses' => 'CartController@get_procesar'] );
 
 
 });
@@ -97,7 +98,6 @@ Route::post('/cart/{id}/add/{qty}', ['uses' => 'CartController@post_add'] );
 Route::get('/cart/minus/{rowid}', ['uses' => 'CartController@post_minus'] );
 Route::get('/cart/plus/{rowid}', ['uses' => 'CartController@post_plus'] );
 
-Route::get('/procesar', ['uses' => 'CartController@get_procesar'] );
 
 
 
