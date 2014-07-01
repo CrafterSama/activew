@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>@yield('title', 'Activewear Venezuela')</title>
+	<title>@yield('title', 'Carioca ActiveWear')</title>
 
 	<!-- Bootstrap core CSS -->
 	{{ HTML::style('assets/css/bootstrap.min.css', array('media'=>'screen')) }}
@@ -76,7 +76,7 @@
 			</header>
 			<div class="blog-header">
 				<div class="container">
-					<h1 class="blog-title">ActiveWear Venezuela</h1>
+					<h1 class="blog-title">Carioca ActiveWear</h1>
 					<p class="lead blog-description">Catalogo de ropa para la actividad deportiva, ventas y mas...</p>
 				</div>
 			</div>

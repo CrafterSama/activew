@@ -102,7 +102,9 @@
 			<a href="http://pioggia.craftersama.me/order/{{ $factura['id'] }}" style="font-size: 28px; background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px"> Completar Pago </a>
 
 		</div>
-
+		<br />
+		<br />
+		<br />
 	</div>	
 
 </body>

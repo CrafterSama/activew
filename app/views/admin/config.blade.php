@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1>>Opciones de Configuracion</h1>
+	<h1>Opciones de Configuracion</h1>
 	<div class="alert alert-info">
 		Formulario para hacer cambios en las opciones de configuracion, tales como cambiar IVA o porcentaje de descuento. 
 	</div>

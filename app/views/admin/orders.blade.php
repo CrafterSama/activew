@@ -26,6 +26,7 @@
 							<th class="text-center">Producto</th>
 							<th class="text-center">Cantidad</th>
 							<th class="col-xs-2 text-center">Fecha de la Orden</th>
+							<th class="col-xs-2 text-center">Imagen Adjunta</th>
 							<th class="col-xs-3 text-center">Acciones</th>
 						</tr>
 					</thead>
@@ -37,6 +38,13 @@
 								<td data-title="Producto"><img class="img-thumbnail" src="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}" class="cart-img" alt="" width="80"></a> {{ Stamp::getStampName($item->product->stamp_id) }}</td>
 								<td data-title="Cantidad">{{ $item->cantidad }}</td>
 								<td data-title="Fecha de la Orden">{{ Helper::getDate(strtotime($item->created_at,0)) }}</td>
+								<td data-title="Adjunto">
+									@if (Pago::getAdj($item->factura_id) == 'Sin Pagar')
+										Mercancia Sin Pagar
+									@else
+										<a href="/{{ Pago::getAdj($item->factura_id) }}"><img src="/{{ Pago::getAdj($item->factura_id) }}" alt="" class="img-thumbnail" width="120px" /></a>
+									@endif
+								</td>
 								<td data-title="Acciones" class="text-center">
 									<a href="" class="btn btn-success btn-xs white"  data-toggle="tooltip" data-placement="top" title="Aprovar Pedido"><i class="fa fa-check fa-lg"></i></a>
 									<a href="" class="btn btn-warning btn-xs white"  data-toggle="tooltip" data-placement="top" title="Editar Registro"><i class="fa fa-pencil fa-lg"></i></a>

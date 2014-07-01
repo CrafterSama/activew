@@ -9,5 +9,16 @@ class Pago extends Eloquent {
     {
         return $this->hasOne('Factura');
     }
-
+    public static function getAdj($id)
+    {
+    	$pay = DB::table('pagos')
+    				->where('factura_id','=',$id)
+    				->pluck('adjunto');
+    	if ($pay) {
+    		return $pay;
+    	} else {
+			return 'Sin Pagar';
+    	}
+    	
+    }
 }

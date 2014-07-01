@@ -47,7 +47,13 @@
 
 		<p><strong>Nombre:</strong> {{ $user['full_name'] }} </p>
 
+		<p><strong>Direccion de Envio:</strong> {{ $user['user_address'] }} </p>
+
+		<p><strong>Telefono de Contacto:</strong> {{ $user['user_mobile'] }} </p>
+
 		<p><strong>Correo:</strong> {{ $user['email'] }} </p>
+		
+		<p><strong>Nota:</strong> El Envio se realiza por MRW a la Dirección que usted proveyo al momento de Registrarse y es con cobro a destino </p>
 	
 
 		<hr/>
@@ -96,7 +102,7 @@
 
 		<h4 align="right">Total: {{ $total }} Bs. </h4>
 
-	
+		<p>Cualquier duda que tenga puede comunicarse con Nosotros a través de nuestro correo electrónico ventas@cariocaactivewear.com o a través de nuestros teléfonos 0414-6558220 o 0414-6135628 </p>	
 
 		<div align="center">
 

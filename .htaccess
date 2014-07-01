@@ -1,0 +1,15 @@
+RewriteEngine on
+# Cambiar yourdomain.com a tu dominio principal.
+RewriteCond %{HTTP_HOST} ^(www.)?cariocaactivewear.com$
+# Cambiar 'subfolder' por el directorio que se desea usar como dominio principal.
+RewriteCond %{REQUEST_URI} !^/public/
+# NO cambiar esta línea
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Cambiar 'subfolder' por el directorio que se desea usar como dominio principal.
+RewriteRule ^(.*)$ /public/$1
+# Cambiar yourdomain.com a tu dominio principal (otra vez).
+# Cambiar 'subfolder' por el directorio que se desea usar como dominio principal.
+# seguido por / y el archivo principal de tu sitio, index.php, index.html, etc.
+RewriteCond %{HTTP_HOST} ^(www.)?cariocaactivewear.com$
+RewriteRule ^(/)?$ public/index.php [L] 

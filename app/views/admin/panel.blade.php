@@ -8,7 +8,7 @@
 			<header class="panel-heading">
 				Cantidades 
 				<span class="tools pull-right">
-					<a href="/admin/productos/agregar" class="btn btn-success pull-right white"><i class="fa fa-plus fa-lg"></i>	Agregar Producto</a>	
+					<a href="/admin/productos/agregar" class="btn btn-success pull-right white"><i class="fa fa-plus fa-lg"></i>&nbsp;&nbsp;Agregar Producto</a>	
 				</span>
 			</header>
 			<div class="panel-body">
@@ -68,7 +68,7 @@
 			<header class="panel-heading">
 				Modelos
 				<span class="tools pull-right">
-					<a href="/admin/modelos/agregar" class="btn btn-success pull-right white"><i class="fa fa-plus fa-lg"></i>	Agregar Modelo</a>	
+					<a href="/admin/modelos/agregar" class="btn btn-success pull-right white"><i class="fa fa-plus fa-lg"></i>&nbsp;&nbsp;Agregar Modelo</a>	
 				</span>
 			</header>
 			<div class="panel-body">

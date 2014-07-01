@@ -35,7 +35,8 @@
         <!--logo start-->
         <div class="brand">
             <a href="/admin" class="logo">
-                ActiveWear Venezuela
+                <img src="/../assets/images/logo.png" alt="logo" width="90px" />
+                <strong><em style="font-size: 0.5em; margin-top: 30px;">Carioca ActiveWear</em></strong>
             </a>
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars fa-2x"></div>
