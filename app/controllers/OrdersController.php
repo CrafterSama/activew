@@ -12,103 +12,35 @@ class OrdersController extends \BaseController {
 		$items = Item::all();
 		return View::make('admin.orders')->with('items', $items);
 	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+	public function approveOrder($id)
 	{
-		//
+		$approved = Item::find($id);
+
+		$approved->delete();
+
+		return Redirect::back()->with('notice','El Pedido ha sido aprobado y entregado satisfactoriamente');
 	}
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+	public function approved()
 	{
-		//
+		$items = Item::onlyTrashed();
+		return View::make('admin.approved')->with('items', $items);
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
+	public function cancelOrder($id)
 	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-	public function agreeBasket()
-	{
-		$order = new Order();
-		$order->user_id = Input::get('user_id');
-		$order->product_id = Input::get('product_id');
-		if($order->save())
+		$item = Item::find($id);
+		//print_r($item);
+		$product = Product::find($item->producto_id);
+		//print_r($product);/*
+		$product->amounts = $item->cantidad + $product->amounts;
+		if($product->save())
 		{
-		    $orderId = Order::orderBy('id','DESC')->first();
-		    //var_dump($orderId);
-    		$toOrder = new ProdToOrder();
-		    $toOrder->product_id = Input::get('product_id');
-		    $toOrder->quantities = Input::get('quantities');
-		    $toOrder->order_id = $orderId->id;
-		    $toOrder->save();
-		    $product = Product::find(Input::get('product_id'));
-		    $qtyUpdate = $product->amounts - Input::get('quantities');
-		    $product->amounts = $qtyUpdate;
-		    $product->save();
+			$item->forceDelete();
+			return Redirect::back()->with('notice','Los Productos fueron devueltos a stock y el pedido cancelado');
 		}
-		
-		return Redirect::back()->with('notice', 'Producto agregado a la Cesta');
-	}
-	public function showBasket()
-	{
-		$id = Auth::user()->id;
-		$orders = Order::where('user_id','=',$id)->get();
+		else
+		{
+			return Redirect::back()->with('notice','El pedido no pudo ser cancelado');
+		}
 
-		return View::make('home.orders')->with('orders',$orders);
 	}
 }

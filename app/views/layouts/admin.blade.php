@@ -84,11 +84,15 @@
                         <span>Productos</span>
                     </a>
                 </li>
-                <li>
-                    <a href="/admin/pedidos">
+                <li class="sub-menu">
+                    <a href="javascript:;">
                         <i class="fa fa-list-alt"></i>
                         <span>Pedidos</span>
                     </a>
+                    <ul class="sub">
+                        <li><a href="/admin/pedidos">Pendientes</a></li>
+                        <li><a href="/admin/pedidos/aprobados">Aprobados</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="/admin/modelos">
@@ -121,11 +125,13 @@
 <!--common script init for all pages-->
 {{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
 {{ HTML::script('http://code.jquery.com/ui/1.10.4/jquery-ui.min.js') }}
-{{ HTML::script('assets/js/bootstrap.min.js') }}
-{{ HTML::script('assets/js/jquery.nicescroll.js') }}
-{{ HTML::script('assets/js/toggle-init.js') }}
-{{ HTML::script('assets/js/common.js') }}
-{{ HTML::script('assets/js/scripts.js') }}
+{{ HTML::script('/../assets/js/bootstrap.min.js') }}
+{{ HTML::script('/../assets/js/jquery.nicescroll.js') }}
+{{ HTML::script('/../assets/js/toggle-init.js') }}
+{{ HTML::script('/../assets/js/jquery.dcjqaccordion.2.7.js') }}
+{{ HTML::script('http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js') }}
+{{ HTML::script('/../assets/js/common.js') }}
+{{ HTML::script('/../assets/js/scripts.js') }}
 <!--script for this page-->
 </body>
 </html>

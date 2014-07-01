@@ -4,16 +4,9 @@
 
 	<h2>Lista de Pedidos</h2>
 	<div class="alert alert-info">
-		A continuación encontrara una lista de los pedidos pendientes por aprobar y entregar o enviar en el sistema. 
+		A continuación encontrara una lista de los pedidos aprobados y entregados o enviados en el sistema. 
 	</div>
 	<br>
-	@if(Session::has('notice'))
-		<div class="alert alert-success">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			{{ Session::get('notice') }}
-		</div>
-		<br>
-	@endif
 	<section class="panel">
 	    <header class="panel-heading">
 	        <span class="tools pull-left">
@@ -22,7 +15,7 @@
 	            &nbsp;&nbsp;
 	            <a href="/admin/usuarios" class="btn btn-success pull-right white"><i class="fa fa-users fa-lg"></i>  Usuarios</a> --}}
 	        </span>
-	    	<span class="visible-lg text-right">Pedidos Pendientes</span>
+	    	<span class="visible-lg text-right">Pedidos Aprobados</span>
 	    </header>
 	    <div class="panel-body">
 	        <section id="no-more-tables">
@@ -54,8 +47,7 @@
 									@endif
 								</td>
 								<td data-title="Acciones" class="text-center">
-									<a href="/admin/pedidos/aprobar/{{ $item->id }}" class="btn btn-success btn-xs white"  data-toggle="tooltip" data-placement="top" title="Aprobar y Entregar"><i class="fa fa-check fa-lg" onclick="return confirm('¿Esta seguro que ya realizo la entrega o envio para aprobar este Pedido?');"></i></a>
-									<a href="/admin/pedidos/cancelar/{{ $item->id }}" class="btn btn-danger btn-xs white"  data-toggle="tooltip" data-placement="top" title="Cancelar Pedido" onclick="return confirm('¿Esta seguro que desea cancelar este pedido?');"><i class="fa fa-trash-o fa-lg"></i></a>
+									Pedido Aprobado y Entregado o Enviado
 								</td>
 							</tr>
 						@endforeach

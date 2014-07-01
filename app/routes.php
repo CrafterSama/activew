@@ -70,6 +70,10 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('usuarios/{id}/perfil', 'UsersController@showProfile');
 		
 		Route::get('pedidos', 'OrdersController@index');
+		Route::get('pedidos/aprobados', 'OrdersController@approved');
+		Route::get('pedidos/aprobar/{id}', 'OrdersController@approveOrder');
+		Route::get('pedidos/cancelar/{id}', 'OrdersController@cancelOrder');
+
 		
 		Route::get('configuracion', 'ConfigurationsController@getConfig');
 		Route::post('configuracion', 'ConfigurationsController@updateConfig');
