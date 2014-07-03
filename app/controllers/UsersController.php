@@ -194,7 +194,7 @@ class UsersController extends BaseController {
 				App::abort(404);
 			}
 		
-			$user->forceDelete();
+			$user->delete();
 			
 			if (Request::ajax())
 			{
@@ -228,11 +228,15 @@ class UsersController extends BaseController {
 		$user->full_name = Input::get('full_name');
 		$user->username = Input::get('username');
 		$user->email = Input::get('email');
+		$user->user_address = Input::get('user_address');
+		$user->user_mobile = Input::get('user_mobile');
 		$user->password = Hash::make(Input::get('password'));
 		$user->role_id = 2;
    		$validator = User::validate(array(
 			'full_name' => Input::get('full_name'),
 			'username' => Input::get('username'),
+			'user_address' => Input::get('user_address'),
+			'user_mobile' => Input::get('user_mobile'),	
 			'email' => Input::get('email'),
 			'password' => $user->password,
 		), $user->id);
@@ -242,13 +246,13 @@ class UsersController extends BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}else{
 			$user->save();
-			return Redirect::to('/registrarse')->with('notice', 'El usuario ha sido modificado correctamente.');
+			return Redirect::to('/registrarse')->with('notice', 'El usuario ha sido creado satisfactoriamente.');
 		}
     }
     public function bannedUsers()
     {
     	if(!$this->autorizado) return Redirect::to('/login');
-    	$users = User::onlyTrashed()->get();
+    	$users = User::onlyTrashed()->paginate(10);
 		$roles 	= 	Role::all();
 		foreach ($users as $user) {
 			$rol 	= 	Role::find($user->role_id);	# code...
@@ -270,6 +274,11 @@ class UsersController extends BaseController {
     	/*var_dump($user);*/
     	/*$user->restore();*/
     	return Redirect::back()->with('notice', 'El usuario ha sido restaurado correctamente.');
+    }
+    public function showOrders($id)
+    {
+    	$orders = Factura::where('user_id','=',$id)->paginate(10);
+    	return View::make('admin.ordersbyuser',compact('orders'));
     }
 
 }

@@ -56,7 +56,10 @@
 
 			</tr>
 
-			<?php $total = 0; ?>
+			<?php 
+				$total = 0; 
+				$discount = 0;
+			?>
 
 			@foreach ($cart as $item)
 
@@ -66,23 +69,27 @@
 
 				<td style="border: 1px solid #fff ;">{{ $item['qty'] }}</td>
 
-				<td style="border: 1px solid #fff ;">{{ $item['price'] }} Bs.</td>
+				<td style="border: 1px solid #fff ;">{{ number_format($item['price'], 2, ',', '.') }} Bs.</td>
 
-				<td style="border: 1px solid #fff ;">{{ $item['subtotal'] }} Bs.</td>
+				<td style="border: 1px solid #fff ;">{{ number_format($item['subtotal'], 2, ',', '.') }} Bs.</td>
 
 			</tr>
 
-			<?php $total += $item['qty'] * $item['price']; ?>
+			<?php 
+				$total += $item['qty'] * $item['price']; 
+				$discount += $item['qty'];
+			?>
 
 			@endforeach
 
 
 
 		</table>
-
-		<h4 align="right">Total: {{ $total }} Bs. </h4>
-
-	
+		@if($discount >= 12)
+			Descuento del 30% a partir de 12 piezas <h4 align="right">Total: Bs. {{ number_format($total-($total*0.30), 2, ',', '.') }} </h4>
+		@else
+			<h4 align="right">Total: Bs. {{ number_format($total, 2, ',', '.') }} </h4>
+		@endif
 
 		<div align="center">
         
@@ -91,15 +98,18 @@
         <span style="font-weight:bold;">Deposita o has una transferencia a las siguientes Cuentas.<br><br></span>
         
         <span>Banesco Banco Universal <strong style="color:#060;">Banesco</strong><br>
-        Cuenta Corriente No. <strong>0134-0000-00-0000000000</strong><br>
+        Cuenta Corriente No. <strong>0134-0073-31-0731061723</strong><br>
         A Nombre de: <strong>Vivian Medina</strong><br>
         C.I. No. <strong>14738935</strong><br><br></span>
       
         
-        LUEGO REPORTA TU PAGO HACIENDO CLICK EL EL SIGUIENTE LINK "COMPLETAR PAGO", LLENA EL FORMILARIO Y LISTO.
+        LUEGO REPORTA TU PAGO HACIENDO CLICK EL EL SIGUIENTE LINK "COMPLETAR PAGO", LLENA EL FORMULARIO Y LISTO.
+        <br />
+        <br />
+        <strong>NOTA:</strong> SI EN UN LAPSO DE 24 HORAS NO HAS REALIZADO NINGUN PAGO EL PEDIDO SERA CANCELADO Y LA MERCANCIA VOLVERA A STOCK DE TIENDA
         </div>
 
-			<a href="http://pioggia.craftersama.me/order/{{ $factura['id'] }}" style="font-size: 28px; background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px"> Completar Pago </a>
+			<a href="http://cariocaactivewear.com/order/{{ $factura['id'] }}" style="font-size: 28px; background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px"> Completar Pago </a>
 
 		</div>
 		<br />

@@ -76,7 +76,10 @@
 
 			</tr>
 
-			<?php $total = 0; ?>
+			<?php 
+				$total = 0; 
+				$discount = 0;
+			?>
 
 			@foreach ($items as $item)
 
@@ -86,13 +89,16 @@
 
 				<td style="border: 1px solid #fff ;">{{ $item['cantidad'] }}</td>
 
-				<td style="border: 1px solid #fff ;">{{ $item['precio'] }} Bs.</td>
+				<td style="border: 1px solid #fff ;">Bs. {{ number_format($item['precio'], 2, ',', '.') }}</td>
 
-				<td style="border: 1px solid #fff ;">{{ $item['cantidad']*$item['precio'] }} Bs.</td>
+				<td style="border: 1px solid #fff ;">{{ number_format($item['cantidad']*$item['precio'], 2, ',', '.') }} Bs.</td>
 
 			</tr>
 
-			<?php $total += $item['cantidad'] * $item['precio']; ?>
+			<?php 
+				$total += $item['cantidad'] * $item['precio']; 
+				$discount += $item['cantidad'];
+			?>
 
 			@endforeach
 
@@ -100,13 +106,17 @@
 
 		</table>
 
-		<h4 align="right">Total: {{ $total }} Bs. </h4>
+		@if($discount >= 12)
+			Descuento del 30% a partir de 12 piezas <h4 align="right">Total: Bs. {{ number_format($total-($total*0.30), 2, ',', '.') }} </h4>
+		@else
+			<h4 align="right">Total: Bs. {{ number_format($total, 2, ',', '.') }} </h4>
+		@endif
 
 		<p>Cualquier duda que tenga puede comunicarse con Nosotros a través de nuestro correo electrónico ventas@cariocaactivewear.com o a través de nuestros teléfonos 0414-6558220 o 0414-6135628 </p>	
 
 		<div align="center">
 
-			<a href="http://pioggia.craftersama.me/order/{{ $factura['id'] }}" style="font-size: 28px;  background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px;"> Ver en linea </a>
+			<a href="http://cariocaactivewear.com/order/{{ $factura['id'] }}" style="font-size: 28px;  background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px;"> Ver en linea </a>
 
 		</div>
 

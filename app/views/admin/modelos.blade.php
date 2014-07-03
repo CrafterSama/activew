@@ -56,6 +56,7 @@
 						@endif
 					</tbody>
 	            </table>
+	            {{ $modelos->links() }}
 	        </section>
 	    </div>
 	</section>

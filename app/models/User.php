@@ -29,10 +29,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'username' 	=> 'required|min:2|max:16|unique:users,username,id',
 		'email' 		=> 'required|email|unique:users,email,id',
 		'password' 	=> 'required|min:6',
+		'user_mobile' 	=> 'required',
+		'user_address' 	=> 'required',
 		'role_id' 	=> 'numeric'
    	);
    	public static $messages = array(
 		'full_name.required' => 'El nombre completo es obligatorio.',
+		'user_mobile.required' => 'El telefono es obligatorio.',
+		'user_address.required' => 'La direccion es obligatoria.',
 		'username.require' => 'El Nombre de Usuario es Obligatorio.',
 		'username.min' => 'El Nombre de Usuario debe tener minimo dos caracteres.',
 		'username.max' => 'El Nombre de Usuario debe tener mmaximo 10 caracteres.',
@@ -117,7 +121,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public static function getName($id)
 	{
 		$name = User::find($id);
-		return $name->full_name;
+		if($name)
+		{
+			return $name->full_name;
+		}else{
+			return 'false';
+		}
 	}
 
 	public function facturas()

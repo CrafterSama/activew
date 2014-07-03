@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@section('title') ActiveWear @stop
+	
 @section('content')
 
 	<div class="main">
@@ -11,7 +13,7 @@
 				<br />
 				<p class="text-justify pull-left">					
 					<h3 class="white">Quieres estar a la moda, ejercitarte comodamente y verte bien al hacerlo?</h3>
-					¡Carioca ActiveWear es la ropa deportiva que esta de moda y se ejercita contigo!
+					¡ActiveWear es la ropa deportiva que esta de moda y se ejercita contigo!
 				</p>
 				<br />
 				<br />

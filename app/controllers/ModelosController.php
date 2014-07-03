@@ -20,7 +20,7 @@ class ModelosController extends \BaseController {
 	{
 		if(!$this->autorizado) return Redirect::to('/login');
 
-		$modelos = Modelo::all();
+		$modelos = Modelo::paginate(10);
 
 		if(is_null($modelos))
 		{

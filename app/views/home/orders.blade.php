@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@section('title') Ordenes por Usuario - ActiveWear @stop
+
 @section('content')
 <div class="main">
     <div class="container">
@@ -26,10 +28,10 @@
 										{{ $order->id }}
 									</td>
 									<td data-title="Productos" class="col-md-3 text-center">
-										{{ $order->countItems() }}
+										{{ Item::countItems($order->id) }}
 									</td>
 									<td data-title="Fecha" class="col-md-3 text-center">
-										{{ $order->created_at }}
+										{{ Helper::getDate(strtotime($order->created_at,0)) }}
 									</td>
 									<td data-title="Ver" class="col-md-3 text-center">
 										<a href="/order/{{ $order->id }}" class="btn btn-primary"><i class="fa fa-eye"></i>&nbsp;&nbsp;Ver</a>

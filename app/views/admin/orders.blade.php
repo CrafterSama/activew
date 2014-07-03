@@ -41,9 +41,16 @@
 					<tbody>
 						@foreach ($items as $item)
 							<tr class="text-center">
-								<td data-title="Nº de Recibo">{{ $item->id }}</td>
-								<td data-title="Usuario"><a href="/admin/usuarios/{{ $item->factura->user_id }}/perfil" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Datos del Usuario">{{ User::getName($item->factura->user_id) }}</a></td>
-								<td data-title="Producto"><img class="img-thumbnail" src="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}" class="cart-img" alt="" width="80"></a> {{ Stamp::getStampName($item->product->stamp_id) }}</td>
+								<td data-title="Nº de Recibo">{{ $item->factura_id }}</td>
+								<td data-title="Usuario">
+								@if(User::getName($item->factura->user_id)=='false')
+									El Usuario fue Borrado
+								@else
+									<a href="/admin/usuarios/{{ $item->factura->user_id }}/perfil" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Datos del Usuario">{{ User::getName($item->factura->user_id) }}</a>
+								@endif								
+								
+								</td>
+								<td data-title="Producto"><img class="img-thumbnail" src="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}" class="cart-img" alt="" width="80"></a><br /> {{ Stamp::getStampName($item->product->stamp_id) }} <br /> ({{ Modelo::getName($item->product->model_id) }})</td>
 								<td data-title="Cantidad">{{ $item->cantidad }}</td>
 								<td data-title="Fecha de la Orden">{{ Helper::getDate(strtotime($item->created_at,0)) }}</td>
 								<td data-title="Adjunto">
@@ -53,14 +60,17 @@
 										<a href="/{{ Pago::getAdj($item->factura_id) }}"><img src="/{{ Pago::getAdj($item->factura_id) }}" alt="" class="img-thumbnail" width="120px" /></a>
 									@endif
 								</td>
+								{{-- <td data-title="Pago">{{ Pago::getAmount($item->factura_id) }}</td> --}}
 								<td data-title="Acciones" class="text-center">
 									<a href="/admin/pedidos/aprobar/{{ $item->id }}" class="btn btn-success btn-xs white"  data-toggle="tooltip" data-placement="top" title="Aprobar y Entregar"><i class="fa fa-check fa-lg" onclick="return confirm('¿Esta seguro que ya realizo la entrega o envio para aprobar este Pedido?');"></i></a>
 									<a href="/admin/pedidos/cancelar/{{ $item->id }}" class="btn btn-danger btn-xs white"  data-toggle="tooltip" data-placement="top" title="Cancelar Pedido" onclick="return confirm('¿Esta seguro que desea cancelar este pedido?');"><i class="fa fa-trash-o fa-lg"></i></a>
+									<a href="/order/{{ $item->factura_id }}" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver el Pedido"><i class="fa fa-eye fa-lg"></i></a>
 								</td>
 							</tr>
 						@endforeach
 					</tbody>
 	            </table>
+	            {{ $items->links() }}
 	        </section>
 	    </div>
 	</section>

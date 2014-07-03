@@ -44,7 +44,7 @@
 								<td data-title="Rol">{{ Role::getName($user->role_id) }}</td>
 								<td data-title="Acciones" class="text-center">
 									<a href="/admin/usuarios/{{ $user->id }}/perfil" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver Perfil"><i class="fa fa-user fa-lg"></i></a>
-									<a href="/admin/pedidos" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver Pedidos"><i class="fa fa-list-alt fa-lg"></i></a>
+									<a href="/admin/usuarios/{{ $user->id }}/pedidos" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver Pedidos"><i class="fa fa-list-alt fa-lg"></i></a>
 									<a href="/admin/usuarios/{{ $user->id }}/editar" class="btn btn-warning btn-xs white"  data-toggle="tooltip" data-placement="top" title="Editar Registro"><i class="fa fa-pencil fa-lg"></i></a>
 									<a href="{{ url('/admin/usuarios/borrar',$user->id) }}" class="btn btn-danger btn-xs btn-delete" data-id="{{ $user->id }}" data-toggle="tooltip" data-placement="top" title="Borrar Registro" onclick="return confirm('¿Esta seguro que desea borrar este Registro?');"><i class="fa fa-trash-o fa-lg"></i></a>
 								</td>

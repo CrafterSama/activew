@@ -15,7 +15,7 @@
 	@endif
 	<section class="panel">
 	    <header class="panel-heading">
-			<a href="{{ URL::previous() }}" class="btn btn-info"><i class="fa fa-angle-double-left"></i>  Volver</a>
+			<a href="{{ URL::previous() }}" class="btn btn-info"><i class="fa fa-chevron-left"></i>  Volver</a>
 			&nbsp;
 			&nbsp;
 			<span class="dropdown">
@@ -24,6 +24,7 @@
 				</button>
 				<ul class="dropdown-menu">
                     <li><a href="/admin/usuarios/{{ $user->id }}/editar"><i class="fa fa-pencil"></i> Editar</a></li>
+                    <li><a href="/admin/usuarios/{{ $user->id }}/pedidos"><i class="fa fa-pencil"></i> Pedidos</a></li>
                     @if ($user->id != Auth::user()->id)
 	                    <li><a href="/admin/usuarios/borrar/{{ $user->id }}"><i class="fa fa-trash-o"></i> Borrar</a></li>
                     @endif
@@ -47,10 +48,10 @@
 					<td class="visible-lg"><strong>Email</strong></td><td data-title="Correo Electronico"> {{ $user->email }} </td>
 				</tr>
 				<tr>
-					<td class="visible-lg"><strong> Direción</strong></td><td data-title="Rol de Usuario"> {{ $user->user_address }} </td>
+					<td class="visible-lg"><strong> Direción</strong></td><td data-title="Dirección"> {{ $user->user_address }} </td>
 				</tr>
 				<tr>
-					<td class="visible-lg"><strong> Teléfono</strong></td><td data-title="Rol de Usuario"> {{ $user->user_mobile }} </td>
+					<td class="visible-lg"><strong> Teléfono</strong></td><td data-title="Teléfono"> {{ $user->user_mobile }} </td>
 				</tr>
 				<tr>
 					<td class="visible-lg"><strong> Nivel</strong></td><td data-title="Rol de Usuario"> {{ $rol->role_name }} </td>

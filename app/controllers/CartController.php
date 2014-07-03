@@ -100,11 +100,11 @@ class CartController extends BaseController {
 
         Mail::send('emails.factura', $datos , function($m) use ($user)
         {
-            $m->from('ventas@activewear.com.ve', 'ActiveWear.com.ve');
+            $m->from('ventas@activewear.com.ve', 'Carioca ActiveWear');
             $m->to($user['email'])->cc('ventas@activewear.com.ve')->subject('Orden de compra.');
         }); 
 
-        return Redirect::to('/order/' . $factura->id);
+        return Redirect::to('/order/' . $factura->id)->with('notice','¡Tu Pedido esta siendo procesado, solo faltan algunos pasos para completar tu compra, revisa tu correo electronico, ya que <strong>te hemos enviado un correo con todos los datos para terminar de procesar tu compra!</strong>');
     } 
 
     public function get_factura($slug){
@@ -157,11 +157,11 @@ class CartController extends BaseController {
 
         Mail::send('emails.pago', $data , function($m) use ($data)
         {
-            $m->from('ventas@activewear.com.ve', 'ActiveWear.com.ve');
+            $m->from('ventas@activewear.com.ve', 'Carioca ActiveWear');
             $m->to($data['user']['email'])->cc('ventas@activewear.com.ve')->subject('Confirmación de Pago.');
         });
 
-        return Redirect::back();
+        return Redirect::back()->with('notice','¡Tu Compra a sido procesada, revisa tu correo electronico, <strong>te hemos enviado un correo con los datos de tu compra!</strong>, si tienes alguna duda no vaciles en contactarnos, estamos a tu servicio.');
     }
 
     public function get_orders(){
@@ -169,7 +169,7 @@ class CartController extends BaseController {
     }
 
     public function get_order($id){
-        $order = Factura::find($id);
+        $order = Factura::withTrashed()->find($id);
         return View::make('home.order', array('order' => $order));
     }
 

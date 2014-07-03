@@ -9,6 +9,13 @@ class Pago extends Eloquent {
     {
         return $this->hasOne('Factura');
     }
+    public static function getAmount($id)
+    {
+        $pay = DB::table('pagos')
+                    ->where('factura_id','=',$id)
+                    ->pluck('monto');
+        return $pay;
+    }
     public static function getAdj($id)
     {
     	$pay = DB::table('pagos')
@@ -21,4 +28,5 @@ class Pago extends Eloquent {
     	}
     	
     }
+
 }

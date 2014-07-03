@@ -15,5 +15,9 @@ class Item extends Eloquent {
     {
     	return $this->hasOne('Factura', 'id', 'factura_id');
     }
-
+    public static function countItems($id)
+    {
+        $items = Item::where('factura_id','=',$id)->get();
+        return count($items);
+    }
 }

@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@section('title') Acerca de - ActiveWear @stop
+
 @section('content')
 <div class="main">
 	<div class="container">
@@ -25,7 +27,7 @@
 						</p>
 						<br />
 						<br />
-						<a href="http://www.pioggiadimare.com" class="btn btn-success btn-block btn-lg" rel="nofollow"><i class="fa fa-chain"></i>&nbsp;&nbsp;Pioggia Trajes de Baño</a>
+						<a href="http://www.pioggiadimare.com" class="btn btn-success btn-block btn-lg" rel="nofollow"><i class="fa fa-chain"></i>&nbsp;&nbsp;Pioggia SwimWear</a>
 					</div>
 				</div>
 			</div>

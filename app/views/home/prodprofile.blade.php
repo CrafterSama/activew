@@ -1,17 +1,19 @@
 @extends('layouts.home')
 
+@section('title') Perfil del Producto {{ $product->id }} - ActiveWear @stop
+
 @section('content')
 <div class="main">
     <div class="container">
         <div class="row">
-            	<br />
-	    	@if(Session::has('notice'))
-		<div class="alert alert-success">
-			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			{{ Session::get('notice') }}
-		</div>
-		@endif
-	    	<br />
+            <br />
+    @if(Session::has('notice'))
+<div class="alert alert-success">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+{{ Session::get('notice') }}
+</div>
+@endif
+    <br />
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <button class="btn btn-info btn-md" onclick="history.go(-1)">
@@ -32,15 +34,16 @@
                         <p><strong>en Stock: </strong> {{ $product->amounts }} </p>
                         <br />
 
-                        <div class="col-md-3">
-                        
-                            <input type="number" id="qty" value="1" min="1" max="{{ $product->amounts }}" class="form-control col-xs-3"/>
+                        <div class="col-sm-6">
+                            {{ Form::selectRange('qty', 1, $product->amounts, array('id'=>'qty','class'=>'form-control col-sm-3')) }}
                             <br />
                             <br />
-
                             <button class="btn btn-success btn-lg add-to-cart" data-id="{{ $product->id }}">
                                 <i class="fa fa-shopping-cart fa-lg"></i>  Agregar a la Cesta
-                            </button>                            
+                            </button>
+                            <button id="carrito" onclick="location.href='/carrito'" class="btn btn-success btn-lg hide">
+                            	<i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Ir al Carrito
+                            </button>                           
                         </div>
                     </div>
                 </div>
@@ -56,13 +59,13 @@
             $(".add-to-cart").on("click", function(event){
                 event.preventDefault();
                 var id = $(this).data('id');
-                var qty = $("#qty").val() || 1;
+                var qty = $("select[name=qty]").val() || 1;
                 $.post('/cart/' + id + '/add/' + qty, function(data, textStatus, xhr) {
                     $.post('/total', function(data, textStatus, xhr) {
                         $(".cart-text").html(data);
                     });
                 });
-
+                $('#carrito').removeClass('hide');
                 $(this).removeClass('btn-success');
                 $(this).addClass('btn-info');
                 $(this).html('<i class="fa fa-check fa-lg"></i> Agregado');

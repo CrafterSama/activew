@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title') Lista de Productos - Carioca ActiveWear @stop
+
 @section('content')
 
 	<h2>Lista de Productos</h2>
@@ -25,14 +27,14 @@
 	        <section id="no-more-tables">
 	            <table class="table table-rounded table-striped table-condensed cf">
 	            	<thead class="cf">
-						<tr>
-							<th class="col-xs-2">Estampado</th>
-							<th>Modelo</th>							
-							<th class="col-xs-1">Cantidad</th>
-							<th class="col-xs-1">Valor Unitario</th>
-							<th class="col-xs-1">Total Bs.</th>
-							<th class="col-xs-2">Fecha de Registro</th>
-							<th class="col-xs-2">Acciones</th>
+						<tr class="text-center">
+							<th class="col-xs-2 text-center">Estampado</th>
+							<th class="text-center">Modelo</th>							
+							<th class="col-xs-1 text-center">Cantidad</th>
+							<th class="col-xs-1 text-center">Valor Unitario</th>
+							<th class="col-xs-1 text-center">Total Bs.</th>
+							<th class="col-xs-2 text-center">Fecha de Registro</th>
+							<th class="col-xs-2 text-center">Acciones</th>
 						</tr>
 					</thead>
 					<tbody class="text-center">
@@ -41,8 +43,8 @@
 						@else
 							@foreach ($products as $product)
 								<tr>
-									<td class="col-xs-2" data-title="Estampado"><a href="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" class="img-responsive thumbnails"><img src="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" alt="Estampado" width="120px" /></a></td>
-									<td data-title="Modelo">{{ Modelo::getName($product->model_id) }}</td>
+									<td class="col-xs-2" data-title="Estampado"><a href="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" class="img-responsive thumbnails"><img src="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" alt="Estampado" width="120px" /></a><br /> </td>
+									<td data-title="Modelo">{{ Stamp::getStampName($product->stamp_id).'<br />'.Modelo::getName($product->model_id) }}</td>
 									<td data-title="Cantidad">{{ $product->amounts }}</td>
 									<td class="visible-lg" data-title="Valor Unitario">Bs. {{  number_format(Modelo::getPrice($product->model_id), 2, ',', '.') }}</td>
 									<td class="visible-lg" data-title="Total Bs.">Bs. {{  number_format($product->amounts*Modelo::getPrice($product->model_id), 2, ',', '.') }}</td>

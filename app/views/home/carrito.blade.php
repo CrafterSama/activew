@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@section('title') Carrito de Compras - ActiveWear @stop
+
 @section('content')
 <div class="main">
 	<div class="container">
@@ -18,12 +20,14 @@
 									<th>No</th>
 									<th>Producto</th>
 									<th>Cantidad</th>
-									<th>Precio</th>
+									<th>Precio Unidad</th>
+									<th>Sub-total</th>
 									<th>Eliminar</th>
 								</tr>
 							</thead>
 
 							<tbody>
+								<?php $discount=0; ?>
 								<?php $no=0; ?>
 								@foreach($cart as $item)
 								<?php $no++; ?>
@@ -43,29 +47,42 @@
 											<i class="fa fa-plus fa-lg"></i> 
 										</a> 
 									</td>
-									<td data-title="Precio">Bs. {{ $item->price }}</td>
+									<td data-title="Precio Unidad">Bs. {{ $item->price }}</td>
+									<td data-title="Sub-total">Bs. {{ $item->qty*$item->price }}</td>
 									<td data-title="Eliminar">
 										<a href="/cart/remove/{{ $item->rowid }}" class="cart-remove">
 											<i class="fa fa-trash-o fa-lg"></i> 
 										</a>
 									</td>
 								</tr>
+								<?php $discount += $item->qty; ?> 
 								@endforeach
 
 								<tr>
-									<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Sub-Total :</strong></td>
-									<td data-title="Sub-Total :">Bs. {{ Cart::total(); }}</td>													
+										@if($discount >= 12)
+											<td colspan="1" class="cart-bottom visible-lg"></td>
+											<td><strong>Descuento del 30% a partir de 12 Piezas</strong></td>
+											<td colspan="3" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
+											<td data-title="Sub-Total :">
+												Bs. {{ number_format(Cart::total() - (Cart::total()*0.30), 2, ',', '.'); }}
+											</td>													
+										@else
+											<td colspan="5" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
+											<td data-title="Sub-Total :">
+												Bs. {{ number_format(Cart::total(), 2, ',', '.') }}
+											</td>													
+										@endif
+
 								</tr>
 
 								<tr>
-									<td colspan="4" class="text-right bg1">
+									<td colspan="5" class="text-right bg1">
 									</td>
 									<td></td>
 								</tr>							  
 							</tbody>
 						</table>
 
-						
 						<!-- Start cart action -->
 						<div class="row">
 							<div class="col-lg-12 bg2 cart-action">

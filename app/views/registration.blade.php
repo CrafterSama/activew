@@ -41,22 +41,22 @@
                 <br>
             @endif
             <p>Ingresa tus Datos a Continuación</p>
-            {{ Form::text('full_name', null, array('class' => 'form-control','placeholder' => 'Nombre Completo')); }}
-            {{ Form::email('email', null, array('class' => 'form-control','placeholder' => 'Correo Electronico')); }}
+            <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Nombre Completo" required/>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Correo Electronico" required/>
+
             <div class="form-group">
                 <div class="alert alert-info">Debe guardar aqui la direccion a la cual recibe los pedidos, coloque al final la Ciudad y el Estado</div>
-                {{ Form::text('user_address', null, array('placeholder' => 'Direccion', 'class' => 'form-control')) }}        
+                <input type="text" name="user_address" id="user_address" class="form-control" placeholder="Dirección" required />
             </div>
             <div class="form-group">
-            <div class="alert alert-info">Ingrese su Numero de telefono o movil para efectos de comunicación</div>
-            {{ Form::text('user_mobile', null, array('placeholder' => 'Telefono', 'class' => 'form-control')) }}        
+                <div class="alert alert-info">Ingrese su Numero de telefono o movil para efectos de comunicación</div>
+                <input type="text" name="user_mobile" id="user_mobile" class="form-control" placeholder="Telefono" required />
             </div>
             <p> Ingresa los detalles para tu Cuenta</p>
-            {{ Form::text('username', null, array('class' => 'form-control','placeholder' => 'Usuario')); }}
-            {{ Form::password('password', array('class' => 'form-control','placeholder' => 'Contraseña')); }}
-            {{ Form::password('password_confirm', array('class' => 'form-control','placeholder' => 'Re-ingresa Contraseña')); }}
+            <input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required />
+            <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required />
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirmar Contraseña" required />
             <button class="btn btn-lg btn-login btn-block" type="submit">Registrarse</button>
-
             <div class="registration">
                 Estas Registrado.
                 <a class="" href="/login">

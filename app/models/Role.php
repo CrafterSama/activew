@@ -19,8 +19,8 @@ class Role extends Eloquent {
 	}
 	public static function getName($id)
 	{
-		$rol = Role::find($id)->pluck('role_name');
-		return $rol;
+		$rol = Role::find($id);
+		return $rol->role_name;
 	}
 
 }

@@ -59,7 +59,7 @@ a,a:hover,a:focus {
 }
 .form-signin {
     max-width:330px;
-    margin:100px auto;
+    margin:10px auto;
     background:#fff;
     border-radius:5px;
     -webkit-border-radius:5px;
@@ -371,8 +371,7 @@ a.logo span {
     margin-left:25px;
 }
 ul.top-menu {
-    margin-right:15px;
-    margin-top: 0;
+    margin: 0 3px 0 0;
 }
 ul.top-menu > li > a {
     color:#666666;
@@ -679,10 +678,10 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 .sidebar-toggle-box {
     float:left;
     margin-top:23px;
-    margin-left:-15px;
+    margin-left:-25px;
     background:#32d2c9;
-    border-radius:15%;
-    -webkit-border-radius:15%;
+    border-radius:10%;
+    -webkit-border-radius:10%;
     width:32px;
     height:32px;
     position:absolute;

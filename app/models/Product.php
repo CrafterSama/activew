@@ -17,6 +17,10 @@ class Product extends Eloquent {
 	{
  		return $this->hasMany('Stamp');
 	}
+	public function modelos()
+	{
+ 		return $this->hasMany('Modelo');
+	}
 	/*public static $rules = array(
 		'amounts_' 	=> 'required|numeric',
 		/*'price_out_tax_float' 	=> 'required',
@@ -49,6 +53,18 @@ class Product extends Eloquent {
    		return DB::table('products')
    				->where('stamp_id','=',$id)
    				->pluck('model_id');
+   	}
+   	public static function totalPzs()
+   	{
+   		return $amounts = DB::table('products')
+        		->pluck(DB::raw('sum(amounts)'));
+   	}
+   	public function totalBs()
+   	{
+   		$cantidades = Product::all();
+
+
+
    	}
    	public function getName($id)
    	{

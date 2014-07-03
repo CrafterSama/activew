@@ -51,11 +51,12 @@
 
             {{ Form::submit('Entrar',array('class'=>'btn btn-lg btn-login btn-block')) }}
 
-            <div class="registration">
-                No Tienes Cuenta?
-                <a class="" href="/registrarse">
+            <div class="text-center" style="font-size: 18px;">
+                No Tienes Cuenta?<br />
+                <a  class="btn btn-info btn-lg btn-block" href="/registrarse">
                     Create una
                 </a>
+		¡Es Gratis!
             </div>
 
         </div>

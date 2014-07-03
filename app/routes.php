@@ -68,6 +68,7 @@ Route::group(array('before' => 'auth'), function()
 		Route::post('usuarios/{id}/editar', 'UsersController@update');
 		Route::get('usuarios/borrar/{id}', 'UsersController@destroy');
 		Route::get('usuarios/{id}/perfil', 'UsersController@showProfile');
+		Route::get('usuarios/{id}/pedidos', 'UsersController@showOrders');
 		
 		Route::get('pedidos', 'OrdersController@index');
 		Route::get('pedidos/aprobados', 'OrdersController@approved');

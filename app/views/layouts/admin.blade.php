@@ -36,7 +36,7 @@
         <div class="brand">
             <a href="/admin" class="logo">
                 <img src="/../assets/images/logo.png" alt="logo" width="90px" />
-                <strong><em style="font-size: 0.5em; margin-top: 30px;">Carioca ActiveWear</em></strong>
+                {{-- <strong><em style="font-size: 0.5em; margin-top: 30px;">Carioca ActiveWear</em></strong> --}}
             </a>
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars fa-2x"></div>
@@ -47,7 +47,7 @@
             <!--search & user info start-->
             <ul class="nav pull-right top-menu">
                 <!-- user login dropdown start-->
-                <li><a href="/" class="btn btn-warning bt-lg"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Volver a la Web</a></li>
+                <li><a href="/" style="padding: 6px; background: rgb(199,71,81); border-radius: 5px; color: white;" class="btn"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Volver a la Web</a></li>
                 <li class="dropdown">
                     
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -85,14 +85,16 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a data-toggle="collapse" data-target="#toggleOrders" class="collapse">
                         <i class="fa fa-list-alt"></i>
                         <span>Pedidos</span>
                     </a>
-                    <ul class="sub">
-                        <li><a href="/admin/pedidos">Pendientes</a></li>
-                        <li><a href="/admin/pedidos/aprobados">Aprobados</a></li>
-                    </ul>
+                    <div class="collapse" id="toggleOrders">
+                        <ul class="sub">
+                            <li><a href="/admin/pedidos">Pendientes</a></li>
+                            <li><a href="/admin/pedidos/aprobados">Aprobados</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <a href="/admin/modelos">

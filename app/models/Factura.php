@@ -10,11 +10,6 @@ class Factura extends Eloquent {
         return $this->hasMany('Item');
     }
 
-    public function countItems()
-    {
-        return count($this->hasMany('Item'));
-    }
-
     public function pago()
     {
         return $this->hasOne('Pago', 'factura_id', 'id');

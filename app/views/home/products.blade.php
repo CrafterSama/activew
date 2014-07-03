@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@section('title') Lista de Productos - ActiveWear @stop
+
 @section('content')
 <div class="main">
 <div class="container">
