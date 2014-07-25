@@ -35,7 +35,13 @@
 						@foreach ($items as $item)
 							<tr class="text-center">
 								<td data-title="Nº de Recibo">{{ $item->factura_id }}</td>
-								<td data-title="Usuario"><a href="/admin/usuarios/{{ $item->factura->user_id }}/perfil" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Datos del Usuario">{{ User::getName($item->factura->user_id) }}</a></td>
+								<td data-title="Usuario">
+									<a href="/admin/usuarios/{{ $item->factura->user_id }}/perfil" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Datos del Usuario">{{ User::getName($item->factura->user_id) }}</a>
+									<br />
+									Direccion: {{ User::getAddress($item->factura->user_id) }}
+									<br />
+									Telefono: {{ User::getPhone($item->factura->user_id) }}
+								</td>
 								<td data-title="Producto"><img class="img-thumbnail" src="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}" class="cart-img" alt="" width="80"></a><br /> {{ Stamp::getStampName($item->product->stamp_id) }} <br /> ({{ Modelo::getName($item->product->model_id) }})</td>
 								<td data-title="Cantidad">{{ $item->cantidad }}</td>
 								<td data-title="Fecha de la Orden">{{ Helper::getDate(strtotime($item->created_at,0)) }}</td>
@@ -48,8 +54,8 @@
 								</td>
 								<td data-title="Acciones" class="text-center">
 									Pedido Aprobado y Entregado o Enviado
-									{{-- <br />
-									<a href="/order/{{ $item->factura_id }}" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver el Pedido"><i class="fa fa-eye fa-lg"></i></a> --}}
+									<br />
+									<a href="/order/{{ $item->factura_id }}" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver el Pedido"><i class="fa fa-eye fa-lg"></i>&nbsp;&nbsp;Ver el Pedido</a>
 								</td>
 							</tr>
 						@endforeach

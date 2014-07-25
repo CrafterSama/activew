@@ -14,7 +14,7 @@ class OrdersController extends \BaseController {
 	}
 	public function approveOrder($id)
 	{
-		$approved = Item::find($id);
+		$approved = Item::where('factura_id','=',$id);
 
 		$approved->delete();
 

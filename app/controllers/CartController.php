@@ -101,7 +101,7 @@ class CartController extends BaseController {
         Mail::send('emails.factura', $datos , function($m) use ($user)
         {
             $m->from('ventasactivewear@gmail.com ', 'ActiveWear');
-                        $m->to($data['user']['email'])->cc('ventasactivewear@gmail.com')->bcc('administracion@cariocaactivewear.com')->subject('Orden de Compra.');
+            $m->to($user['email'])->cc('ventasactivewear@gmail.com')->bcc('administracion@cariocaactivewear.com')->subject('Orden de Compra.');
         }); 
 
         return Redirect::to('/order/' . $factura->id)->with('notice','¡Tu Pedido esta siendo procesado, solo faltan algunos pasos para completar tu compra, revisa tu correo electronico, ya que <strong>te hemos enviado un correo con todos los datos para terminar de procesar tu compra!</strong>');
@@ -147,10 +147,12 @@ class CartController extends BaseController {
 
         $pago->save();
 
-        if(is_null(Input::get('user_address')))
+        if(!is_null(Input::get('user_address')))
         {
             $user = User::find(Auth::user()->id);
             $user->user_address = Input::get('user_address');
+            $user->estado = Input::get('estado');
+            $user->municipio = Input::get('municipio');
             $user->save();
         }
 
@@ -170,14 +172,25 @@ class CartController extends BaseController {
 
         return Redirect::back()->with('notice','¡Tu Compra a sido procesada, revisa tu correo electronico, <strong>te hemos enviado un correo con los datos de tu compra!</strong>, si tienes alguna duda no vaciles en contactarnos, estamos a tu servicio.');
     }
-
+    
     public function get_orders(){
         return View::make('home.orders', array('orders' => Auth::user()->facturas));
     }
 
     public function get_order($id){
         $order = Factura::withTrashed()->find($id);
-        return View::make('home.order', array('order' => $order));
+
+        $states = State::orderBy('nombre','asc')->get();
+        $municipios = Municipio::orderBy('nombre','asc')->get();
+        $estados = array();
+        $ciudades = array();
+        foreach ($states as $state) {
+            $estados[$state->id] = $state->nombre;
+        }
+        foreach ($municipios as $municipio) {
+            $ciudades[$municipio->id] = $municipio->nombre;
+        }
+        return View::make('home.order', array('order' => $order, 'states'=>$states,'estados'=>$estados,'municipios'=>$municipios,'ciudades'=>$ciudades));
     }
 
 }
