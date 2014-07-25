@@ -1,31 +1,3 @@
-$(window).ready(function(){
-    console.log();
-    if ($('.btn-delete').length)
-    {
-        $('.btn-delete').click(function(){
-            var id = $(this).data('id');
-            var form = $('#form-delete');
-            var action = form.attr('action').replace('USER_ID',id);
-            var row = $(this).parents('tr');
-            
-            row.fadeOut(1000);
-            
-            $.post(action, form.serialize(), function(result){
-                if (result.success)
-                {
-                    setTimeout(function(){
-                        row.delay(1000).remove();
-                        alert(result.msg);
-                    }, 1000);
-                }
-                else
-                {
-                    row.show();
-                }
-            }, 'json');
-        });
-    }
-});
 (function ($) {
     $('[data-toggle="tooltip"]').tooltip(); 
 }) (jQuery);
@@ -44,11 +16,40 @@ $("#imgInp").change(function(){
     readURL(this);
 });
 $(document).ready(function() {   
-            var sideslider = $('[data-toggle=collapse-side]');
-            var sel = sideslider.attr('data-target');
-            var sel2 = sideslider.attr('data-target-2');
-            sideslider.click(function(event){
-                $(sel).toggleClass('in');
-                $(sel2).toggleClass('out');
-            });
+    var sideslider = $('[data-toggle=collapse-side]');
+    var sel = sideslider.attr('data-target');
+    var sel2 = sideslider.attr('data-target-2');
+    sideslider.click(function(event){
+        $(sel).toggleClass('in');
+        $(sel2).toggleClass('out');
+    });
+});
+$('input.option').click(function(){
+    if ($('#no').is(':checked'))
+    {
+        $('div.collapse').collapse('show');
+    }
+    else
+    {
+        $('div.collapse').collapse('hide');
+    }
+});
+$(function(){
+    function MaysPrimera(string){ 
+        return string.charAt(0).toUpperCase() + string.slice(1); 
+    }
+    $("#estado").on('change',function(){
+        var id = $(this).val();
+        /*alert(id);*/
+        $.ajax('/api/dropdown/'+id,{
+            type : 'GET',
+            success : function(data){
+                /*alert(data.id);*/
+                $('#municipio').empty();
+                $.each(data, function(key, element) {
+                    $('#municipio').append('<option value="' + key + '">' + MaysPrimera(element.toLowerCase()) + '</option>');
+                });
+            }
         });
+    });
+});

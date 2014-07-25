@@ -55,6 +55,16 @@
 							{{ Form::text('user_address', null, array('placeholder' => 'Direccion', 'class' => 'form-control')) }}        
 						</div>
 						<div class="form-group col-md-4">
+							{{ Form::label('estado', 'Estado') }}
+							<div class="alert alert-info">Seleccione el Estado donde desea que sea enviado el producto</div>
+							{{ Form::select('estado', $estados, $user->estado, array('class'=>'form-control', 'id'=>'estado')) }}
+						</div>
+						<div class="form-group col-md-4">
+							{{ Form::label('municipio', 'Ciudad') }}
+							<div class="alert alert-info">Seleccione la Ciudad donde desea que sea enviado el producto</div>
+							{{ Form::select('municipio', $ciudades, $user->municipio, array('class'=>'form-control','id'=>'municipio')) }}
+						</div>
+						<div class="form-group col-md-4">
 							{{ Form::label('user_mobile', 'Numero Telefonico o Movil') }}
 							<div class="alert alert-info">Ingrese su Numero de telefono o movil para efectos de comunicación</div>
 							{{ Form::text('user_mobile', null, array('placeholder' => 'Telefono', 'class' => 'form-control')) }}        

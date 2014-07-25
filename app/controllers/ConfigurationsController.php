@@ -9,7 +9,14 @@ class ConfigurationsController extends \BaseController {
 	}
 	public function updateConfig()
 	{
+		$config = Configuration::all();
+
+		$config->where('config_name','=','iva')->config_value = Input::get('iva');
+		$config->where('config_name','=','wholesale_discount')->config_value = Input::get('wholesale_discount');
 		
+		$config->save();
+		
+		return Redirect::back();
 	}
 
 }

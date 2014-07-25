@@ -6,12 +6,12 @@
 	<title>@yield('title')</title>
 
 	<!-- Bootstrap core CSS -->
-	{{ HTML::style('assets/css/bootstrap.min.css', array('media'=>'screen')) }}
-	{{ HTML::style('assets/css/font-awesome.min.css', array('media'=>'screen')) }}
+	{{ HTML::style('/../assets/css/bootstrap.min.css', array('media'=>'screen')) }}
+	{{ HTML::style('/../assets/css/font-awesome.min.css', array('media'=>'screen')) }}
 	<!-- Custom styles for this template -->
-	{{ HTML::style('assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
-	{{ HTML::style('assets/css/table-responsive.css', array('media'=>'screen')) }}
-	{{ HTML::style('assets/css/style.css', array('media'=>'screen')) }}
+	{{ HTML::style('/../assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
+	{{ HTML::style('/../assets/css/table-responsive.css', array('media'=>'screen')) }}
+	{{ HTML::style('/../assets/css/style.css', array('media'=>'screen')) }}
 
 	{{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
 	<link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>

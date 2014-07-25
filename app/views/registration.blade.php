@@ -7,14 +7,14 @@
     <title>@yield('title','Panel de Administración')</title>
 
     <!-- Bootstrap core CSS -->
-    {{ HTML::style('assets/css/bootstrap.min.css', array('media'=>'screen')) }}
+    {{ HTML::style('/../assets/css/bootstrap.min.css', array('media'=>'screen')) }}
 
     <!-- Custom styles for this template -->
-    {{ HTML::style('assets/css/adminpanel.css', array('media'=>'screen')) }}
-    {{ HTML::style('assets/css/adminpanel-responsive.css', array('media'=>'screen')) }}
-    {{ HTML::style('assets/css/table-responsive.css', array('media'=>'screen')) }}
-    {{ HTML::style('assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
-    {{ HTML::style('assets/css/font-awesome.css', array('media'=>'screen')) }}
+    {{ HTML::style('/../assets/css/adminpanel.css', array('media'=>'screen')) }}
+    {{ HTML::style('/../assets/css/adminpanel-responsive.css', array('media'=>'screen')) }}
+    {{ HTML::style('/../assets/css/table-responsive.css', array('media'=>'screen')) }}
+    {{ HTML::style('/../assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
+    {{ HTML::style('/../assets/css/font-awesome.css', array('media'=>'screen')) }}
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="js/ie8/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -41,12 +41,24 @@
                 <br>
             @endif
             <p>Ingresa tus Datos a Continuación</p>
-            <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Nombre Completo" required/>
-            <input type="email" name="email" id="email" class="form-control" placeholder="Correo Electronico" required/>
-
+            <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Nombre Completo" required />
+            <input type="email" name="email" id="email" class="form-control" placeholder="Correo Electronico" required />
+            <br />
             <div class="form-group">
-                <div class="alert alert-info">Debe guardar aqui la direccion a la cual recibe los pedidos, coloque al final la Ciudad y el Estado</div>
+                <div class="alert alert-info">Debe guardar aqui la direccion a la cual recibe los pedidos, no olvide seleccionar La Ciudad y el Estado</div>
                 <input type="text" name="user_address" id="user_address" class="form-control" placeholder="Dirección" required />
+                <label for="estado">Estado</label>
+                <select name="estado" id="estado" class="form-control">
+                        <option>Seleccione...</option>
+                    @foreach ($states as $state)
+                        <option value="{{ $state->id }}">{{ ucwords(strtolower($state->nombre)) }}</option>
+                    @endforeach
+                </select>
+                <br />
+                <label for="municipio">Ciudad</label>
+                <select name="municipio" id="municipio" class="form-control">
+                        <option>Selecciona el Estado</option>
+                </select>
             </div>
             <div class="form-group">
                 <div class="alert alert-info">Ingrese su Numero de telefono o movil para efectos de comunicación</div>
@@ -56,7 +68,7 @@
             <input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required />
             <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required />
             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirmar Contraseña" required />
-            <button class="btn btn-lg btn-login btn-block" type="submit">Registrarse</button>
+            <button class="btn btn-lg btn-success btn-block" type="submit">Registrarse</button>
             <div class="registration">
                 Estas Registrado.
                 <a class="" href="/login">
@@ -74,8 +86,9 @@
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!--Core js-->
-    <script src="js/lib/jquery.js"></script>
-    <script src="bs3/js/bootstrap.min.js"></script>
+    {{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
+    {{ HTML::script('/../assets/js/bootstrap.min.js') }}
+    {{ HTML::script('/../assets/js/common.js') }}
 
   </body>
 </html>

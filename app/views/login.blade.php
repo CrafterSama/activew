@@ -49,11 +49,11 @@
               {{ Form::hidden('redirect', $_GET['redirect'] ); }}
             @endif
 
-            {{ Form::submit('Entrar',array('class'=>'btn btn-lg btn-login btn-block')) }}
+            {{ Form::submit('Entrar',array('class'=>'btn btn-lg btn-success btn-block')) }}
 
             <div class="text-center" style="font-size: 18px;">
                 No Tienes Cuenta?<br />
-                <a  class="btn btn-info btn-lg btn-block" href="/registrarse">
+                <a  class="btn btn-lg btn-info btn-block" href="/registrarse">
                     Create una
                 </a>
 		¡Es Gratis!

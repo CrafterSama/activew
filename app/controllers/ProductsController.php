@@ -53,11 +53,11 @@ class ProductsController extends \BaseController {
 		$stampname 		= Input::get('stampname');
 		$file 			= Input::file('stamp');
 		$filename 		= str_random(16).'_'.date('d_m_Y_H_i_s').'_'.$file->getClientOriginalName();
-		$stamp->stampname 	= $stampname;
+		$stamp->stampname = $stampname;
 		$stamp->stamp 	= $filename;
 		$rules 			= array(
 			'stampname'	=>'required',
-			'stamp' 	=> 'image|max:1024'
+			'stamp' 	=>'image|max:1024'
 			);
 		$inputs 		= array(
 			'stampname'	=> Input::get('stampname'),
@@ -72,41 +72,48 @@ class ProductsController extends \BaseController {
 			if ($upload) {
 				$stamp->save();
 			}
-		}//if it validate
+			//if it validate
 
-		$stampId 		= 	Stamp::orderBy('created_at','DESC')->first();
-		foreach (Input::get('model_id') as $modelId) {
-			$product 			= new Product();
-			$product->model_id 	= $modelId;
-			$amounts 			= Input::get('amounts_'.$modelId.'');
-			$product->amounts 	= $amounts;
-			$product->stamp_id 	= $stampId->id;
-			$amount 			= 'amounts_'.$modelId;
-			$rules 				= array(
-				$amount 		=> 'required|numeric'
-			);
-			$inputs 			= array(
-				$amount 		=> $amounts
-			);
-			$messages 			= array(
-				'stampname.required' => 'Debe llenar el Campo Nombre del Stampado',
-				'amounts_'.$modelId.'.required' => 'Dede llenar el campo Cantidades',
-				'amounts_'.$modelId.'.numeric' => 'Las cantidades solo pueden ser numeros',
-			);
-			
-			$validator 			= 	Validator::make($inputs,$rules);
-			if($validator->fails())
-			{
-				$errors 		= $messages;
-				return Redirect::back()->withErrors($validator)->withInput();
-			}
-			else
-			{
-				$product->save();
+			$stampId = Stamp::orderBy('created_at','DESC')->first();
+			foreach (Input::get('model_id') as $modelId) {
+				$product 			= new Product();
+				$product->model_id 	= $modelId;
+				$amounts 			= Input::get('amounts_'.$modelId.'');
+				$product->amounts 	= $amounts;
+				$product->stamp_id 	= $stampId->id;
+				$amount 			= 'amounts_'.$modelId;
+				$rules 				= array(
+					$amount 		=> 'required|numeric'
+				);
+				$inputs 			= array(
+					$amount 		=> $amounts
+				);
+				$messages 			= array(
+					'stampname.required' => 'Debe llenar el Campo Nombre del Stampado',
+					'amounts_'.$modelId.'.required' => 'Dede llenar el campo Cantidades',
+					'amounts_'.$modelId.'.numeric' => 'Las cantidades solo pueden ser numeros',
+				);
 				
-			}/* */
+				$validator 			= 	Validator::make($inputs,$rules);
+				if($validator->fails())
+				{
+					$errors 		= $messages;
+					return Redirect::back()->withErrors($validator)->withInput();
+				}
+				else
+				{
+					$product->save();
+					
+				}/* */
+			}
+			
+			return Redirect::to('admin/productos')->with('notice', 'Los productos han sido agregados correctamente.');
+			
 		}
-		return Redirect::to('admin/productos')->with('notice', 'Los productos han sido agregados correctamente.');
+		else
+		{
+			return Redirect::to('admin/productos')->with('notice','No se logro guardar informacion en los estampados');
+		}
 	}
 
 

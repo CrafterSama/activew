@@ -48,7 +48,7 @@
 										<br />
 										{{ Stamp::getStampName($item->product->stamp_id) }}
 										<br />
-										{{ (Modelo::getName($item->product->model_id)) }}
+										({{ ucwords(strtolower(Modelo::getName($item->product->model_id))) }})
 										</td>
 										<td data-title="Cantidad"> 										
 											<span class="badge cart-qty"> {{ $item->cantidad }} </span>
@@ -59,17 +59,27 @@
 									<?php $discount += $item->cantidad; ?>
 									@endforeach
 
-									<tr>
-										@if ($discount >= 12 )
+									@if (($discount >= 12) && (Configuration::getDiscount() > 0) )
+										<tr>
+											<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Sub-Total:</strong></td>
+											<td data-title="Total :">Bs. {{ number_format($order->total(), 2, ',', '.') }}</td>
+										</tr>
+										<tr>
+											<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Descuento 30% :</strong></td>
+											<td data-title="Descuento 30% :">Bs. {{ number_format($order->total()*Configuration::getDiscount(), 2,',','.') }}</td>
+										</tr>
+										<tr>
 											<td colspan="1"></td>
 											<td><strong>Descuento del 30% a partir de 12 Piezas</strong></td>
 											<td colspan="2" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
-											<td data-title="Total :">Bs. {{ number_format($order->total()-($order->total()*0.30), 2, ',', '.') }}</td>						
-										@else
+											<td data-title="Total :">Bs. {{ number_format($order->total()-($order->total()*Configuration::getDiscount()), 2, ',', '.') }}</td>						
+										</tr>
+									@else
+										<tr>
 											<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
 											<td data-title="Total :">Bs. {{ number_format($order->total(), 2, ',', '.') }}</td>						
-										@endif
-									</tr>
+										</tr>
+									@endif
 
 									<tr>
 										<td colspan="4" class="text-right bg1">
@@ -112,8 +122,32 @@
 												<input type="file" name="adjunto" placeholder="Imagen" class="form-control" required />
 											</div>
 										</div>
-										{{ Form::hidden('id', $order->id) }}
-										<button type="submit" class="btn btn-lg btn-primary pull-right"> <i class="fa fa-check"></i> Confirmar</button>
+										<div class="col-lg-12">
+										<p style="font-size: 19px;">¿Verifique muy bien si es esta la dirección a la desea que se envie su producto?</p>
+											<div class="alert alert-success" style="font-size: 19px;">
+												<p class="text-justify">
+													<strong>Direccion de Entrega del Pedido:</strong><br />
+													{{ User::getAddress(Auth::user()->id) }}
+												</p>
+											</div>
+											{{ Form::label('options', 'Seleccione Si o No') }}
+											<br />
+											{{ Form::label('options', 'Si') }}
+											<input type="radio" name="option" id="si" class="option" value="si" />
+											{{ Form::label('options', 'No') }}
+											<input type="radio" name="option" id="no" class="option" value="no" />
+											<br />
+											<div class="collapse">
+												{{ Form::label('user_address', 'Nueva Dirección') }}
+												<input type="text" name="user_address" value="" class="form-control col-lg-12" placeholder="Agregue su nueva Dirección" />
+											</div>
+											<br />
+											<br />
+											{{ Form::hidden('id', $order->id) }}
+											<button type="submit" class="btn btn-lg btn-primary btn-block"> <i class="fa fa-check"></i> Confirmar</button>
+										</div>
+										<br />
+										<br />
 									</form>
 									@else
 

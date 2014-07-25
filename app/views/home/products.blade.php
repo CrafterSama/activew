@@ -35,7 +35,7 @@
 												</a>
 											</span>
 											<span>
-												<a href="/productos/ver/{{ $product->id }}">{{ Stamp::getStampName($product->stamp_id) }} {{ Modelo::getName($product->model_id) }}</a>
+												<a href="/productos/ver/{{ $product->id }}">{{ Stamp::getStampName($product->stamp_id) }} ({{ ucwords(strtolower(Modelo::getName($product->model_id))) }})</a>
 											</span>
 										</td>
 										<td class="col-md-2 text-center" data-title="en Stock">

@@ -11,6 +11,11 @@
 |
 */
 
+App::missing(function($exception)
+{
+	return Response::view('errors.error404');
+});
+
 /** Home Links **/
 Route::pattern('id', '[0-9]+');
 
@@ -31,6 +36,8 @@ Route::post('login', 'AuthController@postLogin');
 Route::get('registrarse', 'UsersController@showRegister');
 
 Route::post('registrarse', 'UsersController@postRegister');
+
+Route::get('/api/dropdown/{id}', 'UsersController@cities');
 
 Route::group(array('before' => 'auth'), function()
 {

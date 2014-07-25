@@ -63,6 +63,8 @@ class UsersController extends BaseController {
 		$user->email = Input::get('email');
 		$user->password = Hash::make(Input::get('password'));
 		$user->user_address = Input::get('user_address');
+		$user->estado = Input::get('estado');
+		$user->municipio = Input::get('municipio');
 		$user->user_mobile = Input::get('user_mobile');
 		$user->role_id = Input::get('role_id');
 
@@ -121,7 +123,19 @@ class UsersController extends BaseController {
 		foreach ($roles as $role) {
 			$options[$role->id] = $role->role_name;
 		}
-		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options]);
+		$states = State::orderBy('nombre','asc')->get();
+        //$states = State::dropdown(1);
+        $municipios = Municipio::orderBy('nombre','asc')->get();
+        //$municipios = Municipio::dropdown(1);
+		$estados = array();
+		$ciudades = array();
+		foreach ($states as $state) {
+			$estados[$state->id] = $state->nombre;
+		}
+		foreach ($municipios as $municipio) {
+			$ciudades[$municipio->id] = $municipio->nombre;
+		}
+		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options, 'states' => $states, 'estados' => $estados, 'municipios' => $municipios, 'ciudades' => $ciudades]);
 	}
 
 
@@ -150,6 +164,8 @@ class UsersController extends BaseController {
 		}
 		$user->password = $password;
 		$user->user_address = Input::get('user_address');
+		$user->estado = Input::get('estado');
+		$user->municipio = Input::get('municipio');
 		$user->user_mobile = Input::get('user_mobile');
 		
 		$validator = User::validate(array(
@@ -220,7 +236,19 @@ class UsersController extends BaseController {
 	public function showRegister()
     {
         $user = new User();
-    	return View::make('registration');
+        $states = State::orderBy('nombre','asc')->get();
+        //$states = State::dropdown(1);
+        $municipios = Municipio::orderBy('nombre','asc')->get();
+        //$municipios = Municipio::dropdown(1);
+		$estados = array();
+		$ciudades = array();
+		foreach ($states as $state) {
+			$estados[$state->id] = $state->nombre;
+		}
+		foreach ($municipios as $municipio) {
+			$ciudades[$municipio->id] = $municipio->nombre;
+		}
+    	return View::make('registration')->with(['states' => $states,'estados' => $estados, 'municipios' => $municipios, 'ciudades' => $ciudades]);
     }
     public function postRegister()
     {
@@ -229,6 +257,8 @@ class UsersController extends BaseController {
 		$user->username = Input::get('username');
 		$user->email = Input::get('email');
 		$user->user_address = Input::get('user_address');
+		$user->estado = Input::get('estado');
+		$user->municipio = Input::get('municipio');
 		$user->user_mobile = Input::get('user_mobile');
 		$user->password = Hash::make(Input::get('password'));
 		$user->role_id = 2;
@@ -279,6 +309,12 @@ class UsersController extends BaseController {
     {
     	$orders = Factura::where('user_id','=',$id)->paginate(10);
     	return View::make('admin.ordersbyuser',compact('orders'));
+    }
+    public function cities($id)
+    {
+		$municipios = DB::table('municipio')->where('estado_id','=',$id)->orderBy('nombre','asc')->lists('nombre','id');
+		
+		return Response::json($municipios);
     }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('title') Perfil del Producto {{ $product->id }} - ActiveWear @stop
+@section('title', Stamp::getStampName($product->stamp_id).' ('.ucwords(strtolower(Modelo::getName($product->model_id))).')')
 
 @section('content')
 <div class="main">
@@ -28,7 +28,7 @@
                         </figure>
                     </div>
                     <div class="col-md-7">
-                        <h2>{{ Stamp::getStampName($product->stamp_id) }} ({{ Modelo::getName($product->model_id) }})</h2>
+                        <h2>{{ Stamp::getStampName($product->stamp_id) }} ({{ ucwords(strtolower(Modelo::getName($product->model_id))) }})</h2>
                         <br/>
                         <p><strong>Precio: </strong> Bs. {{  number_format(Modelo::getPrice($product->model_id), 2, ',', '.') }} </p>
                         <p><strong>en Stock: </strong> {{ $product->amounts }} </p>
@@ -39,7 +39,7 @@
                             <br />
                             <br />
                             <button class="btn btn-success btn-lg add-to-cart" data-id="{{ $product->id }}">
-                                <i class="fa fa-shopping-cart fa-lg"></i>  Agregar a la Cesta
+                                <i class="fa fa-shopping-cart fa-lg"></i>&nbsp;&nbsp;Agregar a la Cesta
                             </button>
                             <button id="carrito" onclick="location.href='/carrito'" class="btn btn-success btn-lg hide">
                             	<i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Ir al Carrito

@@ -100,8 +100,8 @@ class CartController extends BaseController {
 
         Mail::send('emails.factura', $datos , function($m) use ($user)
         {
-            $m->from('ventas@activewear.com.ve', 'Carioca ActiveWear');
-            $m->to($user['email'])->cc('ventas@activewear.com.ve')->subject('Orden de compra.');
+            $m->from('ventasactivewear@gmail.com ', 'ActiveWear');
+                        $m->to($data['user']['email'])->cc('ventasactivewear@gmail.com')->bcc('administracion@cariocaactivewear.com')->subject('Orden de Compra.');
         }); 
 
         return Redirect::to('/order/' . $factura->id)->with('notice','¡Tu Pedido esta siendo procesado, solo faltan algunos pasos para completar tu compra, revisa tu correo electronico, ya que <strong>te hemos enviado un correo con todos los datos para terminar de procesar tu compra!</strong>');
@@ -147,6 +147,13 @@ class CartController extends BaseController {
 
         $pago->save();
 
+        if(is_null(Input::get('user_address')))
+        {
+            $user = User::find(Auth::user()->id);
+            $user->user_address = Input::get('user_address');
+            $user->save();
+        }
+
         $factura = Factura::find($inputs['id']);
 
         $data['user'] = Auth::user();
@@ -157,8 +164,8 @@ class CartController extends BaseController {
 
         Mail::send('emails.pago', $data , function($m) use ($data)
         {
-            $m->from('ventas@activewear.com.ve', 'Carioca ActiveWear');
-            $m->to($data['user']['email'])->cc('ventas@activewear.com.ve')->subject('Confirmación de Pago.');
+            $m->from('ventasactivewear@gmail.com ', 'ActiveWear');
+            $m->to($data['user']['email'])->cc('ventasactivewear@gmail.com')->bcc('administracion@cariocaactivewear.com')->subject('Confirmación de Pago.');
         });
 
         return Redirect::back()->with('notice','¡Tu Compra a sido procesada, revisa tu correo electronico, <strong>te hemos enviado un correo con los datos de tu compra!</strong>, si tienes alguna duda no vaciles en contactarnos, estamos a tu servicio.');

@@ -58,7 +58,8 @@ a,a:hover,a:focus {
     height:100%;
 }
 .form-signin {
-    max-width:330px;
+    min-width:330px;
+    max-width: 600px;
     margin:10px auto;
     background:#fff;
     border-radius:5px;
