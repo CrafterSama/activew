@@ -123,7 +123,15 @@
 											</div>
 										</div>
 										<div class="col-lg-12">
-										<p style="font-size: 19px;">¿Verifique muy bien si es esta la dirección a la desea que se envie su producto?</p>
+										<?php $user = Auth::user(); ?>
+										@if (strtolower(Municipio::getName($user->municipio)) == 'maracaibo')
+											<div class="alert alert-success" style="font-size: 19px;">
+												<p class="text-justify">
+													De Acuerdo a nuestra Informacion, Tu lugar de Residencia es en Maracaibo, por lo tanto tu Pedido Debe Ser Retirado directamente en el Local de la Tienda Pioggia Di Mare.
+												</p>
+											</div>
+										@else
+											<p style="font-size: 19px;">¿Verifique muy bien si es esta la dirección a la desea que se envie su producto?</p>
 											<div class="alert alert-success" style="font-size: 19px;">
 												<p class="text-justify">
 													<strong>Direccion de Entrega del Pedido:</strong><br />
@@ -140,9 +148,23 @@
 											<div class="collapse">
 												{{ Form::label('user_address', 'Nueva Dirección') }}
 												<input type="text" name="user_address" value="" class="form-control col-lg-12" placeholder="Agregue su nueva Dirección" />
+									            <div class="form-group">
+									                <label for="estado">Estado</label>
+									                <select name="estado" id="estado" class="form-control">
+									                        <option>Seleccione...</option>
+									                    @foreach ($states as $state)
+									                        <option value="{{ $state->id }}">{{ ucwords(strtolower($state->nombre)) }}</option>
+									                    @endforeach
+									                </select>
+									                <br />
+									                <label for="municipio">Ciudad</label>
+									                <select name="municipio" id="municipio" class="form-control">
+									                        <option>Selecciona el Estado</option>
+									                </select>
+									            </div>
 											</div>
 											<br />
-											<br />
+										@endif
 											{{ Form::hidden('id', $order->id) }}
 											<button type="submit" class="btn btn-lg btn-primary btn-block"> <i class="fa fa-check"></i> Confirmar</button>
 										</div>
