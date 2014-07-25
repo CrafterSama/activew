@@ -130,3 +130,18 @@ Route::post('/total', function()
 Route::get('/assets/images/pays/{slug}', function($slug){
 	return Response::download('assets/images/pays/'.$slug);
 });
+
+
+/*
+	GEOLOCALITATION API
+*/
+Route::post('/geo/estados', function()
+{
+	echo Estado::orderBy('estado', 'ASC')->get()->toJson();
+});
+Route::post('/geo/estado/{id}', function($id)
+{
+	echo Estado::find($id)->ciudades->toJson();
+});
+
+/* *********** */

@@ -1,24 +1,18 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
 class Municipio extends Eloquent {
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
+	protected $table = 'municipios';
+	public $timestamps = false;
 
-	protected $table = 'municipio';
-	
-	public function states(){
-		return $this->belongsTo('State');
-	}
-		public static function getName($id)
-	{
-		return Municipio::find($id)->nombre;
-	}
+    public function estado()
+    {
+        return $this->belongsTo('Estado', 'estado_id', 'id');
+    }
+
+	public function parroquias()
+    {
+        return $this->hasMany('Parroquia', 'municipio_id', 'id');
+    }
 
 }

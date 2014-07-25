@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
 
@@ -25,7 +25,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-  <body class="login-body">
+<body class="login-body">
 
     <div class="container">
 
@@ -33,12 +33,12 @@
         <h2 class="form-signin-heading">Registrarse</h2>
         <div class="login-wrap">
             @if(Session::has('notice'))
-                <div class="alert alert-success">{{ Session::get('notice') }}</div>
-                <br>
+            <div class="alert alert-success">{{ Session::get('notice') }}</div>
+            <br>
             @endif
             @if(Session::has('error'))
-                <div class="alert alert-danger">{{ Session::get('error') }}</div>
-                <br>
+            <div class="alert alert-danger">{{ Session::get('error') }}</div>
+            <br>
             @endif
             <p>Ingresa tus Datos a Continuación</p>
             <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Nombre Completo" required />
@@ -48,16 +48,13 @@
                 <div class="alert alert-info">Debe guardar aqui la direccion a la cual recibe los pedidos, no olvide seleccionar La Ciudad y el Estado</div>
                 <input type="text" name="user_address" id="user_address" class="form-control" placeholder="Dirección" required />
                 <label for="estado">Estado</label>
-                <select name="estado" id="estado" class="form-control">
-                        <option>Seleccione...</option>
-                    @foreach ($states as $state)
-                        <option value="{{ $state->id }}">{{ ucwords(strtolower($state->nombre)) }}</option>
-                    @endforeach
+                <select name="estado" id="estados" class="form-control">
+
                 </select>
                 <br />
                 <label for="municipio">Ciudad</label>
-                <select name="municipio" id="municipio" class="form-control">
-                        <option>Selecciona el Estado</option>
+                <select name="municipio" id="municipios" class="form-control">
+                    <option>Selecciona el Estado</option>
                 </select>
             </div>
             <div class="form-group">
@@ -78,7 +75,7 @@
 
         </div>
 
-      {{ Form::close() }}
+        {{ Form::close() }}
 
     </div>
 
@@ -90,5 +87,38 @@
     {{ HTML::script('/../assets/js/bootstrap.min.js') }}
     {{ HTML::script('/../assets/js/common.js') }}
 
-  </body>
+    <script type="text/javascript">
+    /* GEO */
+    $(document).on("ready", function(){
+
+        var $estados = $("#estados");
+        var $municipios = $("#municipios");
+
+        $.post('/geo/estados', function(data, textStatus, xhr) {                
+            $.each(data, function(index, val) {
+                var option = '<option value="' + val.id +'">' + val.estado +'</option>';
+                $estados.append(option);
+            }); 
+        },'json');
+
+        $estados.on("change", function(){
+            var id = $(this).val();
+            resetMunicipios();
+            $.post('/geo/estado/' + id, function(data, textStatus, xhr) {                
+                $.each(data, function(index, val) {
+                    var option = '<option value="' + val.id +'">' + val.ciudad +'</option>';
+                    $municipios.append(option);
+                }); 
+            },'json');
+        });
+
+        function resetMunicipios(){
+            $municipios.empty();
+            var option = '<option> -- Seleccione --</option>';
+            $municipios.append(option);
+        }
+    });
+</script>
+
+</body>
 </html>

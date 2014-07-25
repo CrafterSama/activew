@@ -1,16 +1,13 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
 class Parroquia extends Eloquent {
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
+	protected $table = 'parroquias';
+	public $timestamps = false;
 
-	protected $table = 'parroquia';
+	public function municipio()
+    {
+        return $this->belongsTo('Municipio', 'municipio_id', 'id');
+    }
 
 }

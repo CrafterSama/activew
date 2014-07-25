@@ -236,9 +236,9 @@ class UsersController extends BaseController {
 	public function showRegister()
     {
         $user = new User();
-        $states = State::orderBy('nombre','asc')->get();
+        $states = Estado::orderBy('estado','asc')->get();
         //$states = State::dropdown(1);
-        $municipios = Municipio::orderBy('nombre','asc')->get();
+        $municipios = Municipio::orderBy('municipio','asc')->get();
         //$municipios = Municipio::dropdown(1);
 		$estados = array();
 		$ciudades = array();
