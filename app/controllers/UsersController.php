@@ -235,20 +235,7 @@ class UsersController extends BaseController {
 	}
 	public function showRegister()
     {
-        $user = new User();
-        $states = Estado::orderBy('estado','asc')->get();
-        //$states = State::dropdown(1);
-        $municipios = Municipio::orderBy('municipio','asc')->get();
-        //$municipios = Municipio::dropdown(1);
-		$estados = array();
-		$ciudades = array();
-		foreach ($states as $state) {
-			$estados[$state->id] = $state->nombre;
-		}
-		foreach ($municipios as $municipio) {
-			$ciudades[$municipio->id] = $municipio->nombre;
-		}
-    	return View::make('registration')->with(['states' => $states,'estados' => $estados, 'municipios' => $municipios, 'ciudades' => $ciudades]);
+    	return View::make('registration');
     }
     public function postRegister()
     {
