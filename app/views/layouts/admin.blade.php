@@ -57,6 +57,7 @@
                     </a>
                     <ul class="dropdown-menu extended logout">
                         <li><a href="/admin/usuarios/{{ Auth::user()->id }}/perfil"><i class=" fa fa-suitcase"></i>Perfil</a></li>
+                        <li><a href="/admin/usuarios/{{ Auth::user()->id }}/password"><i class=" fa fa-pencil"></i>Contraseña</a></li>
                         <li><a href="/admin/configuracion"><i class="fa fa-cog"></i>Configuracion</a></li>
                         <li><a href="/logout"><i class="fa fa-key"></i>Cerrar Sesion</a></li>
                     </ul>
@@ -74,19 +75,19 @@
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
                     <a href="/admin">
-                        <i class="fa fa-home"></i>
+                        <i class="fa fa-home fa-lg"></i>
                         <span>Inicio</span>
                     </a>
                 </li>
                 <li>
                     <a href="/admin/productos">
-                        <i class="fa fa-list"></i>
+                        <i class="fa fa-list fa-lg"></i>
                         <span>Productos</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a data-toggle="collapse" data-target="#toggleOrders" class="collapse">
-                        <i class="fa fa-list-alt"></i>
+                        <i class="fa fa-list-alt fa-lg"></i>
                         <span>Pedidos</span>
                     </a>
                     <div class="collapse" id="toggleOrders">
@@ -98,7 +99,7 @@
                 </li>
                 <li>
                     <a href="/admin/modelos">
-                        <i class="fa fa-th-large"></i>
+                        <i class="fa fa-th-large fa-lg"></i>
                         <span>Modelos</span>
                     </a>
                 </li>
@@ -135,6 +136,38 @@
 {{ HTML::script('/../assets/js/common.js') }}
 {{ HTML::script('/../assets/js/scripts.js') }}
 <!--script for this page-->
+    <script type="text/javascript">
+    /* GEO */
+    $(document).on("ready", function(){
+
+        var $estados = $("#estados");
+        var $municipios = $("#municipios");
+
+        $.post('/geo/estados', function(data, textStatus, xhr) {                
+            $.each(data, function(index, val) {
+                var option = '<option value="' + val.id +'">' + val.estado +'</option>';
+                $estados.append(option);
+            }); 
+        },'json');
+
+        $estados.on("change", function(){
+            var id = $(this).val();
+            resetMunicipios();
+            $.post('/geo/estado/' + id, function(data, textStatus, xhr) {                
+                $.each(data, function(index, val) {
+                    var option = '<option value="' + val.id +'">' + val.ciudad +'</option>';
+                    $municipios.append(option);
+                }); 
+            },'json');
+        });
+
+        function resetMunicipios(){
+            $municipios.empty();
+            var option = '<option> -- Seleccione --</option>';
+            $municipios.append(option);
+        }
+    });
+    </script>
 </body>
 </html>
 @endif

@@ -19,7 +19,7 @@ class ProductsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$products = Product::orderBy('id','desc')->paginate(10);
+		$products = Product::where('amounts','!=',0)->orderBy('id','desc')->paginate(10);
 		$stamps = Stamp::all();
 		$modelos = Modelo::all();
 		return View::make('admin.products')->with(['products'=>$products,'stamps'=>$stamps,'modelos'=>$modelos]);
@@ -139,11 +139,12 @@ class ProductsController extends \BaseController {
 	{
 		if(!$this->autorizado) return Redirect::to('/login');
 		$product = Product::find($id);
+		$stamp = Stamp::find($product->stamp_id);
 		if (is_null ($product))
 		{
 			App::abort(404);
 		}
-		return View::make('products.form')->with('product', $product);
+		return View::make('products.form')->with(['product' => $product, 'stamp' => $stamp]);
 	}
 
 
@@ -156,9 +157,12 @@ class ProductsController extends \BaseController {
 	public function update($id)
 	{
 		$product = Product::find($id);
-		$product->amounts = Input::get('amounts');
+		$stamp = Stamp::find($product->stamp_id);
 		
-		if ($product->save())
+		$product->amounts = Input::get('amounts');
+		$stamp->stampname = Input::get('stampname');
+		
+		if ($product->save() && $stamp->save())
 		{
 			return Redirect::to('admin/productos')->with('notice', 'El producto se edito correctamente.');
 		}
@@ -180,7 +184,7 @@ class ProductsController extends \BaseController {
 			App::abort(404);
 		}
 		
-		$product->forceDelete();
+		$product->delete();
 		
 		if (Request::ajax())
 		{

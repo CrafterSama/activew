@@ -1,22 +1,27 @@
 <?php
 
-class ConfigurationsController extends \BaseController {
+class ConfigurationsController extends BaseController {
 
-	public function getConfig()
+	public function edit()
 	{
 		$config = Configuration::paginate(10);
 		return View::make('admin.config',compact('config'));
 	}
-	public function updateConfig()
+	public function update()
 	{
-		$config = Configuration::all();
+		
+		$iva = Input::get('iva');
+		$discount = Input::get('wholesale_discount');
 
-		$config->where('config_name','=','iva')->config_value = Input::get('iva');
-		$config->where('config_name','=','wholesale_discount')->config_value = Input::get('wholesale_discount');
+		DB::table('configurations')
+            ->where('config_name', 'iva')
+            ->update(array('config_value' => $iva));
+		DB::table('configurations')
+            ->where('config_name', 'wholesale_discount')
+            ->update(array('config_value' => $discount));
+
 		
-		$config->save();
-		
-		return Redirect::back();
+		return Redirect::back()->with('notice','Configuracion guardada de forma satisfactoria');;
 	}
 
 }

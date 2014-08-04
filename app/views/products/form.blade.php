@@ -62,9 +62,16 @@
 					{{ Form::model($product, $form_data) }}
 						@include ('common/errors', array('errors' => $errors))
 						<div class="row">
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-6">
 								{{ Form::label(Modelo::getName($product->model_id), strtoupper(Modelo::getName($product->model_id))) }}
-								<input type="number" min="1" name="amounts" class="form-control">
+								<br />
+								<img src="/../assets/images/stamps/{{ Stamp::getName($stamp->id) }}" alt="" width="120px" class="img-thumbnail" />
+								<br />
+								<label for="stampname">Nombre del Stampado</label>
+								<input type="text" value="{{ Stamp::getStampname($stamp->id) }}" name="stampname" class="form-control">
+								<br />
+								<label for="amounts">Cantidades</label>
+								<input type="number" min="1" value="{{ Product::getAmounts($product->id) }}" name="amounts" class="form-control">
 							</div>
 						</div>
 						{{ Form::submit('Guardar', array('class'=>'btn btn-primary pull-right')) }}

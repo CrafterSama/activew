@@ -16,6 +16,9 @@
 			<br />
 			<div class="panel panel-default">
 				<div class="panel-heading">
+                    <button class="btn btn-info btn-md" onclick="history.go(-1)">
+                        <i class="fa fa-chevron-left"></i> Volver
+                    </button>
 				</div>
 				<div class="panel-body">
 					<section id="no-more-tables">
@@ -66,7 +69,7 @@
 										</tr>
 										<tr>
 											<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Descuento 30% :</strong></td>
-											<td data-title="Descuento 30% :">Bs. {{ number_format($order->total()*Configuration::getDiscount(), 2,',','.') }}</td>
+											<td data-title="Descuento 30% :" style="color:red;">Bs. {{ number_format($order->total()*Configuration::getDiscount(), 2,',','.') }}</td>
 										</tr>
 										<tr>
 											<td colspan="1"></td>
@@ -94,7 +97,7 @@
 
 									@if(!$order->pago)
 									<h3>Confirmar pago:</h3>
-									<form action="/pay" method="post" enctype="multipart/form-data">
+									<form action="/pay" id="order" method="post" enctype="multipart/form-data">
 										<div class="col-lg-6">
 											<div class="form-group">
 												{{ Form::label('recibo','No. de transferencia o deposito') }} 
@@ -127,7 +130,7 @@
 										@if (strtolower(Municipio::getName($user->municipio)) == 'maracaibo')
 											<div class="alert alert-success" style="font-size: 19px;">
 												<p class="text-justify">
-													De Acuerdo a nuestra Informacion, Tu lugar de Residencia es en Maracaibo, por lo tanto tu Pedido Debe Ser Retirado directamente en el Local de la Tienda Pioggia Di Mare.
+													De Acuerdo a nuestra informacion, tu lugar de residencia es en Maracaibo, por lo tanto tu pedido debe ser retirado directamente en el local de la tienda <a href="/contacto" class="btn-link"><span data-toggle="tooltip" data-placement="top" title="Urbanización Juana de Avila calle 66A #15A-25. Maracaibo, Edo. Zulia, Venezuela">Pioggia Di Mare</span></a>.
 												</p>
 											</div>
 										@else
@@ -135,30 +138,30 @@
 											<div class="alert alert-success" style="font-size: 19px;">
 												<p class="text-justify">
 													<strong>Direccion de Entrega del Pedido:</strong><br />
-													{{ User::getAddress(Auth::user()->id) }}
+													{{ User::getAddress(Auth::user()->id).' '.ucwords(strtolower(Municipio::getName($user->municipio))).', Edo.'.ucwords(strtolower(Estado::getName($user->estado))); }}
 												</p>
 											</div>
 											{{ Form::label('options', 'Seleccione Si o No') }}
+											{{ $errors->first('option', '<div class="alert alert-danger">:message</div>') }}
 											<br />
 											{{ Form::label('options', 'Si') }}
-											<input type="radio" name="option" id="si" class="option" value="si" />
+											<input type="radio" name="options" id="si" class="option" value="si" />
 											{{ Form::label('options', 'No') }}
-											<input type="radio" name="option" id="no" class="option" value="no" />
+											<input type="radio" name="options" id="no" class="option" value="no" />
 											<br />
 											<div class="collapse">
 												{{ Form::label('user_address', 'Nueva Dirección') }}
 												<input type="text" name="user_address" value="" class="form-control col-lg-12" placeholder="Agregue su nueva Dirección" />
 									            <div class="form-group">
-									                <label for="estado">Estado</label>
-									                <select name="estado" id="estado" class="form-control">
+									                <label for="estados">Estado</label>
+									                {{ $errors->first('estados', '<div class="alert alert-danger">:message</div>') }}
+									                <select name="estados" id="estados" class="form-control">
 									                        <option>Seleccione...</option>
-									                    @foreach ($states as $state)
-									                        <option value="{{ $state->id }}">{{ ucwords(strtolower($state->nombre)) }}</option>
-									                    @endforeach
 									                </select>
 									                <br />
-									                <label for="municipio">Ciudad</label>
-									                <select name="municipio" id="municipio" class="form-control">
+									                <label for="municipios">Ciudad</label>
+									                {{ $errors->first('municipios', '<div class="alert alert-danger">:message</div>') }}
+									                <select name="municipios" id="municipios" class="form-control">
 									                        <option>Selecciona el Estado</option>
 									                </select>
 									            </div>

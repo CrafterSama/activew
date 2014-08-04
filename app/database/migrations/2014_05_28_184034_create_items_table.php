@@ -22,6 +22,7 @@ class CreateItemsTable extends Migration {
 	        $table->foreign('factura_id')->references('id')->on('facturas');
 	        $table->string('keep');
 	        $table->timestamps();
+	        $table->softDeletes();
 	    });
 	}
 

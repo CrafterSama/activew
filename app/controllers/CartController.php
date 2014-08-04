@@ -95,13 +95,15 @@ class CartController extends BaseController {
         $datos['user'] = $user;
         $datos['factura'] = $factura;
         $datos['cart'] = $carts;
+        $datos['discount'] = Configuration::getDiscount();
 
         //return View::make('emails.factura', array('datos' => $data));
 
         Mail::send('emails.factura', $datos , function($m) use ($user)
         {
-            $m->from('ventasactivewear@gmail.com ', 'ActiveWear');
-            $m->to($user['email'])->cc('ventasactivewear@gmail.com')->bcc('administracion@cariocaactivewear.com')->subject('Orden de Compra.');
+            $m->from('ventas@cariocaactivewear.com', 'ActiveWear');
+//            $m->to($user['email'])->cc('ventasactivewear@gmail.com')->bcc('administracion@cariocaactivewear.com')->subject('Orden de Compra.');
+            $m->to($user['email'])->subject('Orden de Compra.');
         }); 
 
         return Redirect::to('/order/' . $factura->id)->with('notice','¡Tu Pedido esta siendo procesado, solo faltan algunos pasos para completar tu compra, revisa tu correo electronico, ya que <strong>te hemos enviado un correo con todos los datos para terminar de procesar tu compra!</strong>');
@@ -163,16 +165,18 @@ class CartController extends BaseController {
         $data['factura'] = $factura->toArray();
         $data['items'] = $factura->items->toArray();
         $data['pago'] = $factura->pago->toArray();
+        $data['discount'] = Configuration::getDiscount();
+
 
         Mail::send('emails.pago', $data , function($m) use ($data)
         {
             $m->from('ventasactivewear@gmail.com ', 'ActiveWear');
-            $m->to($data['user']['email'])->cc('ventasactivewear@gmail.com')->bcc('administracion@cariocaactivewear.com')->subject('Confirmación de Pago.');
+            $m->to($data['user']['email'])->cc('administracion@cariocaactivewear.com')->subject('Confirmación de Pago.');
         });
 
         return Redirect::back()->with('notice','¡Tu Compra a sido procesada, revisa tu correo electronico, <strong>te hemos enviado un correo con los datos de tu compra!</strong>, si tienes alguna duda no vaciles en contactarnos, estamos a tu servicio.');
     }
-    
+
     public function get_orders(){
         return View::make('home.orders', array('orders' => Auth::user()->facturas));
     }
@@ -180,15 +184,15 @@ class CartController extends BaseController {
     public function get_order($id){
         $order = Factura::withTrashed()->find($id);
 
-        $states = State::orderBy('nombre','asc')->get();
-        $municipios = Municipio::orderBy('nombre','asc')->get();
+        $states = Estado::orderBy('estado','asc')->get();
+        $municipios = Municipio::orderBy('municipio','asc')->get();
         $estados = array();
         $ciudades = array();
         foreach ($states as $state) {
-            $estados[$state->id] = $state->nombre;
+            $estados[$state->id] = $state->estado;
         }
         foreach ($municipios as $municipio) {
-            $ciudades[$municipio->id] = $municipio->nombre;
+            $ciudades[$municipio->id] = $municipio->municipio;
         }
         return View::make('home.order', array('order' => $order, 'states'=>$states,'estados'=>$estados,'municipios'=>$municipios,'ciudades'=>$ciudades));
     }

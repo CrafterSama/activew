@@ -25,7 +25,7 @@
 </head>
   <body class="login-body">
       <a href="/" class="back-login btn btn-primary btn-xs white"> <i class="fa fa-angle-double-left fa-lg"></i> Volver a la Web</a>
-      {{ Form::open(array('url' => '/login','class' => 'form-signin')) }}
+      {{ Form::open(array('url' => '/login','class' => 'form-signin', 'id' => 'login')) }}
         <h2 class="form-signin-heading">Conectarse</h2>
         <div class="login-wrap">
             {{-- Preguntamos si hay algún mensaje de error y si hay lo mostramos  --}}
@@ -34,7 +34,9 @@
                 <br>
             @endif
             <div class="user-login-info">
+                {{ $errors->first('username', '<div class="alert alert-danger">:message</div>') }}
                 {{ Form::text('username', Input::old('username'), array('class' => 'form-control','placeholder' => 'Usuario')); }}
+                {{ $errors->first('password', '<div class="alert alert-danger">:message</div>') }}
                 {{ Form::password('password', array('class' => 'form-control','placeholder' => 'Contraseña')); }}
             </div>
             <label class="checkbox">
@@ -87,11 +89,34 @@
 <!-- Placed js at the end of the document so the pages load faster -->
 <!--common script init for all pages-->
 {{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
-{{ HTML::script('assets/js/bootstrap.min.js') }}
-{{ HTML::script('assets/js/jquery.nicescroll.js') }}
-{{ HTML::script('assets/js/toggle-init.js') }}
-{{ HTML::script('assets/js/dashboard.js') }}
-{{ HTML::script('assets/js/scripts.js') }}
+{{ HTML::script('/../assets/js/bootstrap.min.js') }}
+{{ HTML::script('/../assets/js/jquery.nicescroll.js') }}
+{{ HTML::script('/../assets/js/toggle-init.js') }}
+{{ HTML::script('/../assets/js/dashboard.js') }}
+{{ HTML::script('/../assets/js/jquery.validate.js') }}
+{{ HTML::script('/../assets/js/scripts.js') }}
+<script>
+          $(function(){
+            $('#login').validate({
+                rules :{
+                  username : {
+                    required : true,
+                  },
+                  password : {
+                    required : true,
+                  },
+                },
+                messages : {
+                    username : {
+                        required : "Debe ingresar el nombre de usuario",
+                    },
+                    password : {
+                        required : "Debe ingresar un password o contraseña",
+                    },
+                }
+            });    
+        });
+</script>
 
 <!--script for this page-->
 </body>

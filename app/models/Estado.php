@@ -19,4 +19,14 @@ class Estado extends Eloquent {
     {
     	return $value;
     }
+    public static function getName($id)
+    {
+        $estado = Estado::find($id);
+        if (is_null($estado)) {
+            return 'No hay Estado Asociado.';
+        } else {
+            return $estado->estado;
+        }
+        
+    }
 }

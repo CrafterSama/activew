@@ -132,8 +132,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public static function getAddress($id)
 	{
 		$address = User::find($id);
-		$complete_address = $address->user_address.', '.ucwords(strtolower(Municipio::getName($address->municipio))).', Edo.'.ucwords(strtolower(State::getName($address->estado)));
-		return $complete_address;
+		return $address->user_address;
 	}
 
 	public static function getPhone($id)

@@ -34,7 +34,7 @@
                         <p><strong>en Stock: </strong> {{ $product->amounts }} </p>
                         <br />
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-9">
                             {{ Form::selectRange('qty', 1, $product->amounts, array('id'=>'qty','class'=>'form-control col-sm-3')) }}
                             <br />
                             <br />

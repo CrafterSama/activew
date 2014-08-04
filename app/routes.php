@@ -11,10 +11,10 @@
 |
 */
 
-App::missing(function($exception)
+/*App::missing(function($exception)
 {
 	return Response::view('errors.error404');
-});
+});*/
 
 /** Home Links **/
 Route::pattern('id', '[0-9]+');
@@ -58,6 +58,10 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('productos/{id}/editar', 'ProductsController@edit');
 		Route::post('productos/{id}/editar', 'ProductsController@update');
 		Route::get('productos/borrar/{id}', 'ProductsController@destroy');
+		
+		Route::get('estampados', 'StampsController@index');
+		Route::get('estampados/{id}/editar', 'StampsController@edit');
+		Route::post('estampados/{id}/editar', 'StampsController@update');
 
 		Route::get('modelos', 'ModelosController@index');
 		Route::get('modelos/agregar', 'ModelosController@create');
@@ -73,6 +77,8 @@ Route::group(array('before' => 'auth'), function()
 		Route::post('usuarios/agregar', 'UsersController@store');
 		Route::get('usuarios/{id}/editar', 'UsersController@edit');
 		Route::post('usuarios/{id}/editar', 'UsersController@update');
+		Route::get('usuarios/{id}/password', 'UsersController@password');
+		Route::post('usuarios/{id}/password', 'UsersController@changePassword');
 		Route::get('usuarios/borrar/{id}', 'UsersController@destroy');
 		Route::get('usuarios/{id}/perfil', 'UsersController@showProfile');
 		Route::get('usuarios/{id}/pedidos', 'UsersController@showOrders');
@@ -83,8 +89,8 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('pedidos/cancelar/{id}', 'OrdersController@cancelOrder');
 
 		
-		Route::get('configuracion', 'ConfigurationsController@getConfig');
-		Route::post('configuracion', 'ConfigurationsController@updateConfig');
+		Route::get('configuracion', 'ConfigurationsController@edit');
+		Route::post('configuracion', 'ConfigurationsController@update');
 
 		Route::controller('users', 'UsersController');
 		Route::controller('products', 'ProductsController');

@@ -49,7 +49,6 @@
                 <input type="text" name="user_address" id="user_address" class="form-control" placeholder="Dirección" required />
                 <label for="estado">Estado</label>
                 <select name="estado" id="estados" class="form-control">
-
                 </select>
                 <br />
                 <label for="municipio">Ciudad</label>
@@ -118,7 +117,7 @@
             $municipios.append(option);
         }
     });
-</script>
+    </script>
 
 </body>
 </html>

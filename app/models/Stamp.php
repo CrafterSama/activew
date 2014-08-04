@@ -31,12 +31,22 @@ class Stamp extends Eloquent {
 	public static function getName($id)
 	{
 		$stamp = Stamp::find($id);
-		return $stamp->stamp;
+		if (is_null($stamp)) {
+			return 'No se Encuentra Imagen Asociada';
+		} else {
+			return $stamp->stamp;
+		}
+		
 	}
 	public static function getStampName($id)
 	{
 		$stamp = Stamp::find($id);
-		return $stamp->stampname;
+		if (is_null($stamp)) {
+			return 'No se Encuentra Nombre Asociado';
+		} else {
+			return $stamp->stampname;
+		}
+		
 	}
 
 }

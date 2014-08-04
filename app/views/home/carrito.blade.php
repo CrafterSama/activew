@@ -65,7 +65,7 @@
 									</tr>
 									<tr>
 										<td colspan="5" class="cart-bottom visible-lg" style="text-align:right"><strong>Descuento 30% :</strong></td>
-										<td data-title="Descuento 30% :">Bs. {{ number_format(Cart::total()*Configuration::getDiscount(), 2,',','.') }})</td>
+										<td data-title="Descuento 30% :" style="color:red;">Bs. {{ number_format(Cart::total()*Configuration::getDiscount(), 2,',','.') }}</td>
 									</tr>
 									<tr>	
 										<td colspan="1" class="cart-bottom visible-lg"></td>

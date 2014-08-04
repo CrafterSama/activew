@@ -47,13 +47,13 @@
 
 		<p><strong>Nombre:</strong> {{ $user['full_name'] }} </p>
 
-		<p><strong>Direccion de Envio:</strong> {{ $user['user_address'] }} </p>
+		<p><strong>Direccion de Envio:</strong> {{ $user['user_address'].', '.$user['municipio'].', Edo. '.$user['estado'] }} </p>
 
 		<p><strong>Telefono de Contacto:</strong> {{ $user['user_mobile'] }} </p>
 
 		<p><strong>Correo:</strong> {{ $user['email'] }} </p>
 		
-		<p><strong>Nota:</strong> El Envio se realiza por MRW a la Dirección que usted proveyo al momento de Registrarse y es con cobro a destino </p>
+		<p><strong>Nota:</strong> Si su direccion esta localizada en el municipio Maracaibo, su pedido debe retirarlo por el local de <a href="http://cariocaactivewear.com/contacto">Pioggia Di Mare</a> siga el link para conocerla, de lo contrario si su direccion de envio esta fuera de Maracaibo el Envio se realizara por MRW a la dirección que usted ingreso en el sistema a traves del formulario de registro y es con cobro a destino</p>
 	
 
 		<hr/>
@@ -62,7 +62,7 @@
 
 
 
-		<table border="0" width="100%" style="border: 1px solid #fff ; text-align: center;">
+		<table border="0" width="100%" style="border: 1px solid #fff; text-align: center;">
 
 			<tr>
 
@@ -106,7 +106,7 @@
 
 		</table>
 
-		@if(($discount >= 12) && (Configuration::getDiscount() > 0))
+		@if($discount >= 12 && Configuration::getDiscount() > 0)
 			<h4 align="right">Total: Bs. {{ number_format($total, 2, ',', '.') }} </h4>
 			<h4 align="right">Descuento 30%: Bs. {{ number_format($total*Configuration::getDiscount(), 2, ',', '.') }} </h4>
 			Descuento del 30% a partir de 12 piezas <h4 align="right">Total: Bs. {{ number_format($total-($total*Configuration::getDiscount()), 2, ',', '.') }} </h4>
@@ -114,7 +114,7 @@
 			<h4 align="right">Total: Bs. {{ number_format($total, 2, ',', '.') }} </h4>
 		@endif
 
-		<p>Cualquier duda que tenga puede comunicarse con Nosotros a través de nuestro correo electrónico ventas@cariocaactivewear.com o a través de nuestros teléfonos 0414-6558220 o 0414-6135628 </p>	
+		<p>Cualquier duda que tenga puede comunicarse con nosotros a través de nuestro correo electrónico ventasactivewear@gmail.com o a través de nuestros teléfonos 0414-0659155, donde con gusto le atenderemos </p>	
 
 		<div align="center">
 

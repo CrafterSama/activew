@@ -9,5 +9,10 @@ class Ciudad extends Eloquent {
     {
         return $this->belongsTo('Estado', 'estado_id', 'id');
     }
+        public static function getName($id)
+    {
+        $ciudad = Ciudad::find($id);
+        return $ciudad->ciudad;
+    }
 
 }

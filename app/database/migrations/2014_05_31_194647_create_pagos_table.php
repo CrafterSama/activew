@@ -21,6 +21,7 @@ class CreatePagosTable extends Migration {
 	        $table->integer('factura_id')->unsigned();
 	        $table->foreign('factura_id')->references('id')->on('facturas');
 	        $table->timestamps();
+	        $table->softDeletes();
 	    });
 	}
 

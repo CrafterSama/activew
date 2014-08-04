@@ -43,7 +43,7 @@
 						@else
 							@foreach ($products as $product)
 								<tr>
-									<td class="col-xs-2" data-title="Estampado"><a href="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" class="img-responsive thumbnails"><img src="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" alt="Estampado" width="120px" /></a><br /> </td>
+									<td class="col-xs-2" data-title="Estampado"><a href="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" class="img-thumbnail"><img src="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" alt="Estampado" width="150px" /></a><br /> </td>
 									<td data-title="Modelo">{{ Stamp::getStampName($product->stamp_id).'<br />'.Modelo::getName($product->model_id) }}</td>
 									<td data-title="Cantidad">{{ $product->amounts }}</td>
 									<td class="visible-lg" data-title="Valor Unitario">Bs. {{  number_format(Modelo::getPrice($product->model_id), 2, ',', '.') }}</td>

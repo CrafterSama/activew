@@ -64,6 +64,7 @@
 							<div class="alert alert-info">Seleccione la Ciudad donde desea que sea enviado el producto</div>
 							{{ Form::select('municipio', $ciudades, $user->municipio, array('class'=>'form-control','id'=>'municipio')) }}
 						</div>
+
 						<div class="form-group col-md-4">
 							{{ Form::label('user_mobile', 'Numero Telefonico o Movil') }}
 							<div class="alert alert-info">Ingrese su Numero de telefono o movil para efectos de comunicación</div>
@@ -75,14 +76,7 @@
 							{{ Form::label('role_id', 'Tipo de Usuario') }}
 							{{ Form::select('role_id', $options, $user->role_id, array('class'=>'form-control')) }}      
 						</div>
-						<div class="form-group col-md-4">
-							{{ Form::label('password', 'Contraseña') }}
-							{{ Form::password('password', array('class' => 'form-control')) }}
-						</div>
-						<div class="form-group col-md-4">
-							{{ Form::label('password_confirmation', 'Confirmar contraseña') }}
-							{{ Form::password('password_confirmation', array('class' => 'form-control')) }}
-						</div>
+
 					</div>
 					{{ Form::button($action . ' usuario', array('type' => 'submit', 'class' => 'btn btn-primary pull-right')) }}    
 			  
@@ -90,5 +84,37 @@
 			</section>
 		</div>
 	</section>
+    <script type="text/javascript">
+    /* GEO */
+    $(document).on("ready", function(){
+
+        var $estados = $("#estados");
+        var $municipios = $("#municipios");
+
+        $.post('/geo/estados', function(data, textStatus, xhr) {                
+            $.each(data, function(index, val) {
+                var option = '<option value="' + val.id +'">' + val.estado +'</option>';
+                $estados.append(option);
+            }); 
+        },'json');
+
+        $estados.on("change", function(){
+            var id = $(this).val();
+            resetMunicipios();
+            $.post('/geo/estado/' + id, function(data, textStatus, xhr) {                
+                $.each(data, function(index, val) {
+                    var option = '<option value="' + val.id +'">' + val.ciudad +'</option>';
+                    $municipios.append(option);
+                }); 
+            },'json');
+        });
+
+        function resetMunicipios(){
+            $municipios.empty();
+            var option = '<option> -- Seleccione --</option>';
+            $municipios.append(option);
+        }
+    });
+</script>
 
 @stop

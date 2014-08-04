@@ -45,7 +45,19 @@ class UsersController extends BaseController {
 		foreach ($roles as $role) {
 			$options[$role->id] = $role->role_name;
 		}
-		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options]);
+		$states = Estado::orderBy('estado','asc')->get();
+        //$states = State::dropdown(1);
+        $municipios = Municipio::orderBy('municipio','asc')->get();
+        //$municipios = Municipio::dropdown(1);
+		$estados = array();
+		$ciudades = array();
+		foreach ($states as $state) {
+			$estados[$state->id] = $state->estado;
+		}
+		foreach ($municipios as $municipio) {
+			$ciudades[$municipio->id] = $municipio->municipio;
+		}
+		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options, 'states' => $states, 'estados' => $estados, 'municipios' => $municipios, 'ciudades' => $ciudades]);
 	}
 
 
@@ -123,17 +135,17 @@ class UsersController extends BaseController {
 		foreach ($roles as $role) {
 			$options[$role->id] = $role->role_name;
 		}
-		$states = State::orderBy('nombre','asc')->get();
+		$states = Estado::orderBy('estado','asc')->get();
         //$states = State::dropdown(1);
-        $municipios = Municipio::orderBy('nombre','asc')->get();
+        $municipios = Municipio::orderBy('municipio','asc')->get();
         //$municipios = Municipio::dropdown(1);
 		$estados = array();
 		$ciudades = array();
 		foreach ($states as $state) {
-			$estados[$state->id] = $state->nombre;
+			$estados[$state->id] = $state->estado;
 		}
 		foreach ($municipios as $municipio) {
-			$ciudades[$municipio->id] = $municipio->nombre;
+			$ciudades[$municipio->id] = $municipio->municipio;
 		}
 		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options, 'states' => $states, 'estados' => $estados, 'municipios' => $municipios, 'ciudades' => $ciudades]);
 	}
@@ -153,39 +165,29 @@ class UsersController extends BaseController {
 		$user->username = Input::get('username');
 		$user->email = Input::get('email');
 		$user->role_id = Input::get('role_id');
-		if(is_null(Input::get('password')))
-		{
-			$password = $user->password;
-
-		}
-		else
-		{
-			$password = Hash::make(Input::get('password'));
-		}
-		$user->password = $password;
 		$user->user_address = Input::get('user_address');
 		$user->estado = Input::get('estado');
 		$user->municipio = Input::get('municipio');
 		$user->user_mobile = Input::get('user_mobile');
 		
-		$validator = User::validate(array(
+		/*$validator = User::validate(array(
 			'full_name' => Input::get('full_name'),
 			'username' => Input::get('username'),
 			'email' => Input::get('email'),
-			'password' => $password,
 			'user_address' => Input::get('user_address'),
 			'user_mobile' => Input::get('user_mobile'),				
 			'role_id' => Input::get('role_id'), 
+			'estado' => Input::get('estado'),
+			'municipio' => Input::get('municipio'),
 		), $user->id);
 		
 		if($validator->fails()){
 			$errors = $validator->messages()->all();
-			$user->password = null;
 			return Redirect::back()->withErrors($validator)->withInput();
-		}else{
+		}else{*/
 			$user->save();
 			return Redirect::to('admin/usuarios')->with('notice', 'El usuario ha sido modificado correctamente.');
-		}
+		/*}*/
 	}
 
 
@@ -232,6 +234,21 @@ class UsersController extends BaseController {
 		$idRol 	= 	$user->role_id;
 		$rol 	= 	Role::find($idRol);
 		return View::make('users.profile')->with('user', $user)->with('rol', $rol);
+	}
+	public function password($id)
+	{
+		if(!$this->autorizado) return Redirect::to('/login');
+		$user = User::find($id);
+		
+		return View::make('users.password')->with('user', $user);
+	}
+	public function changePassword($id)
+	{
+		if(!$this->autorizado) return Redirect::to('/login');
+		$user = User::find($id);
+		$user->password = Hash::make(Input::get('password'));
+		$user->save();
+		return Redirect::to('admin/usuarios')->with('notice', 'La Contraseña ha sido modificada correctamente.');
 	}
 	public function showRegister()
     {

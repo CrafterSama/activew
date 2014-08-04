@@ -40,13 +40,13 @@ class Modelo extends Eloquent {
 	public static function getName($id)
 	{
 		$modelo = Modelo::find($id);
-		if($modelo)
+		if(is_null($modelo))
 		{
-			return $modelo->model_name;
+			return '&nbsp;&nbsp;"No hay Modelo Asociado(Borre el Producto)" ';
 		}
 		else
 		{
-			return '&nbsp;&nbsp;"No hay Modelo Asociado(Borre el Producto)" ';
+			return $modelo->model_name;
 		}
 	}
 	public static function getNameByStamp($id)

@@ -9,5 +9,10 @@ class Parroquia extends Eloquent {
     {
         return $this->belongsTo('Municipio', 'municipio_id', 'id');
     }
+        public static function getName($id)
+    {
+        $parroquia = Parroquia::find($id);
+        return $parroquia->parroquia;
+    }
 
 }

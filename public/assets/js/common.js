@@ -24,27 +24,27 @@ $(document).ready(function() {
         $(sel2).toggleClass('out');
     });
 });
-$('input.option').click(function(){
+$('input[type="radio"]').click(function(){
     if ($('#no').is(':checked'))
     {
-        $('div.collapse').collapse('show');
+        $('div.collapse').show('slow');
     }
-    else
+    if ($('#si').is(':checked'))
     {
-        $('div.collapse').collapse('hide');
+        $('div.collapse').hide('slow');
     }
 });
-$(function(){
+/*$(function(){
     function MaysPrimera(string){ 
         return string.charAt(0).toUpperCase() + string.slice(1); 
     }
     $("#estado").on('change',function(){
         var id = $(this).val();
-        /*alert(id);*/
+        /*alert(id);
         $.ajax('/api/dropdown/'+id,{
             type : 'GET',
             success : function(data){
-                /*alert(data.id);*/
+                /*alert(data.id);
                 $('#municipio').empty();
                 $.each(data, function(key, element) {
                     $('#municipio').append('<option value="' + key + '">' + MaysPrimera(element.toLowerCase()) + '</option>');
@@ -52,4 +52,4 @@ $(function(){
             }
         });
     });
-});
+});*/

@@ -109,6 +109,7 @@
         <br />
         <br />
         <strong>NOTA:</strong> SI EN UN LAPSO DE 24 HORAS NO HAS REALIZADO NINGUN PAGO EL PEDIDO SERA CANCELADO Y LA MERCANCIA VOLVERA A STOCK DE TIENDA
+        <strong>-</strong> ESTA ES UNA CUENTA NO MONITOREADA. NO RESPONDA O REENVIA CORREOS A ESTA CUENTA.
         </div>
 
 			<a href="http://cariocaactivewear.com/order/{{ $factura['id'] }}" style="font-size: 28px; background-color: #C74751; color: #ecf0f1; text-decoration: none; padding: .2em; border-bottom: 3px solid #8D2C33; margin: 0 auto; border-radius: 5px"> Completar Pago </a>

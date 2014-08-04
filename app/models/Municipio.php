@@ -14,5 +14,17 @@ class Municipio extends Eloquent {
     {
         return $this->hasMany('Parroquia', 'municipio_id', 'id');
     }
+    public static function getName($id)
+    {
+        $municipio = Municipio::find($id);
+        if(is_null($municipio))
+        {
+            return 'no hay Municipio Asociado';
+        }
+        else
+        {
+            return $municipio->municipio;
+        }
+    }
 
 }

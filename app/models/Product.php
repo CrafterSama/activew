@@ -13,6 +13,8 @@ class Product extends Eloquent {
 
 	protected $table = 'products';
 
+  protected $softDelete = true;
+
 	public function stamps()
 	{
  		return $this->hasMany('Stamp');

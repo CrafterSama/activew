@@ -12,8 +12,7 @@
 	{{ HTML::style('/../assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
 	{{ HTML::style('/../assets/css/table-responsive.css', array('media'=>'screen')) }}
 	{{ HTML::style('/../assets/css/style.css', array('media'=>'screen')) }}
-
-	{{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
+	
 	<link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 	<!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -87,12 +86,130 @@
 				<p>Creado por <a href="http://craftersama.me">CrafterSama Studio</a></p>
 				<p><a href="#">Back to top</a></p>
 			</footer>
+		{{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
 		<!-- Bootstrap core JavaScript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		{{ HTML::script('assets/js/bootstrap.min.js') }}
-		{{ HTML::script('assets/js/common.js') }}
+		{{ HTML::script('/../assets/js/bootstrap.min.js') }}
+		{{ HTML::script('/../assets/js/common.js') }}
+		{{ HTML::script('/../assets/js/jquery.validate.js') }}
+	    <script type="text/javascript">
+		    /* GEO */
+		    $(document).on("ready", function(){
 
-		@yield('javascript')
+		        var $estados = $("#estados");
+		        var $municipios = $("#municipios");
+
+		        $.post('/geo/estados', function(data, textStatus, xhr) {                
+		            $.each(data, function(index, val) {
+		                var option = '<option value="' + val.id +'">' + val.estado +'</option>';
+		                $estados.append(option);
+		            }); 
+		        },'json');
+
+		        $estados.on("change", function(){
+		            var id = $(this).val();
+		            resetMunicipios();
+		            $.post('/geo/estado/' + id, function(data, textStatus, xhr) {                
+		                $.each(data, function(index, val) {
+		                    var option = '<option value="' + val.id +'">' + val.ciudad +'</option>';
+		                    $municipios.append(option);
+		                }); 
+		            },'json');
+		        });
+
+		        function resetMunicipios(){
+		            $municipios.empty();
+		            var option = '<option> -- Seleccione --</option>';
+		            $municipios.append(option);
+		        }
+		    });
+		    $(function(){
+	    	    $('#order').validate({
+	        	    rules :{
+	        	    	recibo : {
+	        	    		required : true,
+	        	    		number : true
+
+	        	    	},
+	        	    	monto : {
+	        	    		required : true,
+	        	    		number : true
+
+	        	    	},
+	        	    	fecha : {
+	        	    		required : true,
+	        	    		date : true
+
+	        	    	},
+	        	    	adjunto : {
+	        	    		required : true
+	        	    	},
+	        	    	options : {
+	        	    		required : true
+	        	    	},
+	        	    	/*if ($('#no').is(':checked')) {*/
+		        	    	user_address : {
+		        	    		required : true,
+		        	    		maxlenght : 140
+		        	    	},
+		        	    	estado : {
+		        	    		required : true
+		        	    	},
+		        	    	municipio : {
+		        	    		required : true
+		        	    	},
+		        	    /*}*/
+		            },
+		            messages : {
+		                recibo : {
+		                    required : "Debe ingresar el numero del recibo",
+		                    number    : "Solo puede ingresar caracteres numericos"
+		                },
+		                monto : {
+		                    required : "Debe Ingresar el Monto de la Transferencia o Deposito",
+		                    number    : "Solo puede ingresar caracteres numericos"
+		                },
+		                fecha : {
+		                    required : "Debe Ingresar la fecha en la que realizo la Transferencia o Deposito",
+		                    date : "El Formato debe Ser de Fecha"
+		                },
+		                adjunto : {
+		                    required : "Debe subir una imagen"
+		                },
+		                options : {
+		                    required : "Debe Seleccionar Si o No"
+		                },
+		                /*if ($('#no').is(':checked')) {*/
+			                user_address : {
+			                    required : "Este Campo es Obligatorio, debe ingresar su nueva dirección"
+			                },
+			                estados : {
+			                    required : "Seleccione el estado"
+			                },
+			                municipios : {
+			                    required : "Seleccione el municipio"
+			                },
+		                /*}*/
+		            }
+		        });    
+		    });
+	        $(document).on('ready', function(){
+	            $(".add-to-cart").on("click", function(event){
+	                event.preventDefault();
+	                var id = $(this).data('id');
+	                var qty = $("select[name=qty]").val() || 1;
+	                $.post('/cart/' + id + '/add/' + qty, function(data, textStatus, xhr) {
+	                    $.post('/total', function(data, textStatus, xhr) {
+	                        $(".cart-text").html(data);
+	                    });
+	                });
+	                $('#carrito').removeClass('hide');
+	                $(this).removeClass('btn-success');
+	                $(this).addClass('btn-info');
+	                $(this).html('<i class="fa fa-check fa-lg"></i> Agregado');
+	            })
+	        });
+		</script>
 	</body>
 </html>

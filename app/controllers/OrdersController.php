@@ -9,7 +9,7 @@ class OrdersController extends \BaseController {
 	 */
 	public function index()
 	{
-		$items = Item::paginate(10);
+		$items = Item::orderBy('id','=','desc')->paginate(10);
 		return View::make('admin.orders')->with('items', $items);
 	}
 	public function approveOrder($id)
@@ -22,7 +22,7 @@ class OrdersController extends \BaseController {
 	}
 	public function approved()
 	{
-		$items = Item::onlyTrashed()->paginate(10);
+		$items = Item::onlyTrashed()->orderBy('created_at','desc')->paginate(10);
 		return View::make('admin.approved')->with('items', $items);
 	}
 	public function cancelOrder($id)
