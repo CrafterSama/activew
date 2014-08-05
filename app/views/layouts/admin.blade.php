@@ -103,6 +103,18 @@
                         <span>Modelos</span>
                     </a>
                 </li>
+                <li class="sub-menu">
+                    <a data-toggle="collapse" data-target="#toggleReports" class="collapse">
+                        <i class="fa fa-list-alt fa-lg"></i>
+                        <span>Reportes</span>
+                    </a>
+                    <div class="collapse" id="toggleReports">
+                        <ul class="sub">
+                            <li><a href="/admin/reportes/porfecha">Por Fechas</a></li>
+                            <li><a href="/admin/pedidos/porcentaje">Por Porcentaje</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="/admin/usuarios">
                         <i class="fa fa-users"></i>
@@ -167,6 +179,76 @@
             $municipios.append(option);
         }
     });
+            $(function(){
+                $('#form').validate({
+                    rules :{
+                        recibo : {
+                            required : true,
+                            number : true
+
+                        },
+                        monto : {
+                            required : true,
+                            number : true
+
+                        },
+                        fecha : {
+                            required : true,
+                            date : true
+
+                        },
+                        adjunto : {
+                            required : true
+                        },
+                        options : {
+                            required : true
+                        },
+                        /*if ($('#no').is(':checked')) {*/
+                            user_address : {
+                                required : true,
+                                maxlenght : 140
+                            },
+                            estado : {
+                                required : true
+                            },
+                            municipio : {
+                                required : true
+                            },
+                        /*}*/
+                    },
+                    messages : {
+                        recibo : {
+                            required : "Debe ingresar el numero del recibo",
+                            number    : "Solo puede ingresar caracteres numericos"
+                        },
+                        monto : {
+                            required : "Debe Ingresar el Monto de la Transferencia o Deposito",
+                            number    : "Solo puede ingresar caracteres numericos"
+                        },
+                        fecha : {
+                            required : "Debe Ingresar la fecha en la que realizo la Transferencia o Deposito",
+                            date : "El Formato debe Ser de Fecha"
+                        },
+                        adjunto : {
+                            required : "Debe subir una imagen"
+                        },
+                        options : {
+                            required : "Debe Seleccionar Si o No"
+                        },
+                        /*if ($('#no').is(':checked')) {*/
+                            user_address : {
+                                required : "Este Campo es Obligatorio, debe ingresar su nueva dirección"
+                            },
+                            estados : {
+                                required : "Seleccione el estado"
+                            },
+                            municipios : {
+                                required : "Seleccione el municipio"
+                            },
+                        /*}*/
+                    }
+                });    
+            });
     </script>
 </body>
 </html>

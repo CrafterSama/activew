@@ -9,6 +9,24 @@ class Pago extends Eloquent {
     {
         return $this->hasOne('Factura');
     }
+    public static function getBank($id)
+    {
+        $pay = DB::table('pagos')
+                    ->where('factura_id','=',$id)
+                    ->pluck('banco');
+        if(is_null($pay)){
+            return 'No hay banco asociado';
+        }else{
+            return $pay;
+        }
+    }
+    public static function getBill($id)
+    {
+        $pay = DB::table('pagos')
+                    ->where('factura_id','=',$id)
+                    ->pluck('recibo');
+        return $pay;
+    }
     public static function getAmount($id)
     {
         $pay = DB::table('pagos')

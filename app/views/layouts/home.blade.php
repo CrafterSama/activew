@@ -127,10 +127,12 @@
 		    $(function(){
 	    	    $('#order').validate({
 	        	    rules :{
+	        	    	banco : {
+	        	    		required : true,
+	        	    	},
 	        	    	recibo : {
 	        	    		required : true,
 	        	    		number : true
-
 	        	    	},
 	        	    	monto : {
 	        	    		required : true,
@@ -162,6 +164,9 @@
 		        	    /*}*/
 		            },
 		            messages : {
+		                banco : {
+		                    required : "Debe ingresar el nombre del banco en el cual realizo el deposito o transferencia",
+		                },
 		                recibo : {
 		                    required : "Debe ingresar el numero del recibo",
 		                    number    : "Solo puede ingresar caracteres numericos"

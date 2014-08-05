@@ -85,7 +85,9 @@ Route::group(array('before' => 'auth'), function()
 		
 		Route::get('pedidos', 'OrdersController@index');
 		Route::get('pedidos/aprobados', 'OrdersController@approved');
+		Route::get('pedidos/enviados', 'OrdersController@shipped');
 		Route::get('pedidos/aprobar/{id}', 'OrdersController@approveOrder');
+		Route::get('pedidos/enviado/{id}', 'OrdersController@shippedOrder');
 		Route::get('pedidos/cancelar/{id}', 'OrdersController@cancelOrder');
 
 		

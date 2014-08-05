@@ -52,10 +52,10 @@
 								<td data-title="Cantidad">{{ $item->cantidad }}</td>
 								<td data-title="Fecha de la Orden">{{ Helper::getDate(strtotime($item->created_at,0)) }}</td>
 								<td data-title="Acciones" class="text-center">
-									Pedido Aprobado
+									Pedido Entregado o Enviado
 									<br />
 									<a href="/order/{{ $item->factura_id }}" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver el Pedido"><i class="fa fa-eye fa-lg"></i>&nbsp;&nbsp;Ver el Pedido</a>
-									<a href="/admin/pedidos/enviado/{{ $item->factura_id }}" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Haga click para quitar el pedido de la Lista y pasarlo a Enviados"><i class="fa fa-aprove fa-lg"></i>&nbsp;&nbsp;Pedido Enviado</a>
+									<a href="/enviado/{{ $item->factura_id }}" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver el Pedido"><i class="fa fa-aprove fa-lg"></i>&nbsp;&nbsp;Pedido Enviado</a>
 								</td>
 							</tr>
 						@endforeach

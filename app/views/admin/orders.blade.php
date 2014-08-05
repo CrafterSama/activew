@@ -31,6 +31,9 @@
 						<tr>
 							<th class="col-xs-1 text-center">Nº de Factura</th>
 							<th class="text-center">Nombre Completo</th>
+							<th class="text-center">Banco</th>
+							<th class="text-center">No. de Recibo</th>
+							<th class="text-center">Monto</th>
 							<th class="col-xs-2 text-center">Imagen Adjunta</th>
 							<th class="col-xs-2 text-center">Fecha de la Orden</th>
 							<th class="col-xs-3 text-center">Acciones</th>
@@ -48,6 +51,9 @@
 								@endif								
 								
 								</td>
+								<td data-title="Banco">{{ Pago::getBank($item->factura_id) }}</td>
+								<td data-title="No. de Recibo">{{ Pago::getBill($item->factura_id) }}</td>
+								<td data-title="Monto">{{ number_format(Item::totalFactura($item->factura_id), 2, ',', '.') }}</td>
 								<td data-title="Adjunto">
 									@if (Pago::getAdj($item->factura_id) == 'Sin Pagar')
 										Mercancia Sin Pagar

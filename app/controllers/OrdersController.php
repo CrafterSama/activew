@@ -10,6 +10,7 @@ class OrdersController extends \BaseController {
 	public function index()
 	{
 		$items = Item::orderBy('id','=','desc')->paginate(10);
+
 		return View::make('admin.orders')->with('items', $items);
 	}
 	public function approveOrder($id)
@@ -22,8 +23,21 @@ class OrdersController extends \BaseController {
 	}
 	public function approved()
 	{
-		$items = Item::onlyTrashed()->orderBy('created_at','desc')->paginate(10);
+		$items = Item::onlyTrashed()->where('shipped','=','no')->orderBy('created_at','desc')->paginate(10);
 		return View::make('admin.approved')->with('items', $items);
+	}
+	public function shipped()
+	{
+		$items = Item::onlyTrashed()->where('shipped','=','yes')->orderBy('created_at','desc')->paginate(10);
+		return View::make('admin.approved')->with('items', $items);
+	}
+	public function shippedOrder($id)
+	{
+		DB::table('items')
+            ->where('factura_id', $id)
+            ->update(array('shipped' => 'yes'));
+
+        return Redirect::back()->with('notice','El Pedido ha sido entregado satisfactoriamente'); 
 	}
 	public function cancelOrder($id)
 	{

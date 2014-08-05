@@ -100,10 +100,17 @@
 									<form action="/pay" id="order" method="post" enctype="multipart/form-data">
 										<div class="col-lg-6">
 											<div class="form-group">
+												{{ Form::label('banco','Nombre del Banco Desde donde Realizo el Deposito o Transferencia') }} 
+												{{ $errors->first('banco', '<div class="alert alert-danger">:message</div>') }}
+												<input name="banco" type="text" value="{{ Input::old('banco') }}" placeholder="Nombre del Banco" class="form-control" rquired />
+											</div>
+											<div class="form-group">
 												{{ Form::label('recibo','No. de transferencia o deposito') }} 
 												{{ $errors->first('recibo', '<div class="alert alert-danger">:message</div>') }}
 												<input name="recibo" type="number" value="{{ Input::old('recibo') }}" placeholder="No. de Recibo" class="form-control" rquired />
 											</div>
+										</div>
+										<div class="col-lg-6">
 											<div class="form-group">
 												{{ Form::label('monto','Monto de la transferencia o deposito') }}
 												{{ $errors->first('monto', '<div class="alert alert-danger">:message</div>') }}
@@ -112,13 +119,13 @@
 													<input name="monto" value="{{ Input::old('monto') }}" placeholder="Monto en Bs." type="number" class="form-control" required />
 												</div>
 											</div>
-										</div>
-										<div class="col-lg-6">
 											<div class="form-group">
 												{{ Form::label('fecha','Seleccione la Fecha de la transaccion') }}
 												{{ $errors->first('fecha', '<div class="alert alert-danger">:message</div>') }}
 												<input name="fecha" value="{{ Input::old('fecha') }}" type="date" class="form-control" required />
 											</div>
+										</div>
+										<div class="col-lg-6">
 											<div class="form-group">
 												{{ Form::label('adjunto','Seleccione el Adjunto') }}
 												{{ $errors->first('adjunto', '<div class="alert alert-danger">:message</div>') }}

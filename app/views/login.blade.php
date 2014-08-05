@@ -23,9 +23,9 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
+  <a href="{{ URL::previous() }}" class="back-login btn btn-primary btn-xs white"> <i class="fa fa-angle-double-left fa-lg"></i> Volver a la Web</a>
   <body class="login-body">
-      <a href="/" class="back-login btn btn-primary btn-xs white"> <i class="fa fa-angle-double-left fa-lg"></i> Volver a la Web</a>
-      {{ Form::open(array('url' => '/login','class' => 'form-signin', 'id' => 'login')) }}
+      {{ Form::open(array('url' => '/login','class' => 'form-signin', 'id' => 'singin')) }}
         <h2 class="form-signin-heading">Conectarse</h2>
         <div class="login-wrap">
             {{-- Preguntamos si hay algún mensaje de error y si hay lo mostramos  --}}
@@ -97,7 +97,7 @@
 {{ HTML::script('/../assets/js/scripts.js') }}
 <script>
           $(function(){
-            $('#login').validate({
+            $('#signin').validate({
                 rules :{
                   username : {
                     required : true,
