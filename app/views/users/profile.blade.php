@@ -48,7 +48,7 @@
 					<td class="visible-lg"><strong>Email</strong></td><td data-title="Correo Electronico"> {{ $user->email }} </td>
 				</tr>
 				<tr>
-					<td class="visible-lg"><strong> Direción</strong></td><td data-title="Dirección"> {{ $user->user_address }}, {{ ucwords(strtolower(Municipio::getName($user->municipio))) }}, Edo. {{ ucwords(strtolower(Estado::getName($user->estado))) }} </td>
+					<td class="visible-lg"><strong> Direción</strong></td><td data-title="Dirección"> {{ $user->user_address }}, {{ ucwords(strtolower(Ciudad::getName($user->municipio))) }}, Edo. {{ ucwords(strtolower(Estado::getName($user->estado))) }} </td>
 				</tr>
 				<tr>
 					<td class="visible-lg"><strong> Teléfono</strong></td><td data-title="Teléfono"> {{ $user->user_mobile }} </td>

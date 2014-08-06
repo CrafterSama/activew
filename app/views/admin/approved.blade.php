@@ -44,7 +44,7 @@
 								<td data-title="Usuario">
 									<a href="/admin/usuarios/{{ $item->factura->user_id }}/perfil" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Datos del Usuario">{{ User::getName($item->factura->user_id) }}</a>
 									<br />
-									<strong>Direccion: </strong>{{ User::getAddress($item->factura->user_id) }}
+									<strong>Direccion: </strong>{{ User::getAddress($item->factura->user_id).', '.Ciudad::getName(User::getCiudad($item->factura->user_id)).', Edo. '.Estado::getName(User::getEstado($item->factura->user_id)) }}
 									<br />
 									<strong>Telefono: </strong>{{ User::getPhone($item->factura->user_id) }}
 								</td>

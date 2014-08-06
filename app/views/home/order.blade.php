@@ -91,6 +91,9 @@
 									</tr>							  
 								</tbody>
 							</table>
+							<?php $user = Auth::user(); ?>
+							@if ($user->id == $order->user_id)
+								{{-- true expr --}}
 							<!-- Start cart action -->
 							<div class="row">
 								<div class="col-lg-12 bg2">
@@ -134,7 +137,7 @@
 										</div>
 										<div class="col-lg-12">
 										<?php $user = Auth::user(); ?>
-										@if (strtolower(Municipio::getName($user->municipio)) == 'maracaibo')
+										@if (strtolower(Ciudad::getName($user->municipio)) == 'maracaibo')
 											<div class="alert alert-success" style="font-size: 19px;">
 												<p class="text-justify">
 													De Acuerdo a nuestra informacion, tu lugar de residencia es en Maracaibo, por lo tanto tu pedido debe ser retirado directamente en el local de la tienda <a href="/contacto" class="btn-link"><span data-toggle="tooltip" data-placement="top" title="Urbanización Juana de Avila calle 66A #15A-25. Maracaibo, Edo. Zulia, Venezuela">Pioggia Di Mare</span></a>.
@@ -145,11 +148,11 @@
 											<div class="alert alert-success" style="font-size: 19px;">
 												<p class="text-justify">
 													<strong>Direccion de Entrega del Pedido:</strong><br />
-													{{ User::getAddress(Auth::user()->id).' '.ucwords(strtolower(Municipio::getName($user->municipio))).', Edo.'.ucwords(strtolower(Estado::getName($user->estado))); }}
+													{{ User::getAddress(Auth::user()->id).' '.ucwords(strtolower(Ciudad::getName($user->municipio))).', Edo.'.ucwords(strtolower(Estado::getName($user->estado))); }}
 												</p>
 											</div>
 											{{ Form::label('options', 'Seleccione Si o No') }}
-											{{ $errors->first('option', '<div class="alert alert-danger">:message</div>') }}
+											{{ $errors->first('options', '<div class="alert alert-danger">:message</div>') }}
 											<br />
 											{{ Form::label('options', 'Si') }}
 											<input type="radio" name="options" id="si" class="option" value="si" />
@@ -208,6 +211,9 @@
 								</div>		
 							</div>
 							<!-- End cart action -->
+								@else
+									{{-- false expr --}}
+								@endif
 							@else
 							<br/>
 							<h2 align="center">No hay productos en esta orden :(</h2>

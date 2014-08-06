@@ -57,12 +57,12 @@
 						<div class="form-group col-md-4">
 							{{ Form::label('estado', 'Estado') }}
 							<div class="alert alert-info">Seleccione el Estado donde desea que sea enviado el producto</div>
-							{{ Form::select('estado', $estados, $user->estado, array('class'=>'form-control', 'id'=>'estado')) }}
+							{{ Form::select('estado', $estados, $user->estado, array('class'=>'form-control', 'id'=>'estados')) }}
 						</div>
 						<div class="form-group col-md-4">
 							{{ Form::label('municipio', 'Ciudad') }}
 							<div class="alert alert-info">Seleccione la Ciudad donde desea que sea enviado el producto</div>
-							{{ Form::select('municipio', $ciudades, $user->municipio, array('class'=>'form-control','id'=>'municipio')) }}
+							{{ Form::select('municipio', $ciudades, $user->municipio, array('class'=>'form-control','id'=>'municipios')) }}
 						</div>
 
 						<div class="form-group col-md-4">

@@ -12,7 +12,11 @@ class Ciudad extends Eloquent {
         public static function getName($id)
     {
         $ciudad = Ciudad::find($id);
-        return $ciudad->ciudad;
+        if($ciudad){
+            return $ciudad->ciudad;
+        }else{
+            return 'No hay Ciudad Asociada';
+        }
     }
 
 }

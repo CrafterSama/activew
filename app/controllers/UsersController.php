@@ -137,17 +137,17 @@ class UsersController extends BaseController {
 		}
 		$states = Estado::orderBy('estado','asc')->get();
         //$states = State::dropdown(1);
-        $municipios = Municipio::orderBy('municipio','asc')->get();
+        $cities = Ciudad::orderBy('ciudad','asc')->get();
         //$municipios = Municipio::dropdown(1);
 		$estados = array();
 		$ciudades = array();
 		foreach ($states as $state) {
 			$estados[$state->id] = $state->estado;
 		}
-		foreach ($municipios as $municipio) {
-			$ciudades[$municipio->id] = $municipio->municipio;
+		foreach ($cities as $city) {
+			$ciudades[$city->id] = $city->ciudad;
 		}
-		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options, 'states' => $states, 'estados' => $estados, 'municipios' => $municipios, 'ciudades' => $ciudades]);
+		return View::make('users.form')->with(['user' => $user, 'roles' => $roles, 'options' => $options, 'states' => $states, 'estados' => $estados, 'cities' => $cities, 'ciudades' => $ciudades]);
 	}
 
 
@@ -316,9 +316,9 @@ class UsersController extends BaseController {
     }
     public function cities($id)
     {
-		$municipios = DB::table('municipio')->where('estado_id','=',$id)->orderBy('nombre','asc')->lists('nombre','id');
+		$ciudades = DB::table('ciudades')->where('estado_id','=',$id)->orderBy('nombre','asc')->lists('nombre','id');
 		
-		return Response::json($municipios);
+		return Response::json($ciudades);
     }
 
 }

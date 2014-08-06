@@ -151,7 +151,7 @@ class CartController extends BaseController {
 
         $pago->save();
 
-        if(!is_null(Input::get('user_address')))
+        if(Input::get('options') == 'no')
         {
             $user = User::find(Auth::user()->id);
             $user->user_address = Input::get('user_address');

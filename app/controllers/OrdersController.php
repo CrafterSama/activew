@@ -15,17 +15,17 @@ class OrdersController extends \BaseController {
 	}
 	public function approveOrder($id)
 	{
-		$approved = Item::where('factura_id','=',$id);
+		//$approved = Item::where('factura_id','=',$id);
 
-		$approved->delete();
+		//$approved->delete();
 
         $factura = Factura::withTrashed()->find($id);
 
         $data['user'] = User::find($factura->user_id);
 
-        $data['factura'] = $factura->withTrashed->toArray();
-        $data['items'] = $factura->withTrashed->items->toArray();
-        $data['pago'] = $factura->withTrashed->pago->toArray();
+        $data['factura'] = $factura->toArray();
+        $data['items'] = $factura->items->toArray();
+        $data['pago'] = $factura->pago->toArray();
         $data['discount'] = Configuration::getDiscount();
 
         //print_r($data);
@@ -33,7 +33,7 @@ class OrdersController extends \BaseController {
         Mail::send('emails.orden', $data , function($m) use ($data)
         {
             $m->from('administracion@cariocaactivewear.com', 'ActiveWear');
-            $m->to('jolivero.03@gmail.com')->subject('Confirmación de Pedido.');
+            $m->to('ventasactivewear@gmail.com')->cc('jolivero.03@gmail.com')->subject('Confirmación de Pedido.');
         });
 
 		return Redirect::back()->with('notice','El Pedido ha sido aprobado satisfactoriamente');
