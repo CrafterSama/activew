@@ -118,6 +118,7 @@ class CartController extends BaseController {
         $inputs = Input::all();
 
         $rules = array(
+            'banco' => 'required',
             'recibo' => 'required',
             'monto'    => 'required',
             'fecha' => 'required',
@@ -131,6 +132,7 @@ class CartController extends BaseController {
         }
 
         $pago = new Pago();
+        $pago->banco = $inputs['banco'];
         $pago->recibo = $inputs['recibo'];
         $pago->monto = $inputs['monto'];
         $pago->fecha = $inputs['fecha'];

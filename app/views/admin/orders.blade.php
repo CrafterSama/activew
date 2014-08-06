@@ -33,6 +33,7 @@
 							<th class="text-center">Nombre Completo</th>
 							<th class="text-center">Banco</th>
 							<th class="text-center">No. de Recibo</th>
+							<th class="text-center">Con Descuento</th>
 							<th class="text-center">Monto</th>
 							<th class="col-xs-2 text-center">Imagen Adjunta</th>
 							<th class="col-xs-2 text-center">Fecha de la Orden</th>
@@ -53,7 +54,20 @@
 								</td>
 								<td data-title="Banco">{{ Pago::getBank($item->factura_id) }}</td>
 								<td data-title="No. de Recibo">{{ Pago::getBill($item->factura_id) }}</td>
-								<td data-title="Monto">{{ number_format(Item::totalFactura($item->factura_id), 2, ',', '.') }}</td>
+								<td data-title="Con Descuento">
+									@if (Item::totalItems($item->factura_id) >= 12)
+										Si
+									@else
+										No
+									@endif
+								</td>
+								<td data-title="Monto">
+									@if (Item::totalItems($item->factura_id) >= 12)
+										{{ number_format(Item::totalFactura($item->factura_id)-(Item::totalFactura($item->factura_id)*Configuration::getDiscount()), 2, ',', '.') }}
+									@else
+										{{ number_format(Item::totalFactura($item->factura_id), 2, ',', '.') }}
+									@endif
+								</td>
 								<td data-title="Adjunto">
 									@if (Pago::getAdj($item->factura_id) == 'Sin Pagar')
 										Mercancia Sin Pagar

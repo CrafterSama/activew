@@ -20,19 +20,32 @@ class Item extends Eloquent {
         $items = Item::where('factura_id','=',$id)->get();
         return count($items);
     }
+    public static function totalItems($id)
+    {
+        $totales = DB::table('items')->where('factura_id','=',$id)->get();
+        if ($totales) {
+            $tItems = 0;
+            foreach ($totales as $total) {
+                $tItems += $total->cantidad;
+            }
+            return $tItems;
+        } else {
+            return 'No Hay Monto Asociado';
+        }
+    }
     public static function totalFactura($id)
     {
-        $totales = DB::table('items')->where('factura_id','=',$id);
-        print_r($totales);
-        
-        /*if (is_null($totales)) {
-            return 'No Hay Monto Asociado';
-        } else {
+        /*print_r($id);
+        /*return '123456';*/
+        $totales = DB::table('items')->where('factura_id','=',$id)->get();
+        if ($totales) {
             $tFactura = 0;
             foreach ($totales as $total) {
                 $tFactura += $total->cantidad*$total->precio;
             }
             return $tFactura;
-        }*/
+        } else {
+            return 'No Hay Monto Asociado';
+        }
     }
 }
