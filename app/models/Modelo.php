@@ -42,7 +42,7 @@ class Modelo extends Eloquent {
 		$modelo = Modelo::find($id);
 		if(is_null($modelo))
 		{
-			return '&nbsp;&nbsp;"No hay Modelo Asociado(Borre el Producto)" ';
+			return '&nbsp;&nbsp;"No hay Modelo Asociado" ';
 		}
 		else
 		{

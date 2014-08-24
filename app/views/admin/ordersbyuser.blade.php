@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h2>Lista de Pedidos</h2>
+	<h2>Lista de Pedidos de {{ User::getName($id) }}</h2>
 	<div class="alert alert-info">
 		A continuación encontrara una lista de los pedidos pendientes por aprobar y entregar o enviar en el sistema. 
 	</div>
@@ -22,7 +22,7 @@
 	            &nbsp;&nbsp;
 	            <a href="/admin/usuarios" class="btn btn-success pull-right white"><i class="fa fa-users fa-lg"></i>  Usuarios</a> --}}
 	        </span>
-	    	<span class="visible-lg text-right">Pedidos Pendientes</span>
+	    	<span class="visible-lg text-right">Lista de Pedidos</span>
 	    </header>
 	    <div class="panel-body">
 	        <section id="no-more-tables">
@@ -46,7 +46,7 @@
 										{{ Item::countItems($order->id) }}
 									</td>
 									<td data-title="Fecha" class="col-md-3 text-center">
-										@if (!$order->pago)
+										@if ($order->pago)
 											Orden Paga
 										@else
 											Orden Cancelada o Sin Pagar
@@ -57,6 +57,9 @@
 									</td>
 									<td data-title="Ver" class="col-md-3 text-center">
 										<a href="/order/{{ $order->id }}" class="btn btn-primary"><i class="fa fa-eye"></i>&nbsp;&nbsp;Ver</a>
+										@if (Auth::user()->role_id == 1)
+    										<a href="/order/{{ $order->id }}/borrar" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Borrar</a>
+    									@endif
                         			</td>
 								</tr>
 								@endforeach

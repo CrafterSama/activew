@@ -186,18 +186,26 @@ class CartController extends BaseController {
 
     public function get_order($id){
         $order = Factura::withTrashed()->find($id);
-
+        
         $states = Estado::orderBy('estado','asc')->get();
-        $municipios = Municipio::orderBy('municipio','asc')->get();
+        $cities = Ciudad::orderBy('ciudad','asc')->get();
         $estados = array();
         $ciudades = array();
         foreach ($states as $state) {
             $estados[$state->id] = $state->estado;
         }
-        foreach ($municipios as $municipio) {
-            $ciudades[$municipio->id] = $municipio->municipio;
+        foreach ($cities as $city) {
+            $ciudades[$city->id] = $city->ciudad;
         }
-        return View::make('home.order', array('order' => $order, 'states'=>$states,'estados'=>$estados,'municipios'=>$municipios,'ciudades'=>$ciudades));
+        return View::make('home.order', array('order' => $order, 'states'=>$states,'estados'=>$estados,'cities'=>$cities,'ciudades'=>$ciudades));
+    }
+    public function deleteOrder($id)
+    {
+        $order = Factura::withTrashed()->find($id);
+
+        $order->ForceDelete();
+
+        return Redirect::back()->with('notice', 'El Pedido ha sido eliminado correctamente.');
     }
 
 }

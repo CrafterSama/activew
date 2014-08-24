@@ -34,4 +34,15 @@ class Helper extends Eloquent
 		else return "Hace ".self::ConSoSinS(floor($time/(60*60*24*30*12)), ' Año(s)');
 	}
 
+	public static function Modelos($id)
+	{
+		
+	}
+	public static function woutSpace($string)
+	{
+		$change = array(' '=>'-','ñ'=>'n');
+
+		return strtr($string, $change);
+	}
+
 }

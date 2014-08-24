@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h2>Lista de Pedidos</h2>
+	<h2>Lista de Pedidos Entregados</h2>
 	<div class="alert alert-info">
 		A continuación encontrara una lista de los pedidos aprobados y entregados o enviados en el sistema. 
 	</div>
@@ -22,7 +22,7 @@
 	            &nbsp;&nbsp;
 	            <a href="/admin/usuarios" class="btn btn-success pull-right white"><i class="fa fa-users fa-lg"></i>  Usuarios</a> --}}
 	        </span>
-	    	<span class="visible-lg text-right">Pedidos Aprobados</span>
+	    	<span class="visible-lg text-right">Pedidos Entregados</span>
 	    </header>
 	    <div class="panel-body">
 	        <section id="no-more-tables">
@@ -44,7 +44,7 @@
 								<td data-title="Usuario">
 									<a href="/admin/usuarios/{{ $item->factura->user_id }}/perfil" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Datos del Usuario">{{ User::getName($item->factura->user_id) }}</a>
 									<br />
-									<strong>Direccion: </strong>{{ User::getAddress($item->factura->user_id) }}
+									<strong>Direccion: </strong>{{ User::getAddress($item->factura->user_id).', '.Ciudad::getName(User::getCiudad($item->factura->user_id)).', Edo. '.Estado::getName(User::getEstado($item->factura->user_id)) }}
 									<br />
 									<strong>Telefono: </strong>{{ User::getPhone($item->factura->user_id) }}
 								</td>
@@ -55,7 +55,6 @@
 									Pedido Entregado o Enviado
 									<br />
 									<a href="/order/{{ $item->factura_id }}" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver el Pedido"><i class="fa fa-eye fa-lg"></i>&nbsp;&nbsp;Ver el Pedido</a>
-									<a href="/enviado/{{ $item->factura_id }}" class="btn btn-info btn-xs white"  data-toggle="tooltip" data-placement="top" title="Ver el Pedido"><i class="fa fa-aprove fa-lg"></i>&nbsp;&nbsp;Pedido Enviado</a>
 								</td>
 							</tr>
 						@endforeach

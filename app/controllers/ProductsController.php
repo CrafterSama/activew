@@ -25,7 +25,6 @@ class ProductsController extends \BaseController {
 		return View::make('admin.products')->with(['products'=>$products,'stamps'=>$stamps,'modelos'=>$modelos]);
 	}
 
-
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -39,7 +38,6 @@ class ProductsController extends \BaseController {
 		$stamp = new Stamp();
 		return View::make('products.form')->with(['product' => $product,'modelos' => $modelos,'stamp' => $stamp]);
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.

@@ -9,7 +9,7 @@ class Item extends Eloquent {
 
 	public function product()
     {
-        return $this->hasOne('Product', 'id', 'producto_id');
+        return $this->hasOne('Product', 'id', 'producto_id')->withTrashed();
     }
     public function factura()
     {
@@ -17,7 +17,7 @@ class Item extends Eloquent {
     }
     public static function countItems($id)
     {
-        $items = Item::where('factura_id','=',$id)->get();
+        $items = Item::withTrashed()->where('factura_id','=',$id)->get();
         return count($items);
     }
     public static function totalItems($id)

@@ -7,7 +7,7 @@ class Factura extends Eloquent {
 
 	public function items()
     {
-        return $this->hasMany('Item');
+        return $this->hasMany('Item')->withTrashed();
     }
 
     public function pago()

@@ -120,7 +120,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
-		'Gloudemans\Shoppingcart\ShoppingcartServiceProvider'
+		'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
 
 	),
 
@@ -188,7 +188,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Cart'            => 'Gloudemans\Shoppingcart\Facades\Cart',
-		'Uuid' => 'Webpatser\Uuid\Uuid',
+		'Uuid' 			  => 'Webpatser\Uuid\Uuid',
 	),
 
 );

@@ -18,10 +18,29 @@
 
 /** Home Links **/
 Route::pattern('id', '[0-9]+');
+Route::pattern('model', '[a-zA-Z-]+');
 
 Route::get('/', 'HomeController@index');
 
+
 Route::get('productos', 'HomeController@showProducts');
+
+Route::get('productos/modelos/short', 'HomeController@showShorts');
+
+Route::get('productos/modelos/{id}/{name}', 'HomeController@showModels');
+
+Route::get('productos/modelos/ninas', 'HomeController@showNinas');
+
+Route::get('productos/modelos/capri', 'HomeController@showCapri');
+
+Route::get('productos/modelos/largo', 'HomeController@showLargo');
+
+Route::get('productos/modelos/largo-venezuela', 'HomeController@showLargoVenezuela');
+
+Route::get('productos/modelos/falda-short', 'HomeController@showFaldaShort');
+
+Route::get('productos/modelos/semi-body', 'HomeController@showSemiBody');
+
 
 Route::get('productos/ver/{id}/{title?}', 'HomeController@showProductProfile');
 
@@ -90,6 +109,8 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('pedidos/enviado/{id}', 'OrdersController@shippedOrder');
 		Route::get('pedidos/cancelar/{id}', 'OrdersController@cancelOrder');
 
+		Route::get('reportes/por-fecha', 'ReportsController@getDates');
+		Route::get('reportes/por-porcentaje', 'ReportsController@getPorcentual');
 		
 		Route::get('configuracion', 'ConfigurationsController@edit');
 		Route::post('configuracion', 'ConfigurationsController@update');
@@ -102,14 +123,12 @@ Route::group(array('before' => 'auth'), function()
 
 Route::get('/orders', ['uses' => 'CartController@get_orders'] );
 Route::get('/order/{id}', ['uses' => 'CartController@get_order'] );
+Route::get('/order/{id}/borrar', ['uses' => 'CartController@deleteOrder'] );
 Route::post('/pay', ['uses' => 'CartController@post_pay'] );
 
 Route::get('/procesar', ['uses' => 'CartController@get_procesar'] );
 
-
 });
-
-
 
 /* CART */
 Route::get('/cart', ['uses' => 'CartController@get_cart'] );

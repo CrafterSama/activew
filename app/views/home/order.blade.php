@@ -46,7 +46,7 @@
 									<td data-title="No.">{{ $no; }}. </td>
 									<td data-title="Producto">
 										<a href="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}">
-											<img src="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}" class="cart-img img-thumbnail" alt="" width="90">
+											<img src="/assets/images/stamps/{{ Stamp::getName($item->product->stamp_id) }}" class="cart-img img-thumbnail" alt="" width="120">
 										</a>
 										<br />
 										{{ Stamp::getStampName($item->product->stamp_id) }}
@@ -92,98 +92,101 @@
 								</tbody>
 							</table>
 							<?php $user = Auth::user(); ?>
-							@if ($user->id == $order->user_id)
 								{{-- true expr --}}
 							<!-- Start cart action -->
 							<div class="row">
 								<div class="col-lg-12 bg2">
 
 									@if(!$order->pago)
-									<h3>Confirmar pago:</h3>
-									<form action="/pay" id="order" method="post" enctype="multipart/form-data">
-										<div class="col-lg-6">
-											<div class="form-group">
-												{{ Form::label('banco','Nombre del Banco Desde donde Realizo el Deposito o Transferencia') }} 
-												{{ $errors->first('banco', '<div class="alert alert-danger">:message</div>') }}
-												<input name="banco" type="text" value="{{ Input::old('banco') }}" placeholder="Nombre del Banco" class="form-control" rquired />
-											</div>
-											<div class="form-group">
-												{{ Form::label('recibo','No. de transferencia o deposito') }} 
-												{{ $errors->first('recibo', '<div class="alert alert-danger">:message</div>') }}
-												<input name="recibo" type="number" value="{{ Input::old('recibo') }}" placeholder="No. de Recibo" class="form-control" rquired />
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												{{ Form::label('monto','Monto de la transferencia o deposito') }}
-												{{ $errors->first('monto', '<div class="alert alert-danger">:message</div>') }}
-												<div class="input-group">
-													<span class="input-group-addon">Bs.</span>
-													<input name="monto" value="{{ Input::old('monto') }}" placeholder="Monto en Bs." type="number" class="form-control" required />
+										@if ($user->id == $order->user_id)
+										<h3>Confirmar pago:</h3>
+										<form action="/pay" id="order" autocomplete="off" method="post" enctype="multipart/form-data">
+											<div class="col-lg-6">
+												<div class="form-group">
+													{{ Form::label('banco','Nombre del Banco Desde donde Realizo el Deposito o Transferencia') }} 
+													{{ $errors->first('banco', '<div class="alert alert-danger">:message</div>') }}
+													<input name="banco" type="text" value="{{ Input::old('banco') }}" placeholder="Nombre del Banco" class="form-control" rquired />
+												</div>
+												<div class="form-group">
+													{{ Form::label('recibo','No. de transferencia o deposito') }} 
+													{{ $errors->first('recibo', '<div class="alert alert-danger">:message</div>') }}
+													<input name="recibo" type="number" value="{{ Input::old('recibo') }}" placeholder="No. de Recibo" class="form-control" rquired />
 												</div>
 											</div>
-											<div class="form-group">
-												{{ Form::label('fecha','Seleccione la Fecha de la transaccion') }}
-												{{ $errors->first('fecha', '<div class="alert alert-danger">:message</div>') }}
-												<input name="fecha" value="{{ Input::old('fecha') }}" type="date" class="form-control" required />
+											<div class="col-lg-6">
+												<div class="form-group">
+													{{ Form::label('monto','Monto de la transferencia o deposito') }}
+													{{ $errors->first('monto', '<div class="alert alert-danger">:message</div>') }}
+													<div class="input-group">
+														<span class="input-group-addon">Bs.</span>
+														<input name="monto" value="{{ Input::old('monto') }}" placeholder="Monto en Bs." type="number" class="form-control" required />
+													</div>
+												</div>
+												<div class="form-group">
+													{{ Form::label('fecha','Seleccione la Fecha de la transaccion') }}
+													{{ $errors->first('fecha', '<div class="alert alert-danger">:message</div>') }}
+													<input name="fecha" value="{{ Input::old('fecha') }}" type="text" id="datepicker" class="form-control datepicker" required />
+												</div>
 											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												{{ Form::label('adjunto','Seleccione el Adjunto') }}
-												{{ $errors->first('adjunto', '<div class="alert alert-danger">:message</div>') }}
-												<input type="file" name="adjunto" placeholder="Imagen" class="form-control" required />
+											<div class="col-lg-6">
+												<div class="form-group">
+													{{ Form::label('adjunto','Seleccione el Adjunto') }}
+													{{ $errors->first('adjunto', '<div class="alert alert-danger">:message</div>') }}
+													<input type="file" name="adjunto" placeholder="Imagen" class="form-control" required />
+												</div>
 											</div>
-										</div>
-										<div class="col-lg-12">
-										<?php $user = Auth::user(); ?>
-										@if (strtolower(Ciudad::getName($user->municipio)) == 'maracaibo')
-											<div class="alert alert-success" style="font-size: 19px;">
-												<p class="text-justify">
-													De Acuerdo a nuestra informacion, tu lugar de residencia es en Maracaibo, por lo tanto tu pedido debe ser retirado directamente en el local de la tienda <a href="/contacto" class="btn-link"><span data-toggle="tooltip" data-placement="top" title="Urbanización Juana de Avila calle 66A #15A-25. Maracaibo, Edo. Zulia, Venezuela">Pioggia Di Mare</span></a>.
-												</p>
+											<div class="col-lg-12">
+											<?php $user = Auth::user(); ?>
+											@if (strtolower(Ciudad::getName($user->municipio)) == 'maracaibo')
+												<div class="alert alert-success" style="font-size: 19px;">
+													<p class="text-justify">
+														De Acuerdo a nuestra informacion, tu lugar de residencia es en Maracaibo, por lo tanto tu pedido debe ser retirado directamente en el local de la tienda <a href="/contacto" class="btn-link"><span data-toggle="tooltip" data-placement="top" title="Urbanización Juana de Avila calle 66A #15A-25. Maracaibo, Edo. Zulia, Venezuela">Pioggia Di Mare</span></a>.
+													</p>
+												</div>
+											@else
+												<p style="font-size: 19px;">¿Verifique muy bien si es esta la dirección a la desea que se envie su producto?</p>
+												<div class="alert alert-success" style="font-size: 19px;">
+													<p class="text-justify">
+														<strong>Direccion de Entrega del Pedido:</strong><br />
+														{{ User::getAddress(Auth::user()->id).' '.ucwords(strtolower(Ciudad::getName($user->municipio))).', Edo.'.ucwords(strtolower(Estado::getName($user->estado))); }}
+													</p>
+												</div>
+												{{ Form::label('options', 'Seleccione Si o No') }}
+												{{ $errors->first('options', '<div class="alert alert-danger">:message</div>') }}
+												<br />
+												{{ Form::label('options', 'Si') }}
+												<input type="radio" name="options" id="si" class="option" value="si" />
+												{{ Form::label('options', 'No') }}
+												<input type="radio" name="options" id="no" class="option" value="no" />
+												<br />
+												<div class="collapse">
+													{{ Form::label('user_address', 'Nueva Dirección') }}
+													<input type="text" name="user_address" value="" class="form-control col-lg-12" placeholder="Agregue su nueva Dirección" />
+										            <div class="form-group">
+										                <label for="estados">Estado</label>
+										                {{ $errors->first('estados', '<div class="alert alert-danger">:message</div>') }}
+										                <select name="estados" id="estados" class="form-control">
+										                        <option>Seleccione...</option>
+										                </select>
+										                <br />
+										                <label for="municipios">Ciudad</label>
+										                {{ $errors->first('municipios', '<div class="alert alert-danger">:message</div>') }}
+										                <select name="municipios" id="municipios" class="form-control">
+										                        <option>Selecciona el Estado</option>
+										                </select>
+										            </div>
+												</div>
+												<br />
+											@endif
+												{{ Form::hidden('id', $order->id) }}
+												<button type="submit" class="btn btn-lg btn-primary btn-block"> <i class="fa fa-check"></i> Confirmar</button>
 											</div>
+											<br />
+											<br />
+										</form>
 										@else
-											<p style="font-size: 19px;">¿Verifique muy bien si es esta la dirección a la desea que se envie su producto?</p>
-											<div class="alert alert-success" style="font-size: 19px;">
-												<p class="text-justify">
-													<strong>Direccion de Entrega del Pedido:</strong><br />
-													{{ User::getAddress(Auth::user()->id).' '.ucwords(strtolower(Ciudad::getName($user->municipio))).', Edo.'.ucwords(strtolower(Estado::getName($user->estado))); }}
-												</p>
-											</div>
-											{{ Form::label('options', 'Seleccione Si o No') }}
-											{{ $errors->first('options', '<div class="alert alert-danger">:message</div>') }}
-											<br />
-											{{ Form::label('options', 'Si') }}
-											<input type="radio" name="options" id="si" class="option" value="si" />
-											{{ Form::label('options', 'No') }}
-											<input type="radio" name="options" id="no" class="option" value="no" />
-											<br />
-											<div class="collapse">
-												{{ Form::label('user_address', 'Nueva Dirección') }}
-												<input type="text" name="user_address" value="" class="form-control col-lg-12" placeholder="Agregue su nueva Dirección" />
-									            <div class="form-group">
-									                <label for="estados">Estado</label>
-									                {{ $errors->first('estados', '<div class="alert alert-danger">:message</div>') }}
-									                <select name="estados" id="estados" class="form-control">
-									                        <option>Seleccione...</option>
-									                </select>
-									                <br />
-									                <label for="municipios">Ciudad</label>
-									                {{ $errors->first('municipios', '<div class="alert alert-danger">:message</div>') }}
-									                <select name="municipios" id="municipios" class="form-control">
-									                        <option>Selecciona el Estado</option>
-									                </select>
-									            </div>
-											</div>
-											<br />
+											{{-- false expr --}}
 										@endif
-											{{ Form::hidden('id', $order->id) }}
-											<button type="submit" class="btn btn-lg btn-primary btn-block"> <i class="fa fa-check"></i> Confirmar</button>
-										</div>
-										<br />
-										<br />
-									</form>
 									@else
 
 									<div class="col-lg-6">
@@ -211,9 +214,6 @@
 								</div>		
 							</div>
 							<!-- End cart action -->
-								@else
-									{{-- false expr --}}
-								@endif
 							@else
 							<br/>
 							<h2 align="center">No hay productos en esta orden :(</h2>

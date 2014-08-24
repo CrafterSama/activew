@@ -9,7 +9,8 @@
 	    "webpatser/laravel-uuid": "dev-master"
 	},
 	"require-dev": {
-    	"way/generators": "2.*"
+    	"way/generators": "2.*",
+    	"kevbaldwyn/image":"dev-master"
 	},
 	"autoload": {
 		"classmap": [

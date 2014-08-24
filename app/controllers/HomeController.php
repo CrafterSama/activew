@@ -110,12 +110,24 @@ class HomeController extends BaseController {
 
 	public function showProducts()
 	{
+		$models = Modelo::paginate(4);
+		$modelos = Modelo::whereNotBetween('id', array(1, 4))->get();
 		$products = Product::where('amounts','!=','0')
 		  ->orderBy('id','desc')
 					->paginate(5);
-		return View::make('home.products')->with('products',$products);
+		return View::make('home.products')->with(['products'=>$products, 'models'=>$models, 'modelos'=>$modelos]);
 	}
-	
+
+	public function showModels($id)
+	{
+		$models = Modelo::paginate(4);
+		$modelos = Modelo::whereNotBetween('id', array(1, 4))->get();
+		$products = Product::where('model_id','=',$id)->where('amounts','!=','0')
+		  ->orderBy('id','desc')
+					->paginate(5);
+		return View::make('home.products')->with(['products'=>$products, 'models'=>$models, 'modelos'=>$modelos]);
+	}
+		
 	public function showProductProfile($id,$title=null)
 	{
 		$product = Product::find($id);

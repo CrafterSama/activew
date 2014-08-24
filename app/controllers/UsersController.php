@@ -270,6 +270,8 @@ class UsersController extends BaseController {
 			'full_name' => Input::get('full_name'),
 			'username' => Input::get('username'),
 			'user_address' => Input::get('user_address'),
+			'estado' => Input::get('estado'),
+			'municipio' => Input::get('municipio'),
 			'user_mobile' => Input::get('user_mobile'),	
 			'email' => Input::get('email'),
 			'password' => $user->password,
@@ -311,8 +313,9 @@ class UsersController extends BaseController {
     }
     public function showOrders($id)
     {
-    	$orders = Factura::where('user_id','=',$id)->paginate(10);
-    	return View::make('admin.ordersbyuser',compact('orders'));
+    	$orders = Factura::where('user_id','=',$id)->orderBy('id','desc')->paginate(10);
+    	$id = $id;
+    	return View::make('admin.ordersbyuser')->with(['orders'=>$orders, 'id'=>$id]);
     }
     public function cities($id)
     {

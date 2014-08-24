@@ -15,9 +15,9 @@ class OrdersController extends \BaseController {
 	}
 	public function approveOrder($id)
 	{
-		//$approved = Item::where('factura_id','=',$id);
+		$approved = Item::where('factura_id','=',$id);
 
-		//$approved->delete();
+		$approved->delete();
 
         $factura = Factura::withTrashed()->find($id);
 
@@ -46,7 +46,7 @@ class OrdersController extends \BaseController {
 	public function shipped()
 	{
 		$items = Item::onlyTrashed()->where('shipped','=','yes')->orderBy('created_at','desc')->paginate(10);
-		return View::make('admin.approved')->with('items', $items);
+		return View::make('admin.shipped')->with('items', $items);
 	}
 	public function shippedOrder($id)
 	{

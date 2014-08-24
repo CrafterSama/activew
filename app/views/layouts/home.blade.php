@@ -12,6 +12,8 @@
 	{{ HTML::style('/../assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
 	{{ HTML::style('/../assets/css/table-responsive.css', array('media'=>'screen')) }}
 	{{ HTML::style('/../assets/css/style.css', array('media'=>'screen')) }}
+	{{ HTML::style('/../assets/css/jquery-ui.css', array('media'=>'screen')) }}
+	{{ HTML::style('/../assets/css/datepicker.css', array('media'=>'screen')) }}
 	
 	<link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
@@ -91,8 +93,9 @@
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		{{ HTML::script('/../assets/js/bootstrap.min.js') }}
-		{{ HTML::script('/../assets/js/common.js') }}
 		{{ HTML::script('/../assets/js/jquery.validate.js') }}
+		{{ HTML::script('/../assets/js/jquery-ui.min.js') }}
+		{{ HTML::script('/../assets/js/common.js') }}
 	    <script type="text/javascript">
 		    /* GEO */
 		    $(document).on("ready", function(){
@@ -215,6 +218,23 @@
 	                $(this).html('<i class="fa fa-check fa-lg"></i> Agregado');
 	            })
 	        });
+	        $(function() {
+    			$( "#datepicker" ).datepicker({
+					direction: 'up',
+					constrainInput: true,
+					showOn: "both",
+					showAnim: "fade",
+					buttonImage: "/../assets/images/calendar.png",
+					buttonImageOnly: true,
+					dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+					monthNamesShort: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+					'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+					yearRange: '2014:2025',
+					dateFormat: 'dd/mm/yy',
+					changeMonth: true,
+					changeYear: true
+    			});
+			});
 		</script>
 	</body>
 </html>
