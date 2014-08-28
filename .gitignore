@@ -23,3 +23,4 @@ public/assets/images/pays/YlItSkmDoD76F6ek_provi.gif
 *.sql
 *.PNG
 *.zip
+app/config/database.php

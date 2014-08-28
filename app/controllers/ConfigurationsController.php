@@ -9,17 +9,13 @@ class ConfigurationsController extends BaseController {
 	}
 	public function update()
 	{
-		
-		$iva = Input::get('iva');
-		$discount = Input::get('wholesale_discount');
+		$params = ['iva' , 'wholesale_discount'];
 
-		DB::table('configurations')
-            ->where('config_name', 'iva')
-            ->update(array('config_value' => $iva));
-		DB::table('configurations')
-            ->where('config_name', 'wholesale_discount')
-            ->update(array('config_value' => $discount));
-
+		foreach ($params as $key => $param) {
+			DB::table('configurations')
+	            ->where('config_name', $param)
+	            ->update(array('config_value' => Input::get($param)));
+		}
 		
 		return Redirect::back()->with('notice','Configuracion guardada de forma satisfactoria');;
 	}
