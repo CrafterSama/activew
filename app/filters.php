@@ -35,7 +35,7 @@ App::after(function($request, $response)
 
 Route::filter('auth', function($route, $request)
 {
-	if (Auth::guest()) return Redirect::guest('login?redirect=' . Request::path()  );
+	if (Auth::guest()) return Redirect::guest('login?redirect=' . Request::fullUrl()  );
 });
 
 
