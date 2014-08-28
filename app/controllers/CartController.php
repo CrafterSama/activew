@@ -67,6 +67,10 @@ class CartController extends BaseController {
         $factura = new Factura();
         $factura->user_id = Auth::user()->id;
         $factura->slug = Uuid::generate();
+        if (is_null(Input::get('tax'))) {
+        }else{
+            $factura->with_tax = Input::get('tax');
+        }
         $factura->save();
 
         foreach ($carts = Cart::content() as $key => $cart) {
@@ -90,12 +94,14 @@ class CartController extends BaseController {
         Cart::destroy();  
 
         $user = Auth::user();
+        $cdiscount = Configuration::getDiscount();
+        $tax = Configuration::getIva();
 
         $datos = [];
         $datos['user'] = $user;
         $datos['factura'] = $factura;
         $datos['cart'] = $carts;
-        $datos['discount'] = Configuration::getDiscount();
+        $datos['discount'] = $cdiscount;
 
         //return View::make('emails.factura', array('datos' => $data));
 

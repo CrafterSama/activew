@@ -30,12 +30,12 @@
 	            	<thead class="cf">
 						<tr>
 							<th class="col-xs-1 text-center">Nº de Factura</th>
-							<th class="text-center">Nombre Completo</th>
-							<th class="text-center">Banco</th>
-							<th class="text-center">No. de Recibo</th>
+							<th class="col-xs-1 text-center">Nombre Completo</th>
+							<th class="col-xs-2 text-center">Banco</th>
+							<th class="col-xs-1 text-center">No. de Recibo</th>
 							<th class="text-center">Con Descuento</th>
-							<th class="text-center">Monto</th>
-							<th class="text-center">Con IVA(Si /No)</th>
+							<th class="col-xs-2 text-center">Monto</th>
+							<th class="text-center">Con IVA</th>
 							<th class="col-xs-2 text-center">Imagen Adjunta</th>
 							<th class="col-xs-2 text-center">Fecha de la Orden</th>
 							<th class="col-xs-3 text-center">Acciones</th>
@@ -63,14 +63,26 @@
 									@endif
 								</td>
 								<td data-title="Monto">
+								@if (($item->factura->with_tax == 'yes') && (Configuration::getIva() > 0))
+									@if (Item::totalItems($item->factura_id) >= 12)
+										{{ number_format((Item::totalFactura($item->factura_id)-(Item::totalFactura($item->factura_id)*Configuration::getDiscount()))+((Item::totalFactura($item->factura_id)-(Item::totalFactura($item->factura_id)*Configuration::getDiscount()))*Configuration::getIva()), 2, ',', '.') }}
+									@else
+										{{ number_format(Item::totalFactura($item->factura_id)+(Item::totalFactura($item->factura_id)*Configuration::getIva()), 2, ',', '.') }}
+									@endif
+								@else
 									@if (Item::totalItems($item->factura_id) >= 12)
 										{{ number_format(Item::totalFactura($item->factura_id)-(Item::totalFactura($item->factura_id)*Configuration::getDiscount()), 2, ',', '.') }}
 									@else
 										{{ number_format(Item::totalFactura($item->factura_id), 2, ',', '.') }}
 									@endif
+								@endif
 								</td>
 								<td>
-									{{ 'Si o No' }}
+									@if ($item->factura->with_tax == 'yes')
+										Si
+									@else
+										No
+									@endif
 								</td>
 								<td data-title="Adjunto">
 									@if (Pago::getAdj($item->factura_id) == 'Sin Pagar')

@@ -61,29 +61,70 @@
 									</tr>
 									<?php $discount += $item->cantidad; ?>
 									@endforeach
+									@if (($item->factura->with_tax == 'yes') && (Configuration::getIva() > 0) )
+										@if (($discount >= 12) && (Configuration::getDiscount() > 0) )
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Sub-Total:</strong></td>
+												<td data-title="Total :">Bs. {{ number_format($order->total(), 2, ',', '.') }}</td>
+											</tr>
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Descuento 30% :</strong></td>
+												<td data-title="Descuento 30% :" style="color:red;">Bs. {{ number_format($order->total()*Configuration::getDiscount(), 2,',','.') }}</td>
+											</tr>
+											<tr>
+												<td colspan="1"></td>
+												<td><strong>Descuento del 30% a partir de 12 Piezas</strong></td>
+												<td colspan="2" class="cart-bottom visible-lg" style="text-align:right"><strong>Sub-Total -30% :</strong></td>
+												<td data-title="Sub-Total -30% :">Bs. {{ number_format($order->total()-($order->total()*Configuration::getDiscount()), 2, ',', '.') }}</td>						
+											</tr>
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>IVA 12% :</strong></td>
+												<td data-title="IVA 12% :">Bs. {{ number_format(($order->total()-($order->total()*Configuration::getDiscount()))*Configuration::getIva(), 2,',','.') }}</td>
+											</tr>
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
+												<td data-title="Total :">Bs. {{ number_format(($order->total()-($order->total()*Configuration::getDiscount()))+(($order->total()-($order->total()*Configuration::getDiscount()))*Configuration::getIva()), 2,',','.') }}</td>
+											</tr>
 
-									@if (($discount >= 12) && (Configuration::getDiscount() > 0) )
-										<tr>
-											<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Sub-Total:</strong></td>
-											<td data-title="Total :">Bs. {{ number_format($order->total(), 2, ',', '.') }}</td>
-										</tr>
-										<tr>
-											<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Descuento 30% :</strong></td>
-											<td data-title="Descuento 30% :" style="color:red;">Bs. {{ number_format($order->total()*Configuration::getDiscount(), 2,',','.') }}</td>
-										</tr>
-										<tr>
-											<td colspan="1"></td>
-											<td><strong>Descuento del 30% a partir de 12 Piezas</strong></td>
-											<td colspan="2" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
-											<td data-title="Total :">Bs. {{ number_format($order->total()-($order->total()*Configuration::getDiscount()), 2, ',', '.') }}</td>						
-										</tr>
+										@else
+
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Sub-Total :</strong></td>
+												<td data-title="Sub-total :">Bs. {{ number_format($order->total(), 2, ',', '.') }}</td>
+											</tr>
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>IVA 12% :</strong></td>
+												<td data-title="IVA 12% :" style="color:red;">Bs. {{ number_format($order->total()*Configuration::getIva(), 2,',','.') }}</td>
+											</tr>
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
+												<td data-title="Total :">Bs. {{ number_format($order->total()+($order->total()*Configuration::getIva()), 2, ',', '.') }}</td>
+											</tr>
+										@endif	
 									@else
-										<tr>
-											<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
-											<td data-title="Total :">Bs. {{ number_format($order->total(), 2, ',', '.') }}</td>						
-										</tr>
+										@if (($discount >= 12) && (Configuration::getDiscount() > 0) )
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Sub-Total:</strong></td>
+												<td data-title="Total :">Bs. {{ number_format($order->total(), 2, ',', '.') }}</td>
+											</tr>
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Descuento 30% :</strong></td>
+												<td data-title="Descuento 30% :" style="color:red;">Bs. {{ number_format($order->total()*Configuration::getDiscount(), 2,',','.') }}</td>
+											</tr>
+											<tr>
+												<td colspan="1"></td>
+												<td><strong>Descuento del 30% a partir de 12 Piezas</strong></td>
+												<td colspan="2" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
+												<td data-title="Total :">Bs. {{ number_format($order->total()-($order->total()*Configuration::getDiscount()), 2, ',', '.') }}</td>						
+											</tr>
+										@else
+											<tr>
+												<td colspan="4" class="cart-bottom visible-lg" style="text-align:right"><strong>Total :</strong></td>
+												<td data-title="Total :">Bs. {{ number_format($order->total(), 2, ',', '.') }}</td>						
+											</tr>
+										@endif	
+										
 									@endif
-
 									<tr>
 										<td colspan="4" class="text-right bg1">
 										</td>

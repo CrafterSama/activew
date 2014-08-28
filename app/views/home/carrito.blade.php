@@ -27,6 +27,7 @@
 							</thead>
 
 							<tbody>
+
 								<?php $discount=0; ?>
 								<?php $no=0; ?>
 								@foreach($cart as $item)
@@ -92,14 +93,18 @@
 								</tr>							  
 							</tbody>
 						</table>
-
-						<!-- Start cart action -->
-						<div class="row">
-							<div class="col-lg-12 bg2 cart-action">
-								<a href="/procesar" class="btn btn-lg btn-primary pull-right"> <i class="fa fa-check"></i> Procesar compra</a>
-							</div>		
-						</div>
-						<!-- End cart action -->
+						<form action="/procesar" method="get" accept-charset="utf-8">
+							<!-- Start cart action -->
+							<div class="row">
+								<div class="col-lg-12 bg2 cart-action">
+									<div class="alert alert-success" style="font-size: 1.2em;">
+										<input type="checkbox" name="tax" id="tax" value="yes" />&nbsp;&nbsp; Marque esta casilla si desea usted la factura fiscal.
+									</div>
+									<button type="submit" class="btn btn-lg btn-primary pull-right">&nbsp;&nbsp;<i class="fa fa-check"></i>&nbsp;&nbsp;Procesar Compra</button>
+								</div>		
+							</div>
+							<!-- End cart action -->
+						</form>
 						@else
 						<br/>
 						<h2 class="text-center">No hay productos en tu carrito de compras</h2>
