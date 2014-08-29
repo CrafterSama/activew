@@ -93,8 +93,9 @@
 				<h4 align="right">IVA 12%: Bs. {{ number_format(($total-($total*Configuration::getDiscount()))*Configuration::getIva(), 2, ',', '.') }} </h4>
 				<h4 align="right">Total Bs. {{ number_format(($total-($total*Configuration::getDiscount()))+(($total-($total*Configuration::getDiscount()))*Configuration::getIva()), 2, ',', '.') }} </h4>
 			@else
+				<h4 align="right">Sub-Total: Bs. {{ number_format($total, 2, ',', '.') }} </h4>
 				<h4 align="right">IVA 12%: Bs. {{ number_format($total*Configuration::getIva(), 2, ',', '.') }} </h4>
-				<h4 align="right">Total: Bs. {{ number_format($total, 2, ',', '.') }} </h4>
+				<h4 align="right">Total: Bs. {{ number_format($total+($total*Configuration::getIva()), 2, ',', '.') }} </h4>
 			@endif
 		@else
 			@if(($discount >= 12) && (Configuration::getDiscount() > 0))
@@ -103,7 +104,6 @@
 				Descuento del 30% a partir de 12 piezas <h4 align="right">Sub-Total: Bs. {{ number_format($total-($total*Configuration::getDiscount()), 2, ',', '.') }}</h4>
 				<h4 align="right">Total Bs. {{ number_format($total-($total*Configuration::getDiscount()), 2, ',', '.') }} </h4>
 			@else
-				<h4 align="right">IVA 12%: Bs. {{ number_format($total*Configuration::getIva(), 2, ',', '.') }} </h4>
 				<h4 align="right">Total: Bs. {{ number_format($total, 2, ',', '.') }} </h4>
 			@endif
 
