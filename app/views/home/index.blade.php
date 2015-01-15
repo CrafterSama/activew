@@ -1,51 +1,81 @@
 @extends('layouts.home')
 
 @section('title') ActiveWear @stop
-	
+
 @section('content')
 
 	<div class="main">
-		<div class="text-center">
-			<div class="container">
-				<br />
-				<br />
-				<br />
-				<br />
-				<p class="text-justify pull-left">					
-					<h3 class="white">Quieres estar a la moda, ejercitarte comodamente y verte bien al hacerlo?</h3>
-					¡ActiveWear es la ropa deportiva que esta de moda y se ejercita contigo!
-				</p>
-				<br />
-				<br />
-				<p>
-					<span class="text-center">
-						<button class="btn btn-success btn-lg" onclick="location.href='productos'">Visita Nuestros Productos</button>
-					</span>
-				</p>
-				<br />
-				<br />
-				<div class="social_buttons text-center">
-					<a href="https://twitter.com/pioggiamare" class="twitter-follow-button" data-show-count="true" data-lang="es" data-dnt="true">Seguir a @pioggiamare</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-					<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpioggiamare&amp;width=120&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
-					<br />
-					<a data-pin-do="buttonFollow" href="http://es.pinterest.com/pioggiadimare/">Pioggia Di Mare</a>
-					<!-- Please call pinit.js only once per page -->
-					<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
-					<br />
-					<style>
-						.ig-b- { display: inline-block; margin-top: 7px; }
-						.ig-b- img { visibility: hidden; }
-						.ig-b-:hover { background-position: 0 -60px; } 
-						.ig-b-:active { background-position: 0 -120px; }
-						.ig-b-v-24 { width: 137px; height: 24px; background: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24.png) no-repeat 0 0; }
-						@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-						.ig-b-v-24 { background-image: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24@2x.png); background-size: 160px 178px; } }
-					</style>
-					<a href="http://instagram.com/pioggiadimare?ref=badge" class="ig-b- ig-b-v-24"><img src="//badges.instagram.com/static/images/ig-badge-view-24.png" alt="Instagram" /></a>
-				</div>
-			</div>
-		</div>
+		<div class="container">
+
+            <div class="img-index col-md-12 column">
+                <div class="carioca-index-image">
+                     <div class="row clearfix">
+                        <div class="col-md-3 column">
+                            <h3><p><font color="white">La Ropa Deportiva<br />que esta de moda!</font></p></h3>
+                        </div>
+                        <div class="col-md-6 column">
+                        </div>
+                        <div class="col-md-3 column">
+                            <h3><p>Luce Moderna,<br />Mientras entrenas!<br />#Carioca</p></h3>
+                        </div>
+                     </div>
+                     <div class="white-space-index"></div>
+                     <div style="col-md-12 column">
+                         <div style="background-color: rgba(0, 0, 0, 0.5)" align="center"><img src="/../assets/images/logo_carioca.png" width='75%'></div>
+                     </div>
+                 </div>
+            </div>
+            <div class="buttons col-md-12 column">
+                <div class="col-md-4 column">
+                    <figure class="row products">
+                        <figcaption class="title-box carioca_color1">
+                            <h3><a href="http://pioggia.craftersama.me/productos"><strong>Productos Carioca + </strong></a></h3>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-4 column">
+                    <figure class="row carrito">
+                        <figcaption class="title-box carioca_color4">
+                            <h3><strong>Carrito + </strong></h3>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-4 column social-buttons">
+                    <div class="row clearfix">
+                        <div class="col-md-4 column">
+                            <div class="social-box carioca_color1"><a class="btn btn-block btn-social btn-instagram" href="http://www.instagram.com/carioca_activewear"><i class="fa fa-instagram fa-lg fa-3x"></i></a></div>
+                        </div>
+                        <div class="col-md-4 column">
+                            <div class="social-box carioca_color4"><a class="btn btn-block btn-social btn-facebook" href="https://www.facebook.com/pages/Carioca-Activewear/332150280300248"><i class="fa fa-facebook fa-lg fa-3x"></i></a></div>
+                        </div>
+                        <div class="col-md-4 column">
+                            <div class="social-box carioca_color3"><a class="btn btn-block btn-social btn-twitter" href="http://www.twitter.com/cariocaactive"><i class="fa fa-twitter fa-lg fa-3x"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="row clearfix boxes">
+                        <div class="col-md-4 column">
+                            <div class="box carioca_color1"></div>
+                        </div>
+                        <div class="col-md-4 column">
+                            <div class="box carioca_color4"></div>
+                        </div>
+                        <div class="col-md-4 column">
+                            <div class="box carioca_color3"></div>
+                        </div>
+                    </div>
+                    <div class="title-box-div carioca_color2">
+                        <h3><strong>Siguenos +</strong></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="last-box-index col-md-12">
+                <div class="col-md-6 column">
+                    <a href="http://www.pioggiadimare.com" class="btn btn-success btn-block btn-lg" rel="nofollow">&nbsp;&nbsp;Productos Pioggia<img src="/../assets/images/logo-pioggia.png" alt="acerca de" width="15%" align="" class=""></a>
+                </div>
+                <div class="col-md-6 column">
+                </div>
+            </div>
+        </div>
 		<br />
 		<br />
 	</div>

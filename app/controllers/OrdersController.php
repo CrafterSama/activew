@@ -21,8 +21,8 @@ class OrdersController extends \BaseController {
 
         $factura = Factura::withTrashed()->find($id);
 
+		$data = [];
         $data['user'] = User::find($factura->user_id);
-
         $data['factura'] = $factura->toArray();
         $data['items'] = $factura->items->toArray();
         $data['pago'] = $factura->pago->toArray();

@@ -154,5 +154,25 @@ class HomeController extends BaseController {
 	{
 		return View::make('home.contact');
 	}
+	
+	public function showGaleries()
+	{
+		return View::make('home.galerias');
+	}
+	
+	public function showGalerie1()
+	{
+		return View::make('home.galeria1');
+	}
+	
+	public function showGalerie2()
+	{
+		return View::make('home.galeria2');
+	}
+	
+	public function showGalerie3()
+	{
+		return View::make('home.galeria3');
+	}
 
 }

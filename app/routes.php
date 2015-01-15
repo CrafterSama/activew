@@ -46,7 +46,15 @@ Route::get('productos/ver/{id}/{title?}', 'HomeController@showProductProfile');
 
 Route::get('acerca-de', 'HomeController@showAbout');
 
-Route::get('contacto', 'HomeController@showContact');
+Route::get('contactos', 'HomeController@showContact');
+
+Route::get('galerias', 'HomeController@showGaleries');
+
+Route::get('galeria1', 'HomeController@showGalerie1');
+
+Route::get('galeria2', 'HomeController@showGalerie2');
+
+Route::get('galeria3', 'HomeController@showGalerie3');
 
 Route::get('login', 'AuthController@showLogin');
 
@@ -150,7 +158,7 @@ Route::get('/carrito', function()
 
 Route::post('/total', function()
 {
-	echo '(' . Cart::count() .') Carrito <span class="fa fa-shopping-cart fa-lg white"></span>';
+	echo '<span class="label label-success cart-badge">'. Cart::count() .'</span><span class="fa fa-shopping-cart fa-lg fa-3x"></span>';
 });
 
 

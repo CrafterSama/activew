@@ -112,7 +112,7 @@ class CartController extends BaseController {
             $m->to($user['email'])->subject('Orden de Compra.');
         }); 
 
-        return Redirect::to('/order/' . $factura->id)->with('notice','¡Tu Pedido esta siendo procesado, solo faltan algunos pasos para completar tu compra, revisa tu correo electronico, ya que <strong>te hemos enviado un correo con todos los datos para terminar de procesar tu compra!</strong>');
+        return Redirect::to('/order/' . $factura->id)->with('notice','¡Tu Pedido esta siendo procesado, solo faltan algunos pasos para completar tu compra, revisa tu correo electronico, ya que <strong>te hemos enviado un correo con todos los datos para terminar de procesar tu compra!</strong>, no olvides revisar tu bandeja de correos no deseados en caso de no encuentres nuestro correo en tu badeja de correos recibidos.');
     } 
 
     public function get_factura($slug){

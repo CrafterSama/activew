@@ -1,92 +1,110 @@
 <!DOCTYPE html>
+<?php 
+
+$url = Request::path(); 
+//print_r($url);
+
+?>
 <html lang="es">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>@yield('title')</title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>@yield('title')</title>
 
-	<!-- Bootstrap core CSS -->
-	{{ HTML::style('/../assets/css/bootstrap.min.css', array('media'=>'screen')) }}
-	{{ HTML::style('/../assets/css/font-awesome.min.css', array('media'=>'screen')) }}
-	<!-- Custom styles for this template -->
-	{{ HTML::style('/../assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
-	{{ HTML::style('/../assets/css/table-responsive.css', array('media'=>'screen')) }}
-	{{ HTML::style('/../assets/css/style.css', array('media'=>'screen')) }}
-	{{ HTML::style('/../assets/css/jquery-ui.css', array('media'=>'screen')) }}
-	{{ HTML::style('/../assets/css/datepicker.css', array('media'=>'screen')) }}
-	
-	<link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-	<!-- Just for debugging purposes. Don't actually copy this line! -->
-	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+		<!-- Bootstrap core CSS -->
+		{{ HTML::style('/../assets/css/bootstrap.min.css', array('media'=>'screen')) }}
+		{{ HTML::style('/../assets/css/font-awesome.min.css', array('media'=>'screen')) }}
+		<!-- Custom styles for this template -->
+		{{ HTML::style('/../assets/css/bootstrap-reset.css', array('media'=>'screen')) }}
+		{{ HTML::style('/../assets/css/table-responsive.css', array('media'=>'screen')) }}
+		{{ HTML::style('/../assets/css/style.css', array('media'=>'screen')) }}
+		{{ HTML::style('/../assets/css/jquery-ui.css', array('media'=>'screen')) }}
+		{{ HTML::style('/../assets/css/datepicker.css', array('media'=>'screen')) }}
+		
+		<link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+		<!-- Just for debugging purposes. Don't actually copy this line! -->
+		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-  	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  	<![endif]-->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	  	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	  	<![endif]-->
 	</head>
 		<body>
-			<header role="banner" class="navbar navbar-fixed-top navbar-inverse">
-				<div class="container">
-					<div class="navbar-header text-left">
-						<img src="/../assets/images/logo.png" alt="" height="50px" style="margin:0.2em;" />
-						<button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div>
-					<div class="navbar-inverse side-collapse in">
-						<nav role="navigation" class="navbar-collapse ">
-							<ul class="nav navbar-nav">
+
+			<header class="">
+				<div class="navbar-right">
+					@if (Auth::check())
+						<span class="dropdown blog-nav-item">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<span class="username">{{ Auth::user()->full_name; }}</span>
+								<b class="caret"></b>
+							</a>
+							&nbsp;&nbsp;&nbsp;
+							<ul class="dropdown-menu extended logout">
+							@if (Auth::user()->role_id == 1)
+								<li><a href="/admin"><i class="fa fa-dashboard"></i>  Panel de Administracion</a></li>
+							@endif
+								<li><a href="/orders"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a></li>
+								<li><a href="/logout"><i class="fa fa-sign-out"></i>  Salir</a></li>
+							</ul>
+						</span>
+					@else
+						<a class="" href="/registrarse">Registrarte <i class="fa fa-edit"></i></a>
+						&nbsp;&nbsp;&nbsp;
+						<a class="" href="/login">Identificarse <i class="fa fa-sign-in"></i></a>
+						&nbsp;&nbsp;&nbsp;
+					@endif
+				</div>
+				<br />
+				<div class="carioca_line">
+					<div class="carioca_block1"></div>
+					<div class="carioca_block2"></div>
+					<div class="carioca_block3"></div>
+					<div class="carioca_block4"></div>
+					<div class="carioca_block1"></div>
+					<div class="carioca_block2"></div>
+					<div class="carioca_block3"></div>
+					<div class="carioca_block4"></div>
+					<div class="carioca_block1"></div>
+					<div class="carioca_block2"></div>
+				</div>
+				<div class="navbar-inverse side-collapse in bar-menu">
+					<div class="container">
+						<nav role="navigation" class="navbar-collapse">
+							<ul class="nav navbar-nav menu">
 								<li><a class="blog-nav-item" href="/">Inicio</a></li>
 								<li><a class="blog-nav-item" href="/productos">Productos</a></li>
+								<li><a class="blog-nav-item" href="/galerias">Galerias</a></li>
 								<li><a class="blog-nav-item" href="/acerca-de">Acerca de</a></li>
-								<li><a class="blog-nav-item" href="/contacto">Contactos</a></li>
+								<li><a class="blog-nav-item" href="/contactos">Contactos</a></li>
 							</ul>
-							<div class="navbar-right">
-								<a class="blog-nav-item" href="http://www.twitter.com/pioggiamare"><span class="fa fa-twitter fa-lg white"></span></a>
-								<a class="blog-nav-item" href="http://www.instagram.com/pioggiadimare"><span class="fa fa-instagram fa-lg white"></span></a>
-								<a class="blog-nav-item" href="http://www.facebook.com/pioggiamare"><span class="fa fa-facebook fa-lg white"></span></a>
-								<a class="blog-nav-item" href="http://www.pinterest.com/pioggiadimare"><span class="fa fa-pinterest fa-lg white"></span></a>
-								<a class="blog-nav-item lavel lavel-success cart-text" href="/carrito"> <span class="badge">{{ Cart::count(); }}</span> Carrito <span class="fa fa-shopping-cart fa-lg white"></span></a>
-								@if (Auth::check())
-									<span class="dropdown blog-nav-item">
-										<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-											<span class="username">{{ Auth::user()->full_name; }}</span>
-											<b class="caret"></b>
-										</a>
-										<ul class="dropdown-menu extended logout">
-										@if (Auth::user()->role_id == 1)
-											<li><a href="/admin"><i class="fa fa-dashboard"></i>  Panel de Administracion</a></li>
-										@endif
-											<li><a href="/orders"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a></li>
-											<li><a href="/logout"><i class="fa fa-sign-out"></i>  Salir</a></li>
-										</ul>
-									</span>
-								@else
-									<a class="blog-nav-item lavel lavel-success" href="/registrarse">Registrarte</a>
-									<a class="blog-nav-item" href="/login">Identificarse  <i class="fa fa-sign-in"></i></a>
-								@endif
-							</div>
+							@if ( $url == '/')
+							
+							@else
+								<ul class="nav navbar-nav shopping-cart">
+									<li><a class="lavel lavel-success cart-text cart blog-nav-item" href="/carrito"><span class="label label-success cart-badge">{{ Cart::count(); }}</span><i class="fa fa-shopping-cart fa-lg fa-2x"></i></a></li>
+								</ul> 
+								<ul class="nav navbar-nav social-btns">
+									<li><a class="instagram blog-nav-item" href="http://www.instagram.com/carioca_activewear"><span class="fa fa-instagram fa-lg fa-2x"></span></a></li>
+									<li><a class="facebook blog-nav-item" href="https://www.facebook.com/pages/Carioca-Activewear/332150280300248"><span class="fa fa-facebook fa-lg fa-2x"></span></a></li>
+									<li><a class="twitter blog-nav-item" href="http://www.twitter.com/cariocaactive"><span class="fa fa-twitter fa-lg fa-2x"></span></a></li>
+								</ul>
+							@endif
 						</nav>
 					</div>
 				</div>
 			</header>
-			<div class="blog-header">
-				<div class="container">
-					<h1 class="blog-title">ActiveWear</h1>
-					<p class="lead blog-description">Catalogo de ropa para la actividad deportiva, ventas y mas...</p>
-				</div>
-			</div>
 
 			@yield('content')
 
-			<footer class="blog-footer">
-				<p>Creado por <a href="http://craftersama.me">CrafterSama Studio</a></p>
-				<p><a href="#">Back to top</a></p>
+			<footer class="footer">
+				<div class="container">
+					<p>Creado por <a href="http://craftersama.me">CrafterSama Studio</a></p>
+					<p><span id="back-to-top">Subir</span></p>					
+				</div>
 			</footer>
 		{{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
 		<!-- Bootstrap core JavaScript
@@ -230,7 +248,7 @@
 					monthNamesShort: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 					'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 					yearRange: '2014:2025',
-					dateFormat: 'dd/mm/yy',
+					/*dateFormat: 'dd/mm/yy',*/
 					changeMonth: true,
 					changeYear: true
     			});
