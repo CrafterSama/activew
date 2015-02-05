@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<?php 
+<?php
 
-$url = Request::path(); 
+$url = Request::path();
 //print_r($url);
 
 ?>
 <html lang="es">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<title>@yield('title')</title>
 
 		<!-- Bootstrap core CSS -->
@@ -19,10 +19,15 @@ $url = Request::path();
 		{{ HTML::style('/../assets/css/table-responsive.css', array('media'=>'screen')) }}
 		{{ HTML::style('/../assets/css/style.css', array('media'=>'screen')) }}
 		{{ HTML::style('/../assets/css/jquery-ui.css', array('media'=>'screen')) }}
+		{{ HTML::style('/../assets/css/jMyCarousel.css', array('media'=>'screen')) }}
+		{{ HTML::style('/../assets/css/fotorama.css', array('media'=>'screen')) }}
 		{{ HTML::style('/../assets/css/datepicker.css', array('media'=>'screen')) }}
-		
-		<link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+		{{ HTML::style('/../assets/css/tabs.css', array('media'=>'screen')) }}
+
+		<link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css' />
+		<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css' />
+		<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' />
+		<link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css' />
 		<!-- Just for debugging purposes. Don't actually copy this line! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -35,32 +40,36 @@ $url = Request::path();
 		<body>
 
 			<header class="">
-				<div class="navbar-right">
-					@if (Auth::check())
-						<span class="dropdown blog-nav-item">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<span class="username">{{ Auth::user()->full_name; }}</span>
-								<b class="caret"></b>
-							</a>
-							&nbsp;&nbsp;&nbsp;
-							<ul class="dropdown-menu extended logout">
-							@if (Auth::user()->role_id == 1)
-								<li><a href="/admin"><i class="fa fa-dashboard"></i>  Panel de Administracion</a></li>
-							@endif
-								<li><a href="/orders"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a></li>
-								<li><a href="/logout"><i class="fa fa-sign-out"></i>  Salir</a></li>
-							</ul>
-						</span>
-					@else
+				@if (Auth::check())
+					<div class="login-menu dropdown blog-nav-item pull-right">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							<span class="username">{{ Auth::user()->full_name; }}</span>
+							<b class="caret"></b>
+						</a>
+						&nbsp;&nbsp;&nbsp;
+						<ul class="dropdown-menu extended logout">
+						@if (Auth::user()->role_id == 1)
+							<li><a href="/admin"><i class="fa fa-dashboard"></i>  Panel de Administracion</a></li>
+						@endif
+							<li><a href="/orders"><i class="fa fa-shopping-cart"></i>  Mis Pedidos</a></li>
+							<li><a href="/logout"><i class="fa fa-sign-out"></i>  Salir</a></li>
+						</ul>
+					</div>
+				@else
+					<div class="login-menu pull-right">
 						<a class="" href="/registrarse">Registrarte <i class="fa fa-edit"></i></a>
 						&nbsp;&nbsp;&nbsp;
 						<a class="" href="/login">Identificarse <i class="fa fa-sign-in"></i></a>
 						&nbsp;&nbsp;&nbsp;
-					@endif
-				</div>
+					</div>
+				@endif
 				<br />
 				<div class="carioca_line">
-					<div class="carioca_block1"></div>
+					@if ($url == '/')
+						<div class="carioca_block1"></div>
+					@else
+						<img class="image-logo-header" src="/../assets/images/logo_carioca.png" alt="logo" width="100%">
+					@endif
 					<div class="carioca_block2"></div>
 					<div class="carioca_block3"></div>
 					<div class="carioca_block4"></div>
@@ -71,39 +80,72 @@ $url = Request::path();
 					<div class="carioca_block1"></div>
 					<div class="carioca_block2"></div>
 				</div>
-				<div class="navbar-inverse side-collapse in bar-menu">
+				<div class="bar-menu navbar navbar-default" role="navigation">
 					<div class="container">
-						<nav role="navigation" class="navbar-collapse">
-							<ul class="nav navbar-nav menu">
-								<li><a class="blog-nav-item" href="/">Inicio</a></li>
-								<li><a class="blog-nav-item" href="/productos">Productos</a></li>
-								<li><a class="blog-nav-item" href="/galerias">Galerias</a></li>
-								<li><a class="blog-nav-item" href="/acerca-de">Acerca de</a></li>
-								<li><a class="blog-nav-item" href="/contactos">Contactos</a></li>
-							</ul>
-							@if ( $url == '/')
-							
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="fa fa-bars fa-lg"></span><span class="menu-word">&nbsp;&nbsp;MENU</span>
+							</button>
+							@if ($url == '/')
 							@else
-								<ul class="nav navbar-nav shopping-cart">
-									<li><a class="lavel lavel-success cart-text cart blog-nav-item" href="/carrito"><span class="label label-success cart-badge">{{ Cart::count(); }}</span><i class="fa fa-shopping-cart fa-lg fa-2x"></i></a></li>
-								</ul> 
-								<ul class="nav navbar-nav social-btns">
-									<li><a class="instagram blog-nav-item" href="http://www.instagram.com/carioca_activewear"><span class="fa fa-instagram fa-lg fa-2x"></span></a></li>
-									<li><a class="facebook blog-nav-item" href="https://www.facebook.com/pages/Carioca-Activewear/332150280300248"><span class="fa fa-facebook fa-lg fa-2x"></span></a></li>
-									<li><a class="twitter blog-nav-item" href="http://www.twitter.com/cariocaactive"><span class="fa fa-twitter fa-lg fa-2x"></span></a></li>
-								</ul>
+							<span class="social-nav-btns visible-xs pull-right">
+								<a class="cart" href="/carrito"><span class="label label-warning cart-text">{{ Cart::count(); }}</span>&nbsp;&nbsp;<span class="fa fa-shopping-cart fa-lg"></span></a>
+								<a class="instagram" href="http://www.instagram.com/carioca_activewear"><span class="fa fa-instagram fa-lg"></span></a>
+								<a class="facebook" href="https://www.facebook.com/pages/Carioca-Activewear/332150280300248"><span class="fa fa-facebook fa-lg"></span></a>
+								<a class="twitter" href="http://www.twitter.com/cariocaactive"><span class="fa fa-twitter fa-lg"></a></span>
+							</span>
 							@endif
-						</nav>
+						</div>  
+						<div class="collapse navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li><a class="" href="/">Inicio</a></li>
+								<!-- <li><a class="" href="/productos">Productos</a></li> -->
+								<li>
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+										<span class="">Productos</span>
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="/productos/carioca">Carioca</a></li>
+										<li><a href="/productos/pioggia">Pioggia</a></li>
+									</ul>
+								</li>
+								<li><a class="" href="/galerias">Galerias</a></li>
+								<li><a class="" href="/acerca-de">Acerca de</a></li>
+								<li><a class="" href="/contactos">Contactos</a></li>
+							</ul>
+							@if ($url == '/')
+							@else
+							<span class="social-nav-btns big-screen hidden-xs pull-right nav-pills">
+								<a class="cart" href="/carrito"><span class="label label-warning cart-text">{{ Cart::count(); }}</span>&nbsp;&nbsp;<span class="fa fa-shopping-cart fa-lg"></span></a>
+								<a class="instagram" href="http://www.instagram.com/carioca_activewear"><span class="fa fa-instagram fa-lg"></span></a>
+								<a class="facebook" href="https://www.facebook.com/pages/Carioca-Activewear/332150280300248"><span class="fa fa-facebook fa-lg"></span></a>
+								<a class="twitter" href="http://www.twitter.com/cariocaactive"><span class="fa fa-twitter fa-lg"></a></span>
+							</span>
+							@endif
+						</div>
 					</div>
 				</div>
 			</header>
-
-			@yield('content')
-
+			{{-- @if($url == '/')
+				<section class="body-bg">
+					<div class="main">
+						<div class="container">
+							@yield('content')
+						</div>
+					</div>
+				</section>
+			@else --}}
+				<div class="main">
+					<div class="container">
+						@yield('content')
+					</div>
+				</div>
+			{{-- @endif --}}
 			<footer class="footer">
 				<div class="container">
 					<p>Creado por <a href="http://craftersama.me">CrafterSama Studio</a></p>
-					<p><span id="back-to-top">Subir</span></p>					
+					<p><span id="back-to-top">Subir</span></p>
 				</div>
 			</footer>
 		{{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
@@ -113,7 +155,10 @@ $url = Request::path();
 		{{ HTML::script('/../assets/js/bootstrap.min.js') }}
 		{{ HTML::script('/../assets/js/jquery.validate.js') }}
 		{{ HTML::script('/../assets/js/jquery-ui.min.js') }}
+		{{ HTML::script('/../assets/js/jMyCarousel.js') }}
+		{{ HTML::script('/../assets/js/fotorama.js') }}
 		{{ HTML::script('/../assets/js/common.js') }}
+		{{-- HTML::script('/../assets/js/tabs.js') --}}
 	    <script type="text/javascript">
 		    /* GEO */
 		    $(document).on("ready", function(){
@@ -121,21 +166,21 @@ $url = Request::path();
 		        var $estados = $("#estados");
 		        var $municipios = $("#municipios");
 
-		        $.post('/geo/estados', function(data, textStatus, xhr) {                
+		        $.post('/geo/estados', function(data, textStatus, xhr) {
 		            $.each(data, function(index, val) {
 		                var option = '<option value="' + val.id +'">' + val.estado +'</option>';
 		                $estados.append(option);
-		            }); 
+		            });
 		        },'json');
 
 		        $estados.on("change", function(){
 		            var id = $(this).val();
 		            resetMunicipios();
-		            $.post('/geo/estado/' + id, function(data, textStatus, xhr) {                
+		            $.post('/geo/estado/' + id, function(data, textStatus, xhr) {
 		                $.each(data, function(index, val) {
 		                    var option = '<option value="' + val.id +'">' + val.ciudad +'</option>';
 		                    $municipios.append(option);
-		                }); 
+		                });
 		            },'json');
 		        });
 
@@ -218,7 +263,7 @@ $url = Request::path();
 			                },
 		                /*}*/
 		            }
-		        });    
+		        });
 		    });
 	        $(document).on('ready', function(){
 	            $(".add-to-cart").on("click", function(event){

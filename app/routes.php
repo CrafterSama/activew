@@ -50,11 +50,15 @@ Route::get('contactos', 'HomeController@showContact');
 
 Route::get('galerias', 'HomeController@showGaleries');
 
-Route::get('galeria1', 'HomeController@showGalerie1');
+Route::get('galerias/desfiles', 'HomeController@showGalerie1');
 
-Route::get('galeria2', 'HomeController@showGalerie2');
+Route::get('galerias/sesiones', 'HomeController@showGalerie2');
 
-Route::get('galeria3', 'HomeController@showGalerie3');
+Route::get('galerias/eventos', 'HomeController@showGalerie3');
+
+Route::get('galerias/sesiones/brasil-2014', 'HomeController@showBrasil2014');
+
+Route::get('galerias/sesiones/maracaibo-2014', 'HomeController@showDunas2014');
 
 Route::get('login', 'AuthController@showLogin');
 
@@ -158,7 +162,7 @@ Route::get('/carrito', function()
 
 Route::post('/total', function()
 {
-	echo '<span class="label label-success cart-badge">'. Cart::count() .'</span><span class="fa fa-shopping-cart fa-lg fa-3x"></span>';
+	echo '<span class="label label-warning cart-text">'.Cart::count().'</span>&nbsp;&nbsp;';
 });
 
 

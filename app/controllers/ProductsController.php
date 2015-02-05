@@ -49,16 +49,24 @@ class ProductsController extends \BaseController {
 		if(!$this->autorizado) return Redirect::to('/login');
 		$stamp 			= new Stamp();
 		$stampname 		= Input::get('stampname');
+		$stampcode 		= Input::get('stampcode');
+		$stampdesc 		= Input::get('stampdesc');
 		$file 			= Input::file('stamp');
 		$filename 		= str_random(16).'_'.date('d_m_Y_H_i_s').'_'.$file->getClientOriginalName();
 		$stamp->stampname = $stampname;
+		$stamp->stampcode = $stampcode;
+		$stamp->stampdesc = $stampdesc;
 		$stamp->stamp 	= $filename;
 		$rules 			= array(
 			'stampname'	=>'required',
+			'stampcode'	=>'required',
+			'stampdesc'	=>'required',
 			'stamp' 	=>'image|max:1024'
 			);
 		$inputs 		= array(
 			'stampname'	=> Input::get('stampname'),
+			'stampcode'	=> Input::get('stampcode'),
+			'stampdesc'	=> Input::get('stampdesc'),
 			'stamp' 	=> Input::file('stamp')
 			);
 		$validation 	= Validator::make($inputs, $rules);
@@ -88,6 +96,8 @@ class ProductsController extends \BaseController {
 				);
 				$messages 			= array(
 					'stampname.required' => 'Debe llenar el Campo Nombre del Stampado',
+					'stampcode.required' => 'Debe llenar el Campo Codigo del Stampado',
+					'stampdesc.required' => 'Debe llenar el Campo Descripcion del Stampado',
 					'amounts_'.$modelId.'.required' => 'Dede llenar el campo Cantidades',
 					'amounts_'.$modelId.'.numeric' => 'Las cantidades solo pueden ser numeros',
 				);

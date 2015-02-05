@@ -18,8 +18,8 @@
 							<thead class="cf">
 								<tr>
 									<th>No</th>
-									<th>Producto</th>
-									<th>Cantidad</th>
+									<th>Productos</th>
+									<th>Cantidades</th>
 									<th>Precio Unidad</th>
 									<th>Sub-total</th>
 									<th>Eliminar</th>
@@ -39,19 +39,19 @@
 										<a href="#" class="item-name">{{ $item->name }}</a>
 									</td>
 									<td data-title="Cantidad"> 
-										<a href="/cart/minus/{{ $item->rowid }}" class="cart-change minus"> 
+										<a href="/cart/minus/{{ $item->rowid }}" class="cart-change minus carioca_color4 label label-minus"> 
 											<i class="fa fa-minus fa-lg"></i> 
 										</a> 
-										<span class="badge cart-qty"> {{ $item->qty }} </span>
+										<span class="label label-number label-default cart-qty"> {{ $item->qty }} </span>
 										
-										<a href="/cart/plus/{{ $item->rowid }}" class="cart-change plus">
+										<a href="/cart/plus/{{ $item->rowid }}" class="cart-change plus carioca_color3 label label-plus">
 											<i class="fa fa-plus fa-lg"></i> 
 										</a> 
 									</td>
 									<td data-title="Precio Unidad">Bs. {{ number_format($item->price, 2, ',', '.') }}</td>
 									<td data-title="Sub-total">Bs. {{ number_format($item->qty*$item->price, 2, ',', '.') }}</td>
 									<td data-title="Eliminar">
-										<a href="/cart/remove/{{ $item->rowid }}" class="cart-remove">
+										<a href="/cart/remove/{{ $item->rowid }}" class="cart-remove carioca_color1 label">
 											<i class="fa fa-trash-o fa-lg"></i> 
 										</a>
 									</td>

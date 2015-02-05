@@ -13,9 +13,9 @@
  * Globals
  */
 
-a, 
-a:hover, 
-a:focus, 
+a,
+a:hover,
+a:focus,
 a:visited
 {
   color: #ffffff;
@@ -29,6 +29,15 @@ a.btn:visited,
 {
   color: #ffffff;
   text-decoration: none;
+}
+
+a.cart,  
+a.cart:hover,  
+a.cart:focus,  
+a.cart:visited  
+{
+  background: #81bcb4;
+  color: white;
 }
 
 body {
@@ -50,6 +59,56 @@ h6, .h6 {
   color: #333;
 }
 
+ul.nav-tabs > li > a.carioca_color1,
+ul.nav-tabs > li > a.carioca_color1:focus,
+ul.nav-tabs > li > a.carioca_color1:hover,
+ul.nav-tabs > li > a.carioca_color1:visited
+{
+  background: #8c2d83;
+  color: #000;
+  border: 1px solid #8c2d83;
+}
+ul.nav-tabs > li > a.carioca_color2,
+ul.nav-tabs > li > a.carioca_color2:focus,
+ul.nav-tabs > li > a.carioca_color2:hover,
+ul.nav-tabs > li > a.carioca_color2:visited
+{
+  background: #81bcb4;
+  color: #000;
+  border: 1px solid #81bcb4;
+}
+ul.nav-tabs > li > a.carioca_color3,
+ul.nav-tabs > li > a.carioca_color3:focus,
+ul.nav-tabs > li > a.carioca_color3:hover,
+ul.nav-tabs > li > a.carioca_color3:visited
+{
+  background: #d1da26;
+  color: #000;
+  border: 1px solid #d1da26;
+}
+ul.nav-tabs > li > a.carioca_color4,
+ul.nav-tabs > li > a.carioca_color4:focus,
+ul.nav-tabs > li > a.carioca_color4:hover,
+ul.nav-tabs > li > a.carioca_color4:visited
+{
+  background: #c94780;
+  color: #000;
+  border: 1px solid #c94780;
+}
+ul.nav-tabs > li > a.carioca_color5,
+ul.nav-tabs > li > a.carioca_color5:focus,
+ul.nav-tabs > li > a.carioca_color5:hover,
+ul.nav-tabs > li > a.carioca_color5:visited
+{
+  background: #bcbcbc;
+  color: #000;
+  border: 1px solid #bcbcbc;
+}
+
+.about-body {
+  margin-top: 15px;
+}
+
 .bggray
 {
    background: #bcbcbc;
@@ -67,14 +126,22 @@ h6, .h6 {
 {
   margin-top: 20px;
 }
-.white
+
+.body-bg
 {
-  color: #ffffff;
+  background-color: rgba(0,0,0,0.1);
+  margin-top: -20px;
+  padding-top: 25px;
+}
+.buttons
+{
+  margin-top: 15px;
+  text-align: center;
 }
 
-.carioca_line 
+.carioca_line
 {
-  margin: 40px auto;
+  margin: 35px auto;
 }
 
 .carioca_color1
@@ -86,7 +153,7 @@ h6, .h6 {
 .carioca_color2
 {
   background: #81bcb4;
-  color: #fff;  
+  color: #fff;
 }
 
 .carioca_color3
@@ -107,7 +174,7 @@ h6, .h6 {
   color: #fff;
 }
 
-.carioca_block1 
+.carioca_block1
 {
   background: #8c2d83;
   display: inline-block;
@@ -116,7 +183,7 @@ h6, .h6 {
   width: 10%;
 }
 
-.carioca_block2 
+.carioca_block2
 {
   background: #81bcb4;
   display: inline-block;
@@ -125,7 +192,7 @@ h6, .h6 {
   width: 10%;
 }
 
-.carioca_block3 
+.carioca_block3
 {
   background: #d1da26;
   display: inline-block;
@@ -134,13 +201,63 @@ h6, .h6 {
   width: 10%;
 }
 
-.carioca_block4 
+.carioca_block4
 {
   background: #c94780;
   display: inline-block;
   margin-left: -3px;
   height: 10px;
   width: 10%;
+}
+
+.col-empty
+{
+  width: 25px;
+  margin: 0 25px;
+  color: white;
+  float: left;
+}
+
+.login-menu {
+  margin: 5px 0 0 5px;
+}
+
+.login-menu a {
+  color: #333;
+}
+.navbar li
+{
+  margin-left: 0;
+}
+
+.social-nav-btns.big-screen
+{
+  margin-top: -2px;
+  margin-right: -5px;
+}
+
+.bar-menu, .navbar, .navbar-default
+{
+  margin-top: -23px;
+  font-size: 1.1em;
+}
+
+.collapse, .navbar-collapse {
+  margin-top: 0px;
+  border: none;
+}
+
+.navbar-header {
+  margin-bottom: -23px;
+}
+
+.navbar-toggle {
+  margin-left: 5px;
+}
+
+.nav-tabs
+{
+  margin-top: 15px;
 }
 
 .error {
@@ -151,27 +268,6 @@ h6, .h6 {
   color: #a94442;
   margin-bottom: 20px;
   padding: 5px;
-}
-
-.navbar-right 
-{
-  margin-top: 40px;
-}
-
-.navbar-inverse
-{
-  background-color: rgba();
-  background: #bcbcbc;
-  margin-top: -45px;
-}
-
-.navbar-inverse li a,
-.navbar-inverse li a:hover,
-.navbar-inverse li a:focus,
-.navbar-inverse li a:visited,
-{
-  color: #000;
-  font-size: 1.1em;
 }
 
 .social-btns
@@ -189,22 +285,29 @@ h6, .h6 {
   margin-left: 120px;
 }
 
-/*.navbar-nav > li > a,
-.navbar-nav > li > a:hover,
-.navbar-nav > li > a:focus,
-.navbar-nav > li > a:visited,
+.navbar > li > a,
+.navbar > li > a:hover,
+.navbar > li > a:focus,
+.navbar > li > a:visited,
 {
-  color: #000;
   text-decoration: none;
-}*/
+  text-height: bold;
+}
 
-.cart 
+.navbar-default
+{
+  background-color: rgba(188,188,188,0.8);
+  color: #000;
+}
+
+.cart
 {
   background: #81bcb4;
   border-radius: 5px;
   box-shadow: 1px 1px 2px #333;
   padding: 20px;
 }
+
 
 .cart-badge
 {
@@ -236,18 +339,95 @@ h6, .h6 {
   height: 165px;
 }
 
+.blog-nav-item
+{
+  color: #333;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+a.blog-nav-item,
+a.blog-nav-item:hover,
+a.blog-nav-item:focus,
+a.blog-nav-item:visited
+{
+  color: #222;
+}
+
+.fa-shopping-cart,
+.fa-instagram,
+.fa-facebook,
+.fa-twitter,
+{
+  color: #fff;
+}
+
+.navbar-nav > span.fa-shopping-cart:hover,
+.navbar-nav > span.fa-instagram:hover,
+.navbar-nav > span.fa-facebook:hover,
+.navbar-nav > span.fa-twitter:hover,
+.navbar-nav > span.fa-shopping-cart:focus,
+.navbar-nav > span.fa-instagram:focus,
+.navbar-nav > span.fa-facebook:focus,
+.navbar-nav > span.fa-twitter:focus,
+.navbar-nav > span.fa-shopping-cart:visited,
+.navbar-nav > span.fa-instagram:visited,
+.navbar-nav > span.fa-facebook:visited,
+.navbar-nav > span.fa-twitter:visited
+{
+  color: #333;
+}
+
+.social-nav-btns
+{
+  margin-top: 7px;
+  margin-right: 5px;
+  padding: 13px 0 13px 0;
+}
+
+
+.social-nav-btns a.cart
+{
+  margin-right: 10px;
+  margin-top: 7px;
+  padding: 15px 10px;
+}
+.social-nav-btns a.instagram,
+.social-nav-btns a.facebook,
+.social-nav-btns a.twitter
+{
+  margin-left: -4px;
+  margin-top: 7px;
+  padding: 15px;
+}
+.social-nav-btns a.facebook
+{
+  padding: 15px 17px;
+}
+
+.image-logo-header
+{
+  /*position: relative;
+  top: 0;*/
+  margin-top: -24px;
+  width: 9.5%;
+}
+
 .instagram
 {
   background: #8c2d83;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   box-shadow: 1px 1px 2px #333;
+  padding: 15px;
 }
 
 .facebook
 {
   background: #c94780;
   box-shadow: 1px 1px 2px #333;
+  padding: 15px 16px;
 }
 
 .twitter
@@ -256,18 +436,23 @@ h6, .h6 {
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 1px 1px 2px #333;
+  padding: 15px;
 }
 .quote
 {
-  text-align: center;
-  transform: rotate(355deg);
-  -o-transform: rotate(355deg);
   -moz-transform: rotate(355deg);
-  -webkit-transform: rotate(355deg); 
+  -o-transform: rotate(355deg);
+  -webkit-transform: rotate(355deg);
+  color: #000;
+  font-family: 'Kaushan Script';
+  font-size: 1.5em;
+  text-align: center;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 1);
+  transform: rotate(355deg);
 }
 .banner_top
 {
-    width: 75%;
+    width: 100%;
     box-shadow: 2px 2px 5px #999;
 }
 .banner_bot
@@ -276,30 +461,40 @@ h6, .h6 {
     box-shadow: 2px 2px 5px #999;
 }
 
+.image-shadow
+{
+  box-shadow: 2px 2px 5px #999;
+}
+
+.carioca-about-image-left
+{
+  width: 100%;
+  box-shadow: 2px 2px 5px #999;
+}
+
 .carioca-index-image
 {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-image: url(/../assets/images/imagen_referencial.jpg);
+  background-image: url("/../assets/images/imagen_referencial.JPG");
   width:100%;
 }
 
 .white-space-index
 {
-  height: 250px;
+  height: 120px;
 }
 
 .social-box
 {
-  padding: 7px 20px; 
+  padding: 14px 20px 13px 20px;
 }
 
 .title-box
 {
   bottom: 0;
-  left: 0px;
-  padding: 5px;
+  left: 0;
   position: absolute;
   text-align: right;
   width: 100%;
@@ -307,74 +502,142 @@ h6, .h6 {
 
 .title-box-div
 {
-  padding: 5px;
   text-align: right;
   width: 100%;
 }
 
+.font-cursiva-index {
+  color: white;
+  font-family: 'Kaushan Script';
+  font-size: 30px;
+  text-align: center;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 1);
+}
+
+.font-cursiva-index p {
+  top: 30px;
+  left: 40px;
+  position: absolute;
+}
+
+.font-cursiva-index p.second-text {
+  font-size: 25px;
+  top: 320px;
+  left: 250px;
+  position: absolute;
+
+}
+
+.fig-text {
+  color: white;
+  font-family: 'Kaushan Script';
+  font-size: 1.6em;
+  padding: 5px;
+  text-align: right;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 1);
+}
+
+.products-tabs-bg
+{
+  padding: 5px;
+}
+.products-body
+{
+  margin: 10px;
+  background-color: #F2F2F2;
+}
+.product-item
+{
+  padding: 20px;
+  color: #000;
+  min-height: 250px;
+  border-bottom: 1px #ccc solid;
+}
+
+.other-products,
+.other-products:hover,
+.other-products:focus,
+.other-products:visited
+{
+  background-color: #ececec;
+  color: #000000;
+}
+
+.item-right,
+.item-left
+{
+  color: #000;
+  text-align: center;
+}
+
+.product.item a,
+.product.item a:hover,
+.product.item a:focus,
+.product.item a:visited
+{
+  color: #000;
+}
+
 .box
 {
-  height: 83px;
+  height: 69px;
 }
 
 .boxes
 {
   margin-top: 1px;
 }
-.carrito
+.carrito, .products
 {
-  background-image: url(/../assets/images/home_carrito.png);
-  width: 370px;
-  height: 190px;
+  width: 100%;
+  min-height: 190px;
 }
 
-.products
+.carioca-logo
 {
-  background-image: url(/../assets/images/home_productos.png);
-  width: 370px;
-  height: 190px;
+  background: ('/../assets/images/logo-3.png') no-repeat top center transparent;
 }
 
-.img-index, .buttons, .last-box-index
+.label-minus {
+  border-radius: .25em 0 0 .25em;
+}
+.label-number {
+  border-radius: 0;
+}
+.label-plus {
+  border-radius: 0 .25em .25em 0;
+}
+.last-box-index {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+
+.white
 {
-  margin-top:25px;
+  color: #ffffff;
 }
 
-@media (max-width: 900px) {
-  .white-space-index, .boxes
-  {
-    display: none;
-  }
 
-  .carrito, .products, .social-buttons
-  {
-    width: 100%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .carioca-index-image {
-    height: 710px;
-  }
-}
 
 /* estilos de la galeria */
 
 div.jMyCarousel
 {
-   margin-top: 10px; 
+   margin-top: 10px;
    height: 143px !important;
 }
 div.jMyCarousel .prev
 {
-   background: url('/../assets/css/images/left.png') center center no-repeat; 
+   background: url('/../assets/css/images/left.png') center center no-repeat;
    width:47px; height:61px; border:0px;
 }
-div.jMyCarousel .next  
+div.jMyCarousel .next
 {
-   background: url('/../assets/css/images/right.png') center center no-repeat; 
-   width:40px; height:61px; 
-   border:0px; 
+   background: url('/../assets/css/images/right.png') center center no-repeat;
+   width:40px; height:61px;
+   border:0px;
 }
 div.jMyCarousel ul li
 {
@@ -384,27 +647,110 @@ div.jMyCarousel ul li
 }
 div.jMyCarousel ul li a
 {
-   display:block; 
+   display:block;
 }
 div.jMyCarousel ul li img
 {
-   display:block; border:0px; 
+   display:block; border:0px;
    margin: 0px 5px 0px;
 }
-#contenido_galeria 
+#contenido_galeria
 {
-   /*position: relative; */
-   height: 350px;
+   position: relative;
+   display: inline-block;
+   min-height: 350px;
 }
-#contenido_galeria img  
+#contenido_galeria img
 {
-   /*float: left; */
-   width: 700px;
+   float: left;
+   width: 96%;
 }
-#contenido_galeria p 
+#contenido_galeria p
 {
-   width: 270px; 
-   position: absolute; 
-   top: 0px; 
-   left: 730px; 
+   width: 270px;
+   position: absolute;
+   top: 0px;
+   left: 650px;
+}
+
+@media (max-width: 1023px) {
+  .font-cursiva-index p.second-text {
+    font-size: 0.7em;
+    top: 280px;
+    left: 180px;
+    position: absolute;
+  }
+}
+
+@media (max-width: 900px) {
+  .white-space-index, .font-cursiva-index, .quote
+  {
+    display: none;
+  }
+
+  .products
+  {
+    width: 100%;
+    min-height: 90px;
+  }
+  .carrito
+  {
+    width: 100%;
+    min-height: 90px;
+  }
+
+  .fig-text {
+    font-size: 1em;
+  }
+}
+
+@media (min-width: 768px) {
+  /*.carioca-index-image {
+    height: 450px;
+  }*/
+  .collapse, .navbar-collapse {
+    margin-top: -25px;
+    border: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .navbar-default
+  {
+    font-size: 1.1em;
+  }
+  .social-nav-btns.big-menu
+  {
+    margin-top: -1px;
+  }
+  .side-collapse-container {
+      width:100%;
+      position:relative;
+      left:0;
+      transition:left .4s;
+  }
+  .side-collapse-container.out {
+      left:200px;
+  }
+  .side-collapse {
+      top:60px;
+      bottom:0;
+      left:0;
+      width:200px;
+      position:fixed;
+      overflow:hidden;
+      transition:width .4s;
+  }
+  .side-collapse.in {
+      width:0;
+  }
+  /*.image-logo-header
+  {
+    width: 19.5%;
+  }*/
+}
+@media screen and (max-width: 360px) {
+  .menu-word
+  {
+    display: none;
+  }
 }

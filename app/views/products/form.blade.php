@@ -34,11 +34,15 @@
 					{{ Form::model($product, $form_data) }}
 						@include ('common/errors', array('errors' => $errors))
 						<div class="row">
-							<div class="form-group col-md-4" >
+							<div class="form-group col-md-6" >
 								<h4>Nombre e Imagen del Producto</h4>
 								<hr />
+								{{ Form::label('stampcode','Codigo del Estampado') }}
+								{{ Form::text('stampcode','',array('placeholder'=>'Codigo del Estampado','class'=>'form-control')) }}
 								{{ Form::label('stampname','Nombre del Estampado') }}
 								{{ Form::text('stampname','',array('placeholder'=>'Nombre del Estampado','class'=>'form-control')) }}
+								{{ Form::label('stampdesc','Descripcion del Estampado') }}
+								{{ Form::text('stampdesc','',array('placeholder'=>'Descripcion','class'=>'form-control')) }}
 								<br />
 					        	<input type='file' id="imgInp" name="stamp" class="file" /><br />
 						        <div class="thumbnail">
@@ -49,10 +53,22 @@
 								<h4>Modelos</h4>
 								<hr />
 								@foreach ($modelos as $modelo)
-									{{ Form::label($modelo->model_name, strtoupper($modelo->model_name)) }}
-									{{ Form::checkbox('model_id['.$modelo->id.']',$modelo->id) }}
-									<input type="number" min="1" name="amounts_{{ $modelo->id }}" placeholder="Cantidades" class="form-control" />
-									<br />
+									<div class="row">
+										<div class="col-xs-2">
+											<div class="btn-group" data-toggle="buttons">
+												<span class="btn btn-default">
+													{{ Form::label($modelo->model_name, strtoupper($modelo->model_name)) }}
+													{{ Form::checkbox('model_id['.$modelo->id.']',$modelo->id) }}
+													&nbsp;&nbsp;<span class="glyphicon glyphicon-ok"></span>
+												</span>
+											</div>
+										</div>
+										<div class="col-xs-4"></div>
+										<div class="col-xs-6">
+											<input type="number" min="1" name="amounts_{{ $modelo->id }}" placeholder="Cantidades" class="form-control" />
+										</div>
+										<br />
+									</div>
 								@endforeach
 							</div>
 						</div>

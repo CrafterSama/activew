@@ -48,5 +48,25 @@ class Stamp extends Eloquent {
 		}
 		
 	}
+	public static function getStampCode($id)
+	{
+		$stamp = Stamp::find($id);
+		if (is_null($stamp)) {
+			return 'No se Encuentra Nombre Asociado';
+		} else {
+			return $stamp->stampcode;
+		}
+		
+	}
+	public static function getStampDesc($id)
+	{
+		$stamp = Stamp::find($id);
+		if (is_null($stamp)) {
+			return 'No se Encuentra Nombre Asociado';
+		} else {
+			return $stamp->stampdesc;
+		}
+		
+	}
 
 }

@@ -162,17 +162,25 @@ class HomeController extends BaseController {
 	
 	public function showGalerie1()
 	{
-		return View::make('home.galeria1');
+		return View::make('home.desfiles');
 	}
 	
 	public function showGalerie2()
 	{
-		return View::make('home.galeria2');
+		return View::make('home.sesiones');
 	}
-	
+
 	public function showGalerie3()
 	{
-		return View::make('home.galeria3');
+		return View::make('home.eventos');
+	}	
+	public function showBrasil2014()
+	{
+		return View::make('home.brasil-2014');
+	}	
+	public function showDunas2014()
+	{
+		return View::make('home.maracaibo-2014');
 	}
 
 }

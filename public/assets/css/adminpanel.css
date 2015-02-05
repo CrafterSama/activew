@@ -44,7 +44,23 @@ a,a:hover,a:focus {
     -o-transition:all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
+.btn span.glyphicon.glyphicon-ok {         
+    opacity: 0;  
+}
 
+div.btn-group
+{
+}
+
+span.btn
+{
+    min-width: 109px;
+    padding: 5px 10px 0 10px;
+}
+.btn.active span.glyphicon.glyphicon-ok {
+    color: #000;
+    opacity: 1;
+}
 .error {
   background-color: #f2dede;
   border-color: #ebccd1;

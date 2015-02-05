@@ -44,6 +44,15 @@ $(window).scroll(function(){
 $("#back-to-top").click(function(){
     $("body,html").animate({scrollTop:0},800)
 });
+$(document).ready(function() {   
+            var sideslider = $('[data-toggle=collapse-side]');
+            var sel = sideslider.attr('data-target');
+            var sel2 = sideslider.attr('data-target-2');
+            sideslider.click(function(event){
+                $(sel).toggleClass('in');
+                $(sel2).toggleClass('out');
+            });
+        });
 /*$(function(){
     function MaysPrimera(string){ 
         return string.charAt(0).toUpperCase() + string.slice(1); 
