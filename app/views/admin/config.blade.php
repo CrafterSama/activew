@@ -40,10 +40,16 @@
 						 		}
 							}		
 						</script>
-						{{ Form::label($config->config_name, strtoupper($config->config_name), array('class' => 'control-label col-sm-2') ) }}
+							{{ Form::label($config->config_name, strtoupper($config->config_name), array('class' => 'control-label col-sm-2') ) }}
 							<div class="input-group col-sm-10">
 								<span class="input-group-addon">%</span>
 								<input name="{{ $config->config_name }}" type="text" value="{{ $config->config_value }}" class="form-control" required />
+							</div>
+							<div class="col-sm-2">
+								Vista Previa
+							</div>
+							<div class="col-sm-10">
+								{{ $config->config_value }}
 							</div>
 						</div>
 						<br />

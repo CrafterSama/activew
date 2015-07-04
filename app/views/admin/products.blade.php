@@ -30,6 +30,7 @@
 						<tr class="text-center">
 							<th class="col-xs-2 text-center">Estampado</th>
 							<th class="text-center">Modelo</th>							
+							<th class="text-center">Marca</th>							
 							<th class="col-xs-1 text-center">Cantidad</th>
 							<th class="col-xs-1 text-center visible-lg">Valor Unitario</th>
 							<th class="col-xs-1 text-center visible-lg">Total Bs.</th>
@@ -42,9 +43,21 @@
 							<h4>Aun no hay Datos</h4>
 						@else
 							@foreach ($products as $product)
+								<?php 
+									if($product->brand == '0')
+									{
+										$brand = 'Pioggia';
+									}
+									else
+									{
+										$brand = 'Carioca';
+									}
+									?>
+								<?php $image = '/assets/images/stamps/'.Stamp::getName($product->stamp_id); ?>
 								<tr>
-									<td class="col-xs-2" data-title="Estampado"><a href="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" class="img-thumbnail"><img src="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" alt="Estampado" width="150px" /></a><br /> </td>
+									<td class="col-xs-2" data-title="Estampado"><a href="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" class="img-thumbnail"><img src="{{ Image::path($image, 'resizeCrop', 150, 145)->responsive('max-width=150', 'resize', 100) }}" alt="Estampado" /></a><br /> </td>
 									<td data-title="Modelo">{{ Stamp::getStampName($product->stamp_id).'<br />'.Modelo::getName($product->model_id) }}</td>
+									<td data-title="Marca">{{ $brand }}</td>
 									<td data-title="Cantidad">{{ $product->amounts }}</td>
 									<td class="visible-lg" data-title="Valor Unitario">Bs. {{  number_format(Modelo::getPrice($product->model_id), 2, ',', '.') }}</td>
 									<td class="visible-lg" data-title="Total Bs.">Bs. {{  number_format($product->amounts*Modelo::getPrice($product->model_id), 2, ',', '.') }}</td>

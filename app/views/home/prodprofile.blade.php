@@ -3,6 +3,7 @@
 @section('title', Stamp::getStampName($product->stamp_id).' ('.ucwords(strtolower(Modelo::getName($product->model_id))).')')
 
 @section('content')
+<?php $image = '/assets/images/stamps/'.Stamp::getName($product->stamp_id); ?>
 <div class="main">
     <div class="container">
         <div class="row">
@@ -24,7 +25,7 @@
                 <div class="panel-body">
                     <div class="col-md-5">
                         <figure class="img-thumbnail">
-                            <img src="/assets/images/stamps/{{ Stamp::getName($product->stamp_id) }}" alt="" class="img-tumbnail img-responsive">
+                            <img src="{{ Image::path($image, 'resizeCrop', 435, 420)->responsive('max-width=435', 'resize', 100) }}" alt="" class="img-tumbnail img-responsive">
                         </figure>
                     </div>
                     <div class="col-md-7">

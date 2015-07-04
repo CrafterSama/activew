@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('title') ActiveWear @stop
+@section('title') {{ Configuration::getCompanyName() }} @stop
 	
 @section('content')
 

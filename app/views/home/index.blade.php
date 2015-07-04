@@ -25,15 +25,15 @@
         <figure class="row">
             <img class="products col-md-12" src="/../assets/images/home_productos.png" alt="productos">
             <figcaption class="title-box carioca_color1">
-                <h3 class="fig-text"><a href="http://pioggia.craftersama.me/productos"><strong>Productos Carioca + </strong></a></h3>
+                <h3 class="fig-text"><a style="display:block;" href="/productos/carioca" alt="Productos Carioca"><strong>Productos Carioca + </strong></a></h3>
             </figcaption>
         </figure>
     </div>
     <div class="col-md-4 col-xs-6 img-2">
         <figure class="row">
-            <img class="carrito col-md-12" src="/../assets/images/home_carrito.png" alt="carrito">
+            <a href="/carrito"><img class="carrito col-md-12" src="/../assets/images/home_carrito.png" alt="carrito"></a>
             <figcaption class="title-box carioca_color4">
-                <h3 class="fig-text"><a href="/carrito"><strong>Carrito + </strong></a></h3>
+                <h3 class="fig-text"><a style="display:block;" href="/carrito" alt="Carrito de Compras"><strong>Carrito + </strong></a></h3>
             </figcaption>
         </figure>
     </div>
@@ -69,7 +69,7 @@
 </div>
 <div class="last-box-index col-md-12">
     <div class="col-md-6 carioca_color2">
-        <a href="http://www.pioggiadimare.com" rel="nofollow">&nbsp;&nbsp; Productos Pioggia &nbsp;&nbsp; <img src="/../assets/images/logo-pioggia.png" alt="acerca de" width="13%" align="" class=""></a>
+        <a href="/productos/pioggia" rel="nofollow">&nbsp;&nbsp; Productos Pioggia &nbsp;&nbsp; <img src="/../assets/images/logo-pioggia.png" alt="acerca de" width="13%" align="" class=""></a>
     </div>
     <div class="col-md-6"></div>
 </div>

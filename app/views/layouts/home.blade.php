@@ -159,6 +159,10 @@ $url = Request::path();
 		{{ HTML::script('/../assets/js/fotorama.js') }}
 		{{ HTML::script('/../assets/js/common.js') }}
 		{{-- HTML::script('/../assets/js/tabs.js') --}}
+		{{ HTML::script('/../assets/js/Imagecow.js') }}
+		<script type="text/javascript">
+    		Imagecow.init();
+		</script>
 	    <script type="text/javascript">
 		    /* GEO */
 		    $(document).on("ready", function(){

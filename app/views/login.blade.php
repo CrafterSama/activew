@@ -23,11 +23,11 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-  <a href="{{ URL::previous() }}" class="back-login btn btn-primary btn-xs white"> <i class="fa fa-angle-double-left fa-lg"></i> Volver a la Web</a>
+  <a href="/" class="back-login btn btn-primary btn-xs white"> <i class="fa fa-angle-double-left fa-lg"></i> Volver a la Web</a>
   <body class="login-body">
       {{ Form::open(array('url' => '/login','class' => 'form-signin', 'id' => 'singin')) }}
-        <h2 class="form-signin-heading">Conectarse</h2>
-        <div class="login-wrap">
+        <h2 class="form-signin-heading carioca_color4">Conectarse</h2>
+       <div class="login-wrap">
             {{-- Preguntamos si hay algún mensaje de error y si hay lo mostramos  --}}
             @if(Session::has('mensaje_error'))
                 <div class="alert alert-danger">{{ Session::get('mensaje_error') }}</div>

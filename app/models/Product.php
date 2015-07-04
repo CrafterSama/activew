@@ -59,7 +59,8 @@ class Product extends Eloquent {
    	public static function totalPzs()
    	{
    		return $amounts = DB::table('products')
-        		->pluck(DB::raw('sum(amounts)'));
+        		->pluck(DB::raw('sum(amounts)'))
+            ->where('amounts','!=','0');
    	}
    	public function totalBs()
    	{

@@ -3,8 +3,7 @@
 @section('title') Maracaibo 2014 @stop
 
 @section('content')
-	<br />
-	<br />
+
      <div class="row clearfix">
         <div class="col-md-4 column">
             <img src="/../assets/images/banner_galeria.jpg" alt="galerias" class="banner_top">
@@ -16,8 +15,7 @@
             <div class="quote"><strong>Si estas cansada de empezar, deja de rendirte <br /> #CariocaActiveWear</strong></div>
         </div>
     </div>
-    <br />
-    <br />
+	<br />
 		<div class="row clearfix">
 
 			<div class="col-md-12 column">

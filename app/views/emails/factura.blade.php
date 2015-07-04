@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Factura</title>
+	<title>Orden De Compra</title>
 </head>
-<body style="font-family: sans-serif; background-color: #f2f2f2; margin: 0; color: #333;"> 
-	<div style="width: 100%; background-color: #C74751; padding: 0.3em; text-align: center; border-bottom: 3px solid #8D2C33;">
-		<img src="http://pioggia.craftersama.me/assets/images/logo.png" alt="">
+<body style="font-family: sans-serif; background: #fff url('http://carioca.craftersama.me/assets/images/bg.png') repeat top center fixed; margin: 0; color: #333;"> 
+	<div style="width: 100%; margin-right: 50px; text-align: right; border-bottom: 3px solid #8D2C33; ">
+		<img style="max-width: 450px;" src="http://carioca.craftersama.me/assets/images/logo_carioca.png" alt="" />
+		<h1 style="margin-right: 25px;">Orden de Compra</h1>
 	</div>
 	<div style="padding: 0 1em;"> 
 		<h1>Recibo No. {{ $factura['id'] }} </h1>

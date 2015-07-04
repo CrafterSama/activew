@@ -14,7 +14,7 @@ class Modelo extends Eloquent {
 	protected $table = 'modelos';
 
 	public function products()	{
-		return $this->hasMany('Product', 'model_id', 'id');
+		return $this->hasMany('Product', 'model_id', 'id', 'brand');
 	}
 
 	public static $rules = array(

@@ -44,6 +44,12 @@
 								{{ Form::label('stampdesc','Descripcion del Estampado') }}
 								{{ Form::text('stampdesc','',array('placeholder'=>'Descripcion','class'=>'form-control')) }}
 								<br />
+				                <label for="brand">Marca</label>
+				                <select name="brand" id="brand" class="form-control">
+				                	<option value="0">Pioggia</option>
+				                	<option value="1">Carioca</option>
+				                </select>
+				                <br />
 					        	<input type='file' id="imgInp" name="stamp" class="file" /><br />
 						        <div class="thumbnail">
 		        					<img id="target" src="#" alt="Estampado" class="img-responsive" />

@@ -19,7 +19,7 @@
         <h2 class="text-center">No hay Fotos en la Galerías</h2>
         <br />
         <div class="text-center">
-          <button class="btn btn-success btn-lg" onclick="location.href='productos'">Visita Nuestros Productos</button>
+          <button class="btn btn-success btn-lg" onclick="location.href='/productos/carioca'">Visita Nuestros Productos</button>
           <br />
           <br />
         </div>
